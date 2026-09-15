@@ -99,7 +99,7 @@
             visibility: hidden;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
         }
 
         .slide.active,
@@ -132,7 +132,17 @@
         }
 
         .caption {
-            max-width: 900px;
+            max-width: 1750px !important;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            word-break: keep-all;
+            word-wrap: break-word;
+        }
+
+        .caption p {
+            word-break: keep-all;
+            word-wrap: break-word;
         }
 
         h1 {
@@ -206,7 +216,7 @@
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
         .slide.visible .reveal {
@@ -224,6 +234,105 @@
 
         .delay-3 {
             transition-delay: 0.6s;
+        }
+
+        /* Slide 3 Organic Word Cloud Cluster Layout */
+        .word-cloud-container {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 40px;
+            pointer-events: none;
+            color: #ffffff;
+            opacity: 0.85;
+            z-index: 10;
+            transition: opacity 0.4s ease, color 0.4s ease, filter 0.4s ease;
+            text-shadow: 0 0 14px rgba(255, 255, 255, 0.28);
+        }
+
+        .word-cloud-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px 40px;
+            margin: 12px 0;
+            pointer-events: none;
+            width: 100%;
+        }
+
+        .word-cloud-tag {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            display: inline-block;
+            pointer-events: auto;
+            position: relative;
+            z-index: 12;
+            padding: 6px 16px;
+            border-radius: 20px;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        /* Hover effect ONLY active in initial state (before click): Pure text glow, no background box or border */
+        .slide:not(.steps-dimmed) .word-cloud-tag:hover {
+            color: #38bdf8 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            text-shadow: 0 0 16px rgba(56, 189, 248, 0.9), 0 0 32px rgba(56, 189, 248, 0.6) !important;
+            transform: scale(1.15) translateY(-2px);
+            z-index: 15;
+        }
+
+        /* Dimmed state on click: disable hover completely */
+        .slide.steps-dimmed .word-cloud-container {
+            opacity: 0.14 !important;
+            color: #94a3b8 !important;
+            text-shadow: none !important;
+            pointer-events: none !important;
+            filter: grayscale(100%);
+        }
+
+        .slide.steps-dimmed .word-cloud-tag {
+            pointer-events: none !important;
+            cursor: default !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .slide.steps-dimmed .word-cloud-tag:hover {
+            color: #94a3b8 !important;
+            text-shadow: none !important;
+            transform: none !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .focus-keyword-wrap {
+            position: relative;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 100px;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .focus-keyword.step-item {
+            opacity: 0;
+            transform: scale(0.6) translateY(40px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            display: inline-block;
+        }
+
+        .focus-keyword.step-item.step-active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
         }
 
         /* 2. MSA Animation Updated */
@@ -2016,8 +2125,8 @@
         .srv-desc-line {
             display: block !important;
             white-space: nowrap !important;
-            font-size: 21px !important;
-            line-height: 1.75 !important;
+            font-size: 24px !important;
+            line-height: 1.6 !important;
             color: var(--text-muted) !important;
             margin: 0 auto !important;
             text-align: center !important;
@@ -2672,8 +2781,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 14px;
-            width: 1240px;
+            gap: 18px;
+            width: 1300px;
         }
 
         .matrix-table-wrap {
@@ -2681,7 +2790,7 @@
             background: rgba(15, 23, 42, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 12px;
-            padding: 12px 18px;
+            padding: 16px 22px;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
         }
@@ -2696,7 +2805,7 @@
         }
 
         .table-title {
-            font-size: 13.5px;
+            font-size: 15.5px;
             font-weight: 700;
             color: #f1f5f9;
             display: flex;
@@ -2705,8 +2814,8 @@
         }
 
         .table-badge {
-            font-size: 11px;
-            padding: 3px 10px;
+            font-size: 13px;
+            padding: 4px 13px;
             border-radius: 12px;
             font-weight: 600;
         }
@@ -2727,25 +2836,53 @@
             width: 100%;
             border-collapse: collapse;
             text-align: center;
-            font-size: 12px;
+            font-size: 14px;
+        }
+
+        .data-matrix-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            text-align: center;
+            font-size: 14.5px;
+            overflow: hidden;
+            border-radius: 8px;
         }
 
         .data-matrix-table th {
-            padding: 7px 10px;
-            background: rgba(255, 255, 255, 0.04);
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.03);
             color: #94a3b8;
             font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 11.5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            border-right: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 13.5px;
             letter-spacing: 0.2px;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
         }
 
         .data-matrix-table td {
-            padding: 7px 10px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
             color: #e2e8f0;
-            font-family: monospace;
-            font-size: 12px;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: -0.2px;
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .data-matrix-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-matrix-table th:last-child,
+        .data-matrix-table td:last-child {
+            border-right: none;
         }
 
         .data-matrix-table tr:hover {
@@ -2785,6 +2922,7 @@
             width: 100%;
             position: relative;
             padding: 2px 0;
+            transition: all 0.45s ease;
         }
 
         .flow-step-box {
@@ -2792,10 +2930,11 @@
             align-items: center;
             gap: 8px;
             background: #0f172a;
-            border: 1px solid rgba(56, 189, 248, 0.35);
+            border: 1px solid rgba(56, 189, 248, 0.25);
             border-radius: 20px;
             padding: 6px 16px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .flow-step-icon {
@@ -2803,13 +2942,14 @@
         }
 
         .flow-step-title {
-            font-size: 11.5px;
+            font-size: 13.5px;
             font-weight: 700;
             color: #38bdf8;
+            transition: color 0.35s ease;
         }
 
         .flow-step-desc {
-            font-size: 10px;
+            font-size: 12px;
             color: #94a3b8;
             margin-left: 2px;
         }
@@ -2818,6 +2958,7 @@
             color: #38bdf8;
             font-size: 13px;
             animation: bounceDown 1.5s infinite;
+            transition: all 0.35s ease;
         }
 
         @keyframes bounceDown {
@@ -2832,6 +2973,295 @@
             }
         }
 
+        /* ====================================================
+           Slide 13 (Data Preprocessing Pipeline) 9-Step Animations
+           Aesthetic, Soft Ambient & Fluid Glow Design
+           ==================================================== */
+        #slideDataPipeline .matrix-table-wrap {
+            transition: opacity 0.45s ease;
+        }
+
+        /* 공통 Dimmed 스타일 (아웃포커싱 뎁스 연출) */
+        #slideDataPipeline[data-pipe-step="1"] .col-raw:not(.col-raw-id):not(.col-raw-name),
+        #slideDataPipeline[data-pipe-step="3"] .col-raw:not(.col-raw-job):not(.col-raw-car),
+        #slideDataPipeline[data-pipe-step="4"] .col-raw:not(.col-raw-job):not(.col-raw-car),
+        #slideDataPipeline[data-pipe-step="4"] .col-clean:not(.col-clean-job):not(.col-clean-car),
+        #slideDataPipeline[data-pipe-step="6"] .col-raw:not(.col-raw-age):not(.col-raw-income):not(.col-raw-overdue),
+        #slideDataPipeline[data-pipe-step="7"] .col-raw:not(.col-raw-age):not(.col-raw-income):not(.col-raw-overdue),
+        #slideDataPipeline[data-pipe-step="7"] .col-clean:not(.col-clean-age):not(.col-clean-income):not(.col-clean-overdue),
+        #slideDataPipeline[data-pipe-step="9"] .col-clean:not(.col-clean-label) {
+            opacity: 0.38;
+            filter: blur(0.2px);
+        }
+
+        /* Step 1: 고객명, 계약ID 삭제 설명 (소프트 로즈 앰비언트) */
+        #slideDataPipeline[data-pipe-step="1"] .col-raw-id,
+        #slideDataPipeline[data-pipe-step="1"] .col-raw-name {
+            background: linear-gradient(180deg, rgba(244, 63, 94, 0.14) 0%, rgba(244, 63, 94, 0.05) 100%) !important;
+            color: #fda4af !important;
+            border-bottom-color: rgba(244, 63, 94, 0.22) !important;
+            text-shadow: 0 0 14px rgba(244, 63, 94, 0.4);
+            font-weight: 600;
+        }
+
+        #slideDataPipeline[data-pipe-step="1"] td.col-raw-name {
+            text-decoration: line-through;
+            text-decoration-color: rgba(244, 63, 94, 0.7);
+            text-decoration-thickness: 1.5px;
+            opacity: 0.85;
+        }
+
+        #slideDataPipeline[data-pipe-step="1"] .matrix-clean-wrap {
+            opacity: 0.4;
+            filter: blur(0.2px);
+        }
+
+        #slideDataPipeline[data-pipe-step="1"] .flow-box-select {
+            border-color: rgba(244, 63, 94, 0.6) !important;
+            box-shadow: 0 8px 30px -4px rgba(244, 63, 94, 0.45) !important;
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.18) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+            transform: translateY(-2px);
+        }
+
+        #slideDataPipeline[data-pipe-step="1"] .flow-box-select .flow-step-title {
+            color: #fb7185;
+        }
+
+        /* Step 2: 강조 해제 (기본 표 복귀) */
+
+        /* Step 3: 카테고리 인코딩 설명 (부드러운 선셋 골드 앰비언트) */
+        #slideDataPipeline[data-pipe-step="3"] .col-raw-job,
+        #slideDataPipeline[data-pipe-step="3"] .col-raw-car {
+            background: linear-gradient(180deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.06) 100%) !important;
+            color: #fef08a !important;
+            border-bottom-color: rgba(245, 158, 11, 0.22) !important;
+            text-shadow: 0 0 16px rgba(245, 158, 11, 0.45);
+            font-weight: 600;
+        }
+
+        #slideDataPipeline[data-pipe-step="3"] .matrix-clean-wrap {
+            opacity: 0.4;
+            filter: blur(0.2px);
+        }
+
+        #slideDataPipeline[data-pipe-step="3"] .flow-box-encode {
+            border-color: rgba(245, 158, 11, 0.6) !important;
+            box-shadow: 0 8px 30px -4px rgba(245, 158, 11, 0.45) !important;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.18) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+            transform: translateY(-2px);
+        }
+
+        #slideDataPipeline[data-pipe-step="3"] .flow-box-encode .flow-step-title {
+            color: #fde047;
+        }
+
+        /* Step 4: 아래 표의 카테고리화(직업, 차종) 강조 (소프트 사이언 앰비언트) */
+        #slideDataPipeline[data-pipe-step="4"] .col-raw-job,
+        #slideDataPipeline[data-pipe-step="4"] .col-raw-car {
+            background: rgba(245, 158, 11, 0.08) !important;
+            color: #fef08a !important;
+            border-bottom-color: rgba(245, 158, 11, 0.15) !important;
+        }
+
+        #slideDataPipeline[data-pipe-step="4"] .col-clean-job,
+        #slideDataPipeline[data-pipe-step="4"] .col-clean-car {
+            background: linear-gradient(180deg, rgba(56, 189, 248, 0.16) 0%, rgba(56, 189, 248, 0.06) 100%) !important;
+            color: #bae6fd !important;
+            border-bottom-color: rgba(56, 189, 248, 0.25) !important;
+            text-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
+            font-weight: 700;
+        }
+
+        #slideDataPipeline[data-pipe-step="4"] .flow-box-encode {
+            border-color: rgba(56, 189, 248, 0.6) !important;
+            box-shadow: 0 8px 30px -4px rgba(56, 189, 248, 0.45) !important;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.18) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+            transform: translateY(-2px);
+        }
+
+        #slideDataPipeline[data-pipe-step="4"] .flow-box-encode .flow-step-title {
+            color: #7dd3fc;
+        }
+
+        /* Step 5: 강조 해제 (기본 표 복귀) */
+
+        /* Step 6: 정규화 설명 (소프트 바이올렛 앰비언트) */
+        #slideDataPipeline[data-pipe-step="6"] .col-raw-age,
+        #slideDataPipeline[data-pipe-step="6"] .col-raw-income,
+        #slideDataPipeline[data-pipe-step="6"] .col-raw-overdue {
+            background: linear-gradient(180deg, rgba(168, 85, 247, 0.15) 0%, rgba(168, 85, 247, 0.06) 100%) !important;
+            color: #f3e8ff !important;
+            border-bottom-color: rgba(168, 85, 247, 0.22) !important;
+            text-shadow: 0 0 16px rgba(168, 85, 247, 0.45);
+            font-weight: 600;
+        }
+
+        #slideDataPipeline[data-pipe-step="6"] .matrix-clean-wrap {
+            opacity: 0.4;
+            filter: blur(0.2px);
+        }
+
+        #slideDataPipeline[data-pipe-step="6"] .flow-box-scale {
+            border-color: rgba(168, 85, 247, 0.6) !important;
+            box-shadow: 0 8px 30px -4px rgba(168, 85, 247, 0.45) !important;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.18) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+            transform: translateY(-2px);
+        }
+
+        #slideDataPipeline[data-pipe-step="6"] .flow-box-scale .flow-step-title {
+            color: #d8b4fe;
+        }
+
+        /* Step 7: 아래 표의 정규화 수치(연령, 소득분위, 연체횟수) 강조 (소프트 에메랄드 앰비언트) */
+        #slideDataPipeline[data-pipe-step="7"] .col-raw-age,
+        #slideDataPipeline[data-pipe-step="7"] .col-raw-income,
+        #slideDataPipeline[data-pipe-step="7"] .col-raw-overdue {
+            background: rgba(168, 85, 247, 0.08) !important;
+            color: #f3e8ff !important;
+            border-bottom-color: rgba(168, 85, 247, 0.15) !important;
+        }
+
+        #slideDataPipeline[data-pipe-step="7"] .col-clean-age,
+        #slideDataPipeline[data-pipe-step="7"] .col-clean-income,
+        #slideDataPipeline[data-pipe-step="7"] .col-clean-overdue {
+            background: linear-gradient(180deg, rgba(52, 211, 153, 0.16) 0%, rgba(52, 211, 153, 0.06) 100%) !important;
+            color: #a7f3d0 !important;
+            border-bottom-color: rgba(52, 211, 153, 0.25) !important;
+            text-shadow: 0 0 16px rgba(52, 211, 153, 0.45);
+            font-weight: 700;
+        }
+
+        #slideDataPipeline[data-pipe-step="7"] .flow-box-scale {
+            border-color: rgba(52, 211, 153, 0.6) !important;
+            box-shadow: 0 8px 30px -4px rgba(52, 211, 153, 0.45) !important;
+            background: linear-gradient(135deg, rgba(52, 211, 153, 0.18) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+            transform: translateY(-2px);
+        }
+
+        #slideDataPipeline[data-pipe-step="7"] .flow-box-scale .flow-step-title {
+            color: #6ee7b7;
+        }
+
+        /* Step 8: 강조 해제 (기본 표 복귀) */
+
+        /* Step 9: 마지막 연체 위험도 라벨링 강조 (오릭스 시그니처 딥 로즈 & 소프트 블룸 펄스) */
+        #slideDataPipeline[data-pipe-step="9"] .matrix-raw-wrap {
+            opacity: 0.35;
+            filter: blur(0.2px);
+        }
+
+        #slideDataPipeline[data-pipe-step="9"] .col-clean-label {
+            background: linear-gradient(180deg, rgba(225, 29, 72, 0.22) 0%, rgba(225, 29, 72, 0.08) 100%) !important;
+            color: #fecdd3 !important;
+            border-bottom-color: rgba(225, 29, 72, 0.35) !important;
+            font-weight: 700 !important;
+            animation: softPulseBloom 2.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes softPulseBloom {
+            0% {
+                background: linear-gradient(180deg, rgba(225, 29, 72, 0.18) 0%, rgba(225, 29, 72, 0.06) 100%);
+                text-shadow: 0 0 14px rgba(244, 63, 94, 0.45);
+            }
+
+            100% {
+                background: linear-gradient(180deg, rgba(225, 29, 72, 0.28) 0%, rgba(225, 29, 72, 0.12) 100%);
+                text-shadow: 0 0 22px rgba(244, 63, 94, 0.85), 0 0 35px rgba(244, 63, 94, 0.4);
+                color: #ffffff !important;
+            }
+        }
+
+        /* 하이라이트 기둥 상/하단 부드러운 코너 라운딩 (Soft Floating Pillar Effect) */
+        #slideDataPipeline[data-pipe-step="1"] th.col-raw-id {
+            border-top-left-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="1"] th.col-raw-name {
+            border-top-right-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="1"] tr:last-child td.col-raw-id {
+            border-bottom-left-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="1"] tr:last-child td.col-raw-name {
+            border-bottom-right-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="3"] th.col-raw-job {
+            border-top-left-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="3"] th.col-raw-car {
+            border-top-right-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="3"] tr:last-child td.col-raw-job {
+            border-bottom-left-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="3"] tr:last-child td.col-raw-car {
+            border-bottom-right-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="4"] th.col-clean-job {
+            border-top-left-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="4"] th.col-clean-car {
+            border-top-right-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="4"] tr:last-child td.col-clean-job {
+            border-bottom-left-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="4"] tr:last-child td.col-clean-car {
+            border-bottom-right-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="6"] th.col-raw-age {
+            border-top-left-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="6"] th.col-raw-overdue {
+            border-top-right-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="6"] tr:last-child td.col-raw-age {
+            border-bottom-left-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="6"] tr:last-child td.col-raw-overdue {
+            border-bottom-right-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="7"] th.col-clean-age {
+            border-top-left-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="7"] th.col-clean-overdue {
+            border-top-right-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="7"] tr:last-child td.col-clean-age {
+            border-bottom-left-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="7"] tr:last-child td.col-clean-overdue {
+            border-bottom-right-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="9"] th.col-clean-label {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        #slideDataPipeline[data-pipe-step="9"] tr:last-child td.col-clean-label {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
         /* ----------------------------------------------------
            14. Deep Learning & Mathematical Model
            ---------------------------------------------------- */
@@ -2839,13 +3269,15 @@
             display: flex;
             align-items: stretch;
             justify-content: center;
-            gap: 32px;
-            width: 1340px;
-            height: 380px;
+            gap: 40px;
+            width: 1480px;
+            max-width: 96vw;
+            height: 440px;
         }
 
         .neural-net-card {
-            flex: 1.1;
+            flex: 1.35;
+            min-width: 0;
             height: 100%;
             background: transparent;
             border: none;
@@ -2862,18 +3294,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            white-space: nowrap;
+            gap: 16px;
         }
 
         .nn-title {
-            font-size: 13px;
+            font-size: 16px;
             font-weight: 700;
             color: #f1f5f9;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .nn-header .table-badge {
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-size: 13px;
+            padding: 4px 13px;
         }
 
         .nn-canvas-svg {
@@ -2884,6 +3327,7 @@
 
         .math-concept-card {
             flex: 1.0;
+            min-width: 0;
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -2892,37 +3336,37 @@
         }
 
         .formula-box {
-            background: linear-gradient(135deg, rgba(218, 31, 61, 0.12), rgba(15, 23, 42, 0.4));
-            border: 1.5px solid rgba(218, 31, 61, 0.4);
+            background: linear-gradient(135deg, rgba(218, 31, 61, 0.14), rgba(15, 23, 42, 0.5));
+            border: 1.5px solid rgba(218, 31, 61, 0.45);
             border-radius: 16px;
-            padding: 16px 20px;
+            padding: 16px 22px;
             text-align: center;
-            box-shadow: 0 0 25px rgba(218, 31, 61, 0.15);
+            box-shadow: 0 0 30px rgba(218, 31, 61, 0.18);
         }
 
         .formula-tag {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
             color: #ff8599;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
         }
 
         .formula-main {
             font-family: var(--font-display);
-            font-size: 24px;
+            font-size: 25px;
             font-weight: 800;
             color: #ffffff;
-            letter-spacing: 0px;
+            letter-spacing: -0.5px;
             white-space: nowrap;
             margin: 6px 0;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 18px rgba(255, 255, 255, 0.5);
         }
 
         .formula-desc {
-            font-size: 11.5px;
+            font-size: 13.5px;
             color: #cbd5e1;
-            line-height: 1.5;
+            line-height: 1.55;
             word-break: keep-all;
         }
 
@@ -2930,7 +3374,7 @@
             background: transparent;
             border: none;
             border-radius: 0;
-            padding: 4px 0;
+            padding: 2px 0;
             display: flex;
             flex-direction: column;
             gap: 14px;
@@ -2943,13 +3387,13 @@
         }
 
         .principle-num {
-            width: 22px;
-            height: 22px;
+            width: 25px;
+            height: 25px;
             border-radius: 7px;
-            background: rgba(56, 189, 248, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.4);
+            background: rgba(56, 189, 248, 0.18);
+            border: 1px solid rgba(56, 189, 248, 0.45);
             color: #38bdf8;
-            font-size: 11.5px;
+            font-size: 13px;
             font-weight: 800;
             display: flex;
             align-items: center;
@@ -2959,14 +3403,14 @@
         }
 
         .principle-title {
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 700;
             color: #f1f5f9;
             text-align: left;
         }
 
         .principle-desc {
-            font-size: 11.5px;
+            font-size: 13px;
             color: #94a3b8;
             margin-top: 2px;
             line-height: 1.4;
@@ -3062,6 +3506,47 @@
             pointer-events: auto !important;
             visibility: visible;
         }
+
+        /* ── Round 3 Layer: 최종 완성 모델 단독 & 실시간 추론 릴레이 ── */
+        .training-graphic-svg .round-3-layer {
+            transition: opacity 0.4s ease;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        /* r3-switch 활성화 시: Round 1과 Round 2 완전히 숨김 */
+        .slide.r3-active .training-graphic-svg .round-1-layer,
+        .slide:has(.r3-switch.step-active) .training-graphic-svg .round-1-layer,
+        .slide.r3-active .training-graphic-svg .round-2-layer,
+        .slide:has(.r3-switch.step-active) .training-graphic-svg .round-2-layer {
+            opacity: 0 !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
+        }
+
+        /* r3-switch 활성화 시: Round 3 표시 */
+        .slide.r3-active .training-graphic-svg .round-3-layer,
+        .slide:has(.r3-switch.step-active) .training-graphic-svg .round-3-layer {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            visibility: visible !important;
+        }
+
+        /* 새 질문(r3-step-query) 시작 시 상단 안내 문구 숨김 (글씨 겹침 방지) */
+        .slide:has(.r3-step-query.step-active) .r3-intro-msg {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+
+        /* 결합 질문 재입력(r3-step-refeed) 시작 시 최초 질문 텍스트 숨김 */
+        .slide:has(.r3-step-refeed.step-active) .r3-query-initial {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+
 
         /* Spinning core rings */
         @keyframes coreSpinClockwise {
@@ -4104,7 +4589,7 @@
             inset: 0;
             border-radius: 10px;
             border: 1px solid var(--primary);
-            background: rgba(218, 31, 61, 0.4);
+            background: #3b0712;
             color: #fff;
             font-size: 13px;
             font-weight: bold;
@@ -4113,7 +4598,6 @@
             justify-content: center;
             box-shadow: 0 0 15px var(--primary-glow);
             opacity: 0;
-            backdrop-filter: blur(5px);
         }
 
         .slide.visible .anim-k8s-overload {
@@ -4125,7 +4609,7 @@
             0%,
             15% {
                 border-color: var(--border);
-                background: rgba(255, 255, 255, 0.05);
+                background: #182232;
                 color: var(--text);
                 box-shadow: none;
             }
@@ -4133,7 +4617,7 @@
             20%,
             45% {
                 border-color: #ef4444;
-                background: rgba(239, 68, 68, 0.4);
+                background: #3b0712;
                 color: #fca5a5;
                 box-shadow: 0 0 25px rgba(239, 68, 68, 0.7);
             }
@@ -4142,7 +4626,7 @@
             50%,
             80% {
                 border-color: #4ade80;
-                background: rgba(74, 222, 128, 0.2);
+                background: #052e16;
                 color: #fff;
                 box-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
             }
@@ -4151,99 +4635,91 @@
             85%,
             100% {
                 border-color: var(--border);
-                background: rgba(255, 255, 255, 0.05);
+                background: #182232;
                 color: var(--text);
                 box-shadow: none;
             }
         }
 
+        /* Replica 1: Spawns UNDERNEATH Main Card (z-index: 3, translates down & right) */
         .slide.visible .anim-k8s-stack-1 {
-            animation: k8sStack1 7s infinite;
+            animation: k8sStack1 6s infinite ease-in-out;
         }
 
+        /* Replica 2: Spawns UNDERNEATH Replica 1 (z-index: 2, translates down & right further) */
         .slide.visible .anim-k8s-stack-2 {
-            animation: k8sStack2 7s infinite;
+            animation: k8sStack2 6s infinite ease-in-out;
         }
 
         @keyframes k8sStack1 {
 
             0%,
-            35% {
+            38% {
                 opacity: 0;
                 transform: translate(0, 0);
-                border-color: var(--primary);
-                background: rgba(218, 31, 61, 0.4);
-                box-shadow: 0 0 15px var(--primary-glow);
-                z-index: 1;
-            }
-
-            45% {
-                opacity: 0.95;
-                transform: translate(14px, -10px);
-                border-color: var(--primary);
-                background: rgba(218, 31, 61, 0.4);
-                box-shadow: 0 0 15px var(--primary-glow);
                 z-index: 3;
             }
 
-            55%,
-            80% {
-                opacity: 0.95;
-                transform: translate(14px, -10px);
+            46% {
+                opacity: 1;
+                transform: translate(14px, 12px);
+                border-color: #ef4444;
+                background: #3b0712;
+                z-index: 3;
+            }
+
+            54%,
+            85% {
+                opacity: 1;
+                transform: translate(14px, 12px);
                 border-color: #4ade80;
-                background: rgba(74, 222, 128, 0.25);
+                background: #052e16;
                 color: #fff;
-                box-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+                box-shadow: 0 0 15px rgba(74, 222, 128, 0.6);
                 z-index: 3;
             }
 
-            /* Turn Green! */
-            85%,
+            90%,
             100% {
                 opacity: 0;
                 transform: translate(0, 0);
-                z-index: 1;
+                z-index: 3;
             }
         }
 
         @keyframes k8sStack2 {
 
             0%,
-            40% {
+            44% {
                 opacity: 0;
                 transform: translate(0, 0);
-                border-color: var(--primary);
-                background: rgba(218, 31, 61, 0.4);
-                box-shadow: 0 0 15px var(--primary-glow);
-                z-index: 1;
+                z-index: 2;
             }
 
-            50% {
-                opacity: 0.95;
-                transform: translate(28px, -20px);
-                border-color: var(--primary);
-                background: rgba(218, 31, 61, 0.4);
-                box-shadow: 0 0 15px var(--primary-glow);
+            52% {
+                opacity: 1;
+                transform: translate(28px, 24px);
+                border-color: #ef4444;
+                background: #3b0712;
                 z-index: 2;
             }
 
             60%,
-            80% {
-                opacity: 0.95;
-                transform: translate(28px, -20px);
+            85% {
+                opacity: 1;
+                transform: translate(28px, 24px);
                 border-color: #4ade80;
-                background: rgba(74, 222, 128, 0.25);
+                background: #052e16;
                 color: #fff;
-                box-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+                box-shadow: 0 0 15px rgba(74, 222, 128, 0.6);
                 z-index: 2;
             }
 
-            /* Turn Green! */
-            85%,
+            90%,
             100% {
                 opacity: 0;
                 transform: translate(0, 0);
-                z-index: 1;
+                z-index: 2;
             }
         }
 
@@ -4486,7 +4962,7 @@
             0%,
             15% {
                 border-color: rgba(6, 182, 212, 0.4);
-                background: rgba(6, 182, 212, 0.1);
+                background: #0f172a;
                 color: #fff;
                 box-shadow: none;
             }
@@ -4495,7 +4971,7 @@
             25%,
             45% {
                 border-color: #ef4444;
-                background: rgba(239, 68, 68, 0.35);
+                background: #3b0712;
                 color: #fca5a5;
                 box-shadow: 0 0 30px rgba(239, 68, 68, 0.8);
                 transform: scale(1.03);
@@ -4505,7 +4981,7 @@
             55%,
             85% {
                 border-color: #06b6d4;
-                background: rgba(6, 182, 212, 0.18);
+                background: #082f49;
                 color: #fff;
                 box-shadow: 0 0 25px rgba(6, 182, 212, 0.5);
                 transform: scale(1);
@@ -4514,13 +4990,13 @@
             90%,
             100% {
                 border-color: rgba(6, 182, 212, 0.4);
-                background: rgba(6, 182, 212, 0.1);
+                background: #0f172a;
                 color: #fff;
                 box-shadow: none;
             }
         }
 
-        /* Replica 1: Spawns UNDERNEATH (z-index: 1, translates down & right) */
+        /* Replica 1: Spawns UNDERNEATH Main Card (z-index: 3, translates down & right) */
         .slide.visible .anim-search-stack-1 {
             animation: searchStack1 6s infinite ease-in-out;
         }
@@ -4528,29 +5004,29 @@
         @keyframes searchStack1 {
 
             0%,
-            40% {
+            38% {
                 opacity: 0;
                 transform: translate(0, 0);
-                z-index: 1;
+                z-index: 3;
             }
 
-            48% {
-                opacity: 0.9;
+            46% {
+                opacity: 1;
                 transform: translate(16px, 14px);
                 border-color: #ef4444;
-                background: rgba(239, 68, 68, 0.3);
-                z-index: 1;
+                background: #3b0712;
+                z-index: 3;
             }
 
-            55%,
+            54%,
             85% {
-                opacity: 0.95;
+                opacity: 1;
                 transform: translate(16px, 14px);
                 border-color: #06b6d4;
-                background: rgba(6, 182, 212, 0.25);
+                background: #082f49;
                 color: #fff;
-                box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
-                z-index: 1;
+                box-shadow: 0 0 15px rgba(6, 182, 212, 0.6);
+                z-index: 3;
                 /* Below main card (z-index 4) */
             }
 
@@ -4558,11 +5034,11 @@
             100% {
                 opacity: 0;
                 transform: translate(0, 0);
-                z-index: 1;
+                z-index: 3;
             }
         }
 
-        /* Replica 2: Spawns UNDERNEATH (z-index: 2, translates down & right further) */
+        /* Replica 2: Spawns UNDERNEATH Replica 1 (z-index: 2, translates down & right further) */
         .slide.visible .anim-search-stack-2 {
             animation: searchStack2 6s infinite ease-in-out;
         }
@@ -4570,28 +5046,28 @@
         @keyframes searchStack2 {
 
             0%,
-            45% {
+            44% {
                 opacity: 0;
                 transform: translate(0, 0);
                 z-index: 2;
             }
 
             52% {
-                opacity: 0.9;
+                opacity: 1;
                 transform: translate(32px, 28px);
                 border-color: #ef4444;
-                background: rgba(239, 68, 68, 0.3);
+                background: #3b0712;
                 z-index: 2;
             }
 
             60%,
             85% {
-                opacity: 0.95;
+                opacity: 1;
                 transform: translate(32px, 28px);
                 border-color: #06b6d4;
-                background: rgba(6, 182, 212, 0.25);
+                background: #082f49;
                 color: #fff;
-                box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+                box-shadow: 0 0 15px rgba(6, 182, 212, 0.6);
                 z-index: 2;
                 /* Below main card (z-index 4) */
             }
@@ -5435,7 +5911,127 @@
                 </div>
             </section>
 
-            <!-- Slide 2: Monolithic vs MSA -->
+            <!-- Slide 2: Definition of IT Infrastructure -->
+            <section class="slide">
+                <div class="slide-content" style="padding: 0 80px;">
+                    <h3 class="reveal" style="letter-spacing: 0.15em;">KPC IT INFRASTRUCTURE BASICS</h3>
+                    <h1 class="reveal delay-1" style="font-size: 76px; font-weight: 700; margin-bottom: 24px;">IT 인프라란?
+                    </h1>
+                    <div style="width: 80px; height: 4px; background: var(--primary); border-radius: 2px; margin: 0 auto 40px auto; box-shadow: 0 0 15px var(--primary-glow);"
+                        class="reveal delay-2"></div>
+
+                    <!-- Main Definition Box -->
+                    <div class="reveal delay-2"
+                        style="max-width: 1200px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 20px; padding: 42px 60px; backdrop-filter: blur(10px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); margin-bottom: 45px; text-align: center;">
+                        <p
+                            style="font-size: 27px; line-height: 1.75; color: #ffffff; font-weight: 400; word-break: keep-all; margin: 0; word-spacing: 0.02em;">
+                            IT 인프라는 기업의 비즈니스 서비스와 응용 프로그램을 안정적이고 효율적으로 운영하기 위해 필요한<br>
+                            <span style="color: var(--primary); font-weight: 700;">하드웨어, 소프트웨어, 네트워크, 데이터센터 및 관리 파이프라인의
+                                종합적인 기반 구조</span>를 의미합니다.
+                        </p>
+                    </div>
+
+                    <!-- Core Components Cards -->
+                    <div class="reveal delay-3"
+                        style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; width: 100%; max-width: 1240px;">
+                        <div
+                            style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 32px 28px; text-align: center; transition: all 0.3s ease;">
+                            <div style="font-size: 38px; margin-bottom: 14px;">🖥️</div>
+                            <h4
+                                style="font-family: var(--font-display); font-size: 22px; color: #fff; margin: 0 0 12px 0; font-weight: 600;">
+                                Hardware & Server</h4>
+                            <p
+                                style="font-size: 16px; color: var(--text-muted); line-height: 1.6; margin: 0; word-break: keep-all;">
+                                컴퓨팅 파워, 물리 서버, 스토리지,<br>고성능 데이터센터 디바이스
+                            </p>
+                        </div>
+
+                        <div
+                            style="background: rgba(218, 31, 61, 0.05); border: 1px solid rgba(218, 31, 61, 0.3); border-radius: 16px; padding: 32px 28px; text-align: center; box-shadow: 0 0 25px rgba(218, 31, 61, 0.15);">
+                            <div style="font-size: 38px; margin-bottom: 14px;">🌐</div>
+                            <h4
+                                style="font-family: var(--font-display); font-size: 22px; color: var(--primary); margin: 0 0 12px 0; font-weight: 600;">
+                                Network & Cloud</h4>
+                            <p
+                                style="font-size: 16px; color: var(--text-muted); line-height: 1.6; margin: 0; word-break: keep-all;">
+                                데이터 전송 통로, 라우팅/스위칭,<br>CDN, VPC 및 클라우드 네트워크
+                            </p>
+                        </div>
+
+                        <div
+                            style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 32px 28px; text-align: center; transition: all 0.3s ease;">
+                            <div style="font-size: 38px; margin-bottom: 14px;">⚙️</div>
+                            <h4
+                                style="font-family: var(--font-display); font-size: 22px; color: #fff; margin: 0 0 12px 0; font-weight: 600;">
+                                Software & OS</h4>
+                            <p
+                                style="font-size: 16px; color: var(--text-muted); line-height: 1.6; margin: 0; word-break: keep-all;">
+                                운영체제(OS), DBMS, 미들웨어,<br>가상화/컨테이너 (Docker / K8s)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: Focus Keywords (Step-by-step Click Reveal) -->
+            <section class="slide">
+                <div class="slide-content"
+                    style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+
+                    <!-- Organic Word Cloud Cluster (Initially Bright White, Dimmed on Click) -->
+                    <div class="word-cloud-container reveal">
+                        <!-- Row 1 (Top edge - 3 items) -->
+                        <div class="word-cloud-row" style="max-width: 1000px; justify-content: space-evenly;">
+                            <span class="word-cloud-tag" style="font-size: 25px; font-weight: 400; letter-spacing: 0.05em;">서버 랙 & IDC</span>
+                            <span class="word-cloud-tag" style="font-size: 24px; font-weight: 400; letter-spacing: 0.05em;">온프레미스 (On-Premises)</span>
+                            <span class="word-cloud-tag" style="font-size: 25px; font-weight: 400; letter-spacing: 0.05em;">RAID 구성 (RAID 0/1/5/10)</span>
+                        </div>
+                        <!-- Row 2 (Upper middle - 5 items) -->
+                        <div class="word-cloud-row" style="max-width: 1400px; justify-content: space-between;">
+                            <span class="word-cloud-tag" style="font-size: 24px; font-weight: 400; letter-spacing: 0.05em;">데이터센터 관리</span>
+                            <span class="word-cloud-tag" style="font-size: 25px; font-weight: 400; letter-spacing: 0.05em;">서버 사이징</span>
+                            <span class="word-cloud-tag" style="font-size: 24px; font-weight: 400; letter-spacing: 0.05em;">가상화 & Hypervisor</span>
+                            <span class="word-cloud-tag" style="font-size: 25px; font-weight: 400; letter-spacing: 0.05em;">도커 & 컨테이너</span>
+                            <span class="word-cloud-tag" style="font-size: 24px; font-weight: 400; letter-spacing: 0.05em;">쿠버네티스 (K8s)</span>
+                        </div>
+                        <!-- Row 3 (Center equator - 4 items spaced wide to give room for center focus words) -->
+                        <div class="word-cloud-row" style="max-width: 1650px; justify-content: space-between;">
+                            <span class="word-cloud-tag" style="font-size: 25px; font-weight: 400; letter-spacing: 0.05em;">API Gateway & 라우팅</span>
+                            <span class="word-cloud-tag" style="font-size: 26px; font-weight: 400; letter-spacing: 0.05em;">동적 로드밸런싱</span>
+                            <span class="word-cloud-tag" style="font-size: 25px; font-weight: 400; letter-spacing: 0.05em;">오토스케일링</span>
+                            <span class="word-cloud-tag" style="font-size: 24px; font-weight: 400; letter-spacing: 0.05em;">네트워크 보안</span>
+                        </div>
+                        <!-- Row 4 (Lower middle - 5 items) -->
+                        <div class="word-cloud-row" style="max-width: 1450px; justify-content: space-between;">
+                            <span class="word-cloud-tag" style="font-size: 25px; font-weight: 400; letter-spacing: 0.05em;">DBMS & 스토리지</span>
+                            <span class="word-cloud-tag" style="font-size: 24px; font-weight: 400; letter-spacing: 0.05em;">하이브리드 클라우드</span>
+                            <span class="word-cloud-tag" style="font-size: 25px; font-weight: 400; letter-spacing: 0.05em;">블록체인</span>
+                            <span class="word-cloud-tag" style="font-size: 24px; font-weight: 400; letter-spacing: 0.05em;">서버리스 (AWS Lambda)</span>
+                            <span class="word-cloud-tag" style="font-size: 25px; font-weight: 400; letter-spacing: 0.05em;">SDN 네트워크</span>
+                        </div>
+                        <!-- Row 5 (Bottom edge - 4 items) -->
+                        <div class="word-cloud-row" style="max-width: 1050px; justify-content: space-evenly;">
+                            <span class="word-cloud-tag" style="font-size: 24px; font-weight: 400; letter-spacing: 0.05em;">OLTP & OLAP</span>
+                            <span class="word-cloud-tag" style="font-size: 25px; font-weight: 400; letter-spacing: 0.05em;">CPU와 메모리</span>
+                            <span class="word-cloud-tag" style="font-size: 24px; font-weight: 400; letter-spacing: 0.05em;">인공신경망 & 딥러닝</span>
+                            <span class="word-cloud-tag" style="font-size: 25px; font-weight: 400; letter-spacing: 0.05em;">양자 컴퓨팅</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Highlighted Focus Words (Step-by-Step Click Reveal) -->
+                    <div class="focus-keyword-wrap">
+                        <span class="focus-keyword step-item"
+                            style="font-family: var(--font-display); font-size: 110px; font-weight: 800; color: #ff2e54; text-shadow: 0 0 50px rgba(255, 46, 84, 0.6); letter-spacing: -0.02em;">CLOUD</span>
+                        <span class="focus-keyword step-item"
+                            style="font-family: var(--font-display); font-size: 110px; font-weight: 800; color: #38bdf8; text-shadow: 0 0 50px rgba(56, 189, 248, 0.6); letter-spacing: -0.02em;">DATA</span>
+                        <span class="focus-keyword step-item"
+                            style="font-family: var(--font-display); font-size: 110px; font-weight: 800; color: #c084fc; text-shadow: 0 0 50px rgba(192, 132, 252, 0.6); letter-spacing: -0.02em;">AI</span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 4: Monolithic vs MSA -->
             <section class="slide">
                 <div class="slide-content">
                     <div class="central-diagram">
@@ -5448,7 +6044,7 @@
                                 <div class="flow-particle anim-flow-3"></div>
                             </div>
                             <div class="msa-grid-static">
-                                <div class="msa-node-static red-box">Auth</div>
+                                <div class="msa-node-static box">Auth</div>
                                 <div class="msa-node-static box">User</div>
                                 <div class="msa-node-static box">Billing</div>
                                 <div class="msa-node-static box">Search</div>
@@ -5456,10 +6052,11 @@
                         </div>
                     </div>
                     <div class="caption reveal">
-                        <h3>Architecture</h3>
-                        <h2>Monolithic to MSA</h2>
-                        <p>거대한 단일 장애점(SPoF)을 분해하여, <span class="highlight">독립적이고 유연한 마이크로서비스</span>로 진화합니다.</p>
-                    </div>
+ <h3>Architecture Evolution</h3>
+ <h2>Monolithic to MSA</h2>
+ <p>거대한 단일 아키텍처(Monolithic)를 분해하여, <span class="highlight">독립적이고 유연한 마이크로서비스(MSA)</span>로 전환합니다.
+ </p>
+ </div>
                 </div>
             </section>
 
@@ -5517,10 +6114,10 @@
                         </div>
                     </div>
                     <div class="caption reveal">
-                        <h3>Resilience</h3>
-                        <h2>장애 격리 (Fault Isolation)</h2>
-                        <p>하나의 서비스 장애가 전체 시스템 마비로 이어지지 않으며, <span class="highlight">해당 서비스가 복구되면 정상화</span>됩니다.</p>
-                    </div>
+ <h3>Resilience</h3>
+ <h2>장애 격리 (Fault Isolation)</h2>
+ <p>하나의 서비스 장애가 전체 시스템 마비로 이어지지 않으며, <span class="highlight">해당 서비스가 복구되면 정상화</span>됩니다.</p>
+ </div>
                 </div>
             </section>
 
@@ -5554,11 +6151,11 @@
                         </div>
                     </div>
                     <div class="caption reveal">
-                        <h3>VIRTUALIZATION</h3>
-                        <h2>Container vs Hypervisor VM</h2>
-                        <p>게스트 OS(Guest OS)를 생략하고 호스트 커널을 공유하여, <span class="highlight">오버헤드를 대폭 줄이고 초경량 실행</span>을 가능하게
-                            합니다.</p>
-                    </div>
+ <h3>VIRTUALIZATION</h3>
+ <h2>Container vs Hypervisor VM</h2>
+ <p>게스트 OS(Guest OS)를 생략하고 호스트 커널을 공유하여, <span class="highlight">오버헤드를 대폭 줄이고 초경량 실행</span>을 가능하게
+ 합니다.</p>
+ </div>
                 </div>
             </section>
 
@@ -5634,11 +6231,11 @@
                         </div>
                     </div>
                     <div class="caption reveal">
-                        <h3>ORCHESTRATION & ELASTICITY</h3>
-                        <h2>Kubernetes (K8s)</h2>
-                        <p>수많은 도커 컨테이너를 모니터링하여, <span class="highlight">과부하 발생 시 자동으로 파드를 확장(Auto-Scaling)하고 장애 시 실시간으로
-                                복구(Auto-Healing)</span>합니다.</p>
-                    </div>
+ <h3>ORCHESTRATION & ELASTICITY</h3>
+ <h2>Kubernetes (K8s)</h2>
+ <p>수많은 도커 컨테이너를 모니터링하여, <span class="highlight">과부하 발생 시 자동으로 파드를 확장(Auto-Scaling)하고 장애 시 실시간으로
+ 복구(Auto-Healing)</span>합니다.</p>
+ </div>
                 </div>
             </section>
 
@@ -5747,11 +6344,11 @@
                         </div>
                     </div>
                     <div class="caption reveal">
-                        <h3>CLOUD NATIVE ROUTING</h3>
-                        <h2>API Gateway & Dynamic Load Balancing</h2>
-                        <p>요청 URL 경로(<span class="highlight">/search</span>)별로 마이크로서비스를 자동 바인딩하며, <span
-                                class="highlight">서치 서비스 부하 폭주 시 해당 경로만 독자적으로 오토스케일링 및 동적 로드밸런싱</span>을 수행합니다.</p>
-                    </div>
+ <h3>CLOUD NATIVE ROUTING</h3>
+ <h2>API Gateway & Dynamic Load Balancing</h2>
+ <p>요청 URL 경로(<span class="highlight">/search</span>)별로 마이크로서비스를 자동 바인딩하며, <span
+ class="highlight">서치 서비스 부하 폭주 시 해당 경로만 독자적으로 오토스케일링 및 동적 로드밸런싱</span>을 수행합니다.</p>
+ </div>
                 </div>
             </section>
 
@@ -6033,9 +6630,7 @@
                     <div class="caption reveal">
                         <h3>EXPANDED ATTACK SURFACE & HYBRID SECURITY</h3>
                         <h2>관리 포인트의 급증 ➔ 공격 표면(Attack Surface)의 기하급수적 확대</h2>
-                        <p>과거 온프레미스는 <span class="highlight">외곽 단일 방화벽</span>만 통제하면 안전했으나, <span class="highlight">하이브리드
-                                클라우드와 수많은 MSA·API 엔드포인트</span>로 연결되면서 <span class="red-text">해커가 침투할 수 있는 접점(공격 표면)이
-                                전방위로 폭증</span>하여 입체적인 제로 트러스트 보안 체계가 필수적입니다.</p>
+                        <p>과거 온프레미스는 <span class="highlight">외곽 단일 방화벽</span>만 통제하면 안전했으나,<br><span class="highlight">하이브리드 클라우드와 수많은 MSA·API 엔드포인트</span>로 연결되면서,<br><span class="red-text">해커가 침투할 수 있는 접점(공격 표면)이 전방위로 폭증</span>하여 입체적인 제로 트러스트 보안 체계가 필수적입니다.</p>
                     </div>
                 </div>
             </section>
@@ -6166,11 +6761,11 @@
                         </div>
                     </div>
                     <div class="caption reveal">
-                        <h3>AWS GLOBAL INFRASTRUCTURE</h3>
-                        <h2>Region & Availability Zone (AZ)</h2>
-                        <p>서울 리전 내 비공개 데이터센터들을 묶어 <span class="highlight">총 4개의 독립 가용영역(AZ-a, b, c, d)으로 클러스터링</span>하여
-                            물리적 재해를 완벽 차단합니다.</p>
-                    </div>
+ <h3>AWS GLOBAL INFRASTRUCTURE</h3>
+ <h2>Region & Availability Zone (AZ)</h2>
+ <p>서울 리전 내 비공개 데이터센터들을 묶어 <span class="highlight">총 4개의 독립 가용영역(AZ-a, b, c, d)으로 클러스터링</span>하여
+ 물리적 재해를 완벽 차단합니다.</p>
+ </div>
                 </div>
             </section>
 
@@ -6279,9 +6874,36 @@
                     <div class="caption reveal delay-1">
                         <h3>Performance & High Availability</h3>
                         <h2>CDN (Content Delivery Network) & Dynamic Failover</h2>
-                        <p>전 세계 사용자는 <span class="highlight">물리적으로 가장 가까운 엣지(Edge) 서버</span>와 통신하여 초저지연 응답을 받으며, <span
-                                class="red-text">특정 엣지가 셧다운(Down)되더라도 Anycast 라우팅으로 인접 정상 엣지로 즉시 자동
-                                우회(Failover)</span>되어 무중단 연속성을 보장합니다.</p>
+                        <p>전 세계 사용자는 <span class="highlight">물리적으로 가장 가까운 엣지(Edge) 서버</span>와 통신하여 초저지연 응답을 받으며,<br><span class="red-text">특정 엣지가 셧다운(Down)되더라도 Anycast 라우팅으로 인접 정상 엣지로 즉시 자동 우회(Failover)</span>되어 무중단 연속성을 보장합니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3.5: Infrastructure Dilemma & Serverless Trigger (Problem Statement) -->
+            <section class="slide">
+                <div class="slide-content" style="padding: 0 100px; max-width: 1450px; margin: 0 auto; text-align: center;">
+                    <h3 class="reveal" style="letter-spacing: 0.18em; font-size: 24px; color: var(--primary); margin-bottom: 25px;">
+                        INFRASTRUCTURE DILEMMA & EFFICIENCY
+                    </h3>
+
+                    <h1 class="reveal delay-1" style="font-size: 60px; font-weight: 700; line-height: 1.45; letter-spacing: -0.02em; word-break: keep-all; margin: 0 0 10px 0;">
+                        "월말 특정 시간대에만 집중되는 조회·배치 업무를 위해,<br>
+                        <span style="color: #ff3355; text-shadow: 0 0 35px rgba(255, 51, 85, 0.45);">24시간 최고 스펙의 서버</span>를 켜두어야 할까요?"
+                    </h1>
+
+                    <div class="reveal delay-2" style="width: 100px; height: 4px; background: var(--primary); border-radius: 2px; margin: 40px auto; box-shadow: 0 0 20px var(--primary-glow);"></div>
+
+                    <div class="reveal delay-2" style="max-width: 1200px; margin: 0 auto 35px auto;">
+                        <p style="font-size: 28px; line-height: 1.75; color: #cbd5e1; font-weight: 300; word-break: keep-all; margin: 0;">
+                            수강신청, 티켓팅, 결산 배치처럼 <span style="color: #ffffff; font-weight: 600;">'순간 폭주'</span>하는 트래픽을 대비하느라<br>
+                            나머지 <span style="color: #ff3355; font-weight: 600;">95%의 유휴 시간(Idle Time)</span>에도 막대한 고정 인프라 비용을 지출하는 딜레마
+                        </p>
+                    </div>
+
+                    <div class="reveal delay-3" style="display: inline-block; padding: 18px 45px; border-radius: 50px; background: rgba(56, 189, 248, 0.08); border: 1.5px solid rgba(56, 189, 248, 0.35); box-shadow: 0 0 30px rgba(56, 189, 248, 0.15); margin-top: 15px;">
+                        <p style="font-size: 26px; color: #38bdf8; font-weight: 500; margin: 0; word-break: keep-all;">
+                            💡 <span style="color: #ffffff; font-weight: 700;">"호출될 때만 초 단위로 생성되고, 평소엔 $0로 사라질 수는 없을까?"</span>
+                        </p>
                     </div>
                 </div>
             </section>
@@ -6439,13 +7061,13 @@
                         </div>
                     </div>
                     <div class="caption srv-caption reveal delay-1">
-                        <h3>Scalability & Event-Driven</h3>
-                        <h2 class="srv-title-single">Serverless (AWS Lambda) & Cold/Warm Start</h2>
-                        <p class="srv-desc-line">호출 시에만 <strong>초단위 인스턴스 생성 ➔ 연산 처리 ➔ 즉시 소멸(Scale to Zero)</strong>되어
-                            평상시 유휴 비용이 <strong>$0</strong>입니다.</p>
-                        <p class="srv-desc-line">첫 요청 시 컨테이너 로딩 지연(<span class="highlight">Cold Start</span>)이 발생하나, 이후엔
-                            상주 인스턴스를 재사용해 <span class="green-text">초고속 즉각 응답(Warm Start)</span>합니다.</p>
-                    </div>
+ <h3>Scalability & Event-Driven</h3>
+ <h2 class="srv-title-single">Serverless (AWS Lambda) & Cold/Warm Start</h2>
+ <p class="srv-desc-line">호출 시에만 <strong>초단위 인스턴스 생성 ➔ 연산 처리 ➔ 즉시 소멸(Scale to Zero)</strong>되어
+ 평상시 유휴 비용이 <strong>$0</strong>입니다.</p>
+ <p class="srv-desc-line">첫 요청 시 컨테이너 로딩 지연(<span class="highlight">Cold Start</span>)이 발생하나, 이후엔
+ 상주 인스턴스를 재사용해 <span class="green-text">초고속 즉각 응답(Warm Start)</span>합니다.</p>
+ </div>
                 </div>
             </section>
 
@@ -6871,11 +7493,11 @@
 
                     <!-- 하단 캡션: 1문장 1줄 정렬 -->
                     <div class="caption srv-caption reveal delay-1">
-                        <h3>Network Architecture</h3>
-                        <h2 class="srv-title-single">SDN (Private Cloud) vs Traditional L2/L3 (On-Premises)</h2>
-                        <p class="srv-desc-line">전통적 인프라는 물리 스위치와 고정 서버를 케이블로 직접 연결하여 네트워크 변경 시 수동 작업과 경직성이 큽니다.</p>
-                        <p class="srv-desc-line">SDN 기반 프라이빗 클라우드는 중앙 SW 컨트롤러가 가상 네트워크를 실시간 제어하여 무중단 동적 라우팅을 실현합니다.</p>
-                    </div>
+ <h3>Network Architecture</h3>
+ <h2 class="srv-title-single">SDN (Private Cloud) vs Traditional L2/L3 (On-Premises)</h2>
+ <p class="srv-desc-line">전통적 인프라는 물리 스위치와 고정 서버를 케이블로 직접 연결하여 네트워크 변경 시 수동 작업과 경직성이 큽니다.</p>
+ <p class="srv-desc-line">SDN 기반 프라이빗 클라우드는 중앙 SW 컨트롤러가 가상 네트워크를 실시간 제어하여 무중단 동적 라우팅을 실현합니다.</p>
+ </div>
                 </div>
             </section>
 
@@ -7085,21 +7707,34 @@
                     </div>
                     <!-- 하단 캡션: 1문장 1줄 정렬 -->
                     <div class="caption srv-caption reveal delay-1">
-                        <h3>Data Architecture</h3>
-                        <h2 class="srv-title-single">OLTP & OLAP Separation</h2>
-                        <p class="srv-desc-line">무거운 분석(AI/BI) 쿼리가 서비스 장애를 유발하지 않도록 <span class="highlight">운영계와 분석계
-                                트래픽을 완벽히 분리</span>합니다.</p>
-                    </div>
+ <h3>Data Architecture</h3>
+ <h2 class="srv-title-single">OLTP & OLAP Separation</h2>
+ <p class="srv-desc-line">무거운 분석(AI/BI) 쿼리가 서비스 장애를 유발하지 않도록 <span class="highlight">운영계와 분석계
+ 트래픽을 완벽히 분리</span>합니다.</p>
+ </div>
                 </div>
             </section>
 
             <!-- Slide 7: Data Preprocessing Pipeline (Raw to Clean Matrix) -->
-            <section class="slide">
+            <section class="slide" id="slideDataPipeline">
                 <div class="slide-content">
-                    <div class="central-diagram" style="height: 410px; margin-bottom: 35px;">
+                    <!-- Step Controller (9 Steps for In-Slide Interactive Animation) -->
+                    <div class="pipe-step-controller" style="display: none;" aria-hidden="true">
+                        <div class="step-item pipe-step-1"></div>
+                        <div class="step-item pipe-step-2"></div>
+                        <div class="step-item pipe-step-3"></div>
+                        <div class="step-item pipe-step-4"></div>
+                        <div class="step-item pipe-step-5"></div>
+                        <div class="step-item pipe-step-6"></div>
+                        <div class="step-item pipe-step-7"></div>
+                        <div class="step-item pipe-step-8"></div>
+                        <div class="step-item pipe-step-9"></div>
+                    </div>
+
+                    <div class="central-diagram" style="height: 510px; margin-bottom: 55px;">
                         <div class="data-pipeline-layout">
                             <!-- 1. 상단: 원본 데이터 (Raw Customer & Vehicle Data) -->
-                            <div class="matrix-table-wrap">
+                            <div class="matrix-table-wrap matrix-raw-wrap">
                                 <div class="table-title-bar">
                                     <div class="table-title">
                                         <span>📋 원본 데이터 (Raw Data: 비정형 텍스트 · 한글 문자열 혼재)</span>
@@ -7109,42 +7744,42 @@
                                 <table class="data-matrix-table">
                                     <thead>
                                         <tr>
-                                            <th>계약ID</th>
-                                            <th>고객명 (비식별 대상)</th>
-                                            <th>연령</th>
-                                            <th>직업 (한글 범주)</th>
-                                            <th>리스 차종 (문자열)</th>
-                                            <th>연소득 (단위 표기)</th>
-                                            <th>연체 이력</th>
+                                            <th class="col-raw col-raw-id">계약ID</th>
+                                            <th class="col-raw col-raw-name">고객명 (비식별 대상)</th>
+                                            <th class="col-raw col-raw-age">연령</th>
+                                            <th class="col-raw col-raw-job">직업 (한글 범주)</th>
+                                            <th class="col-raw col-raw-car">리스 차종 (문자열)</th>
+                                            <th class="col-raw col-raw-income">연소득 (단위 표기)</th>
+                                            <th class="col-raw col-raw-overdue">연체 이력</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>LC-2024-081</td>
-                                            <td class="cell-highlight-del">김*수 (개인식별)</td>
-                                            <td>42세</td>
-                                            <td class="cell-highlight-str">개인사업자</td>
-                                            <td class="cell-highlight-str">제네시스 GV80</td>
-                                            <td class="cell-highlight-str">7,500만원</td>
-                                            <td>무 (0건)</td>
+                                            <td class="col-raw col-raw-id">LC-2024-081</td>
+                                            <td class="col-raw col-raw-name">김*수 (개인식별)</td>
+                                            <td class="col-raw col-raw-age">42세</td>
+                                            <td class="col-raw col-raw-job">개인사업자</td>
+                                            <td class="col-raw col-raw-car">제네시스 GV80</td>
+                                            <td class="col-raw col-raw-income">7,500만원</td>
+                                            <td class="col-raw col-raw-overdue">무 (0건)</td>
                                         </tr>
                                         <tr>
-                                            <td>LC-2024-119</td>
-                                            <td class="cell-highlight-del">이*호 (개인식별)</td>
-                                            <td>35세</td>
-                                            <td class="cell-highlight-str">급여소득자</td>
-                                            <td class="cell-highlight-str">그랜저 GN7</td>
-                                            <td class="cell-highlight-str">4,800만원</td>
-                                            <td>1회 (단기)</td>
+                                            <td class="col-raw col-raw-id">LC-2024-119</td>
+                                            <td class="col-raw col-raw-name">이*호 (개인식별)</td>
+                                            <td class="col-raw col-raw-age">35세</td>
+                                            <td class="col-raw col-raw-job">급여소득자</td>
+                                            <td class="col-raw col-raw-car">그랜저 GN7</td>
+                                            <td class="col-raw col-raw-income">4,800만원</td>
+                                            <td class="col-raw col-raw-overdue">1회 (단기)</td>
                                         </tr>
                                         <tr>
-                                            <td>LC-2024-204</td>
-                                            <td class="cell-highlight-del">박*영 (개인식별)</td>
-                                            <td>51세</td>
-                                            <td class="cell-highlight-str">전문직 (의사)</td>
-                                            <td class="cell-highlight-str">벤츠 E-Class</td>
-                                            <td class="cell-highlight-str">1억 2,000만</td>
-                                            <td>무 (0건)</td>
+                                            <td class="col-raw col-raw-id">LC-2024-204</td>
+                                            <td class="col-raw col-raw-name">박*영 (개인식별)</td>
+                                            <td class="col-raw col-raw-age">51세</td>
+                                            <td class="col-raw col-raw-job">전문직 (의사)</td>
+                                            <td class="col-raw col-raw-car">벤츠 E-Class</td>
+                                            <td class="col-raw col-raw-income">1억 2,000만</td>
+                                            <td class="col-raw col-raw-overdue">무 (0건)</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -7152,7 +7787,7 @@
 
                             <!-- 2. 중앙: 전처리 변환 프로세스 (Feature Engineering & Encoding) -->
                             <div class="pipeline-transform-flow">
-                                <div class="flow-step-box">
+                                <div class="flow-step-box flow-box-select">
                                     <span class="flow-step-icon">✂️</span>
                                     <div>
                                         <span class="flow-step-title">Feature Selection</span>
@@ -7160,7 +7795,7 @@
                                     </div>
                                 </div>
                                 <div class="flow-arrow-down">▼</div>
-                                <div class="flow-step-box">
+                                <div class="flow-step-box flow-box-encode">
                                     <span class="flow-step-icon">🔢</span>
                                     <div>
                                         <span class="flow-step-title">Categorical Encoding</span>
@@ -7168,7 +7803,7 @@
                                     </div>
                                 </div>
                                 <div class="flow-arrow-down">▼</div>
-                                <div class="flow-step-box">
+                                <div class="flow-step-box flow-box-scale">
                                     <span class="flow-step-icon">📐</span>
                                     <div>
                                         <span class="flow-step-title">Scaling & Normalize</span>
@@ -7178,7 +7813,7 @@
                             </div>
 
                             <!-- 3. 하단: AI 학습용 정제 행렬 (Clean Feature Matrix) -->
-                            <div class="matrix-table-wrap">
+                            <div class="matrix-table-wrap matrix-clean-wrap">
                                 <div class="table-title-bar">
                                     <div class="table-title">
                                         <span>🔢 정제된 학습 행렬 (Feature Matrix: 컴퓨터가 이해하는 수치 벡터)</span>
@@ -7188,38 +7823,38 @@
                                 <table class="data-matrix-table">
                                     <thead>
                                         <tr>
-                                            <th>연령 (정규화)</th>
-                                            <th>직업 (0=급여, 1=사업, 2=전문)</th>
-                                            <th>차종 (1=국산, 2=대형, 3=수입)</th>
-                                            <th>소득분위 (1~5)</th>
-                                            <th>연체횟수</th>
-                                            <th style="color: #ff8599;">연체 위험도 (라벨)</th>
+                                            <th class="col-clean col-clean-age">연령 (정규화)</th>
+                                            <th class="col-clean col-clean-job">직업 (0=급여, 1=사업, 2=전문)</th>
+                                            <th class="col-clean col-clean-car">차종 (1=국산, 2=대형, 3=수입)</th>
+                                            <th class="col-clean col-clean-income">소득분위 (1~5)</th>
+                                            <th class="col-clean col-clean-overdue">연체횟수</th>
+                                            <th class="col-clean col-clean-label">연체 위험도 (라벨)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="cell-highlight-num">0.42</td>
-                                            <td class="cell-highlight-num">1 (개인사업자)</td>
-                                            <td class="cell-highlight-num">2 (대형/제네시스)</td>
-                                            <td class="cell-highlight-num">4분위</td>
-                                            <td class="cell-highlight-num">0</td>
-                                            <td class="cell-highlight-target">0 (정상 유지)</td>
+                                            <td class="col-clean col-clean-age">0.42</td>
+                                            <td class="col-clean col-clean-job">1 (개인사업자)</td>
+                                            <td class="col-clean col-clean-car">2 (대형/제네시스)</td>
+                                            <td class="col-clean col-clean-income">4분위</td>
+                                            <td class="col-clean col-clean-overdue">0</td>
+                                            <td class="col-clean col-clean-label">0 (정상 유지)</td>
                                         </tr>
                                         <tr>
-                                            <td class="cell-highlight-num">0.35</td>
-                                            <td class="cell-highlight-num">0 (급여소득자)</td>
-                                            <td class="cell-highlight-num">1 (준대형/그랜저)</td>
-                                            <td class="cell-highlight-num">2분위</td>
-                                            <td class="cell-highlight-num">1</td>
-                                            <td class="cell-highlight-target">1 (위험 주의군 ⚠️)</td>
+                                            <td class="col-clean col-clean-age">0.35</td>
+                                            <td class="col-clean col-clean-job">0 (급여소득자)</td>
+                                            <td class="col-clean col-clean-car">1 (준대형/그랜저)</td>
+                                            <td class="col-clean col-clean-income">2분위</td>
+                                            <td class="col-clean col-clean-overdue">1</td>
+                                            <td class="col-clean col-clean-label">1 (위험 주의군 ⚠️)</td>
                                         </tr>
                                         <tr>
-                                            <td class="cell-highlight-num">0.51</td>
-                                            <td class="cell-highlight-num">2 (전문직)</td>
-                                            <td class="cell-highlight-num">3 (수입/벤츠)</td>
-                                            <td class="cell-highlight-num">5분위</td>
-                                            <td class="cell-highlight-num">0</td>
-                                            <td class="cell-highlight-target">0 (우량 유지)</td>
+                                            <td class="col-clean col-clean-age">0.51</td>
+                                            <td class="col-clean col-clean-job">2 (전문직)</td>
+                                            <td class="col-clean col-clean-car">3 (수입/벤츠)</td>
+                                            <td class="col-clean col-clean-income">5분위</td>
+                                            <td class="col-clean col-clean-overdue">0</td>
+                                            <td class="col-clean col-clean-label">0 (우량 유지)</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -7229,20 +7864,21 @@
 
                     <!-- 하단 캡션: 1문장 1줄 정렬 -->
                     <div class="caption srv-caption reveal delay-1">
-                        <h3>Data Preprocessing Pipeline</h3>
-                        <h2 class="srv-title-single">Raw Data to Machine-Readable Matrix</h2>
-                        <p class="srv-desc-line">AI 모델은 한글 텍스트나 비정형 단위를 이해하지 못하므로, 핵심 정보만 추출하여 컴퓨터가 계산 가능한 숫자 행렬로 변환합니다.
-                        </p>
-                        <p class="srv-desc-line">오릭스캐피탈의 차량 및 고객 데이터를 0, 1, 2 등의 수치 벡터로 규격화하는 '정제(ETL)' 과정이 데이터 분석의 가장
-                            중요한 출발점입니다.</p>
-                    </div>
+ <h3>Data Preprocessing Pipeline</h3>
+ <h2 class="srv-title-single">Raw Data to Machine-Readable Matrix</h2>
+ <p class="srv-desc-line">AI 모델은 한글 텍스트나 비정형 단위를 이해하지 못하므로, 핵심 정보만 추출하여 컴퓨터가 계산 가능한 숫자 행렬로 변환합니다.
+ </p>
+ <p class="srv-desc-line">오릭스캐피탈의 차량 및 고객 데이터를 0, 1, 2 등의 수치 벡터로 규격화하는 '정제(ETL)' 과정이 데이터 분석의 가장
+ 중요한 출발점입니다.</p>
+ </div>
                 </div>
             </section>
 
             <!-- Slide 8: Deep Learning & Mathematical Model -->
             <section class="slide">
                 <div class="slide-content">
-                    <div class="central-diagram" style="height: 400px; margin-bottom: 40px;">
+                    <div class="central-diagram"
+                        style="width: 1480px; max-width: 96vw; height: 440px; margin-bottom: 30px;">
                         <div class="deep-learning-layout">
                             <!-- Left: Interactive Neural Network Diagram -->
                             <div class="neural-net-card">
@@ -7252,7 +7888,7 @@
                                     </div>
                                     <span class="table-badge badge-clean">실시간 특징 추출 및 예측 연산</span>
                                 </div>
-                                <svg class="nn-canvas-svg" viewBox="0 0 680 300">
+                                <svg class="nn-canvas-svg" viewBox="0 0 740 300">
                                     <defs>
                                         <linearGradient id="synapseGradCyan" x1="0%" y1="0%" x2="100%" y2="0%">
                                             <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8" />
@@ -7263,128 +7899,128 @@
                                             <stop offset="100%" stop-color="#ff3b5c" stop-opacity="0.9" />
                                         </linearGradient>
                                         <filter id="nnGlow" x="-20%" y="-20%" width="140%" height="140%">
-                                            <feGaussianBlur stdDeviation="3" result="blur" />
+                                            <feGaussianBlur stdDeviation="3.5" result="blur" />
                                             <feComposite in="SourceGraphic" in2="blur" operator="over" />
                                         </filter>
                                     </defs>
 
                                     <!-- 1. 연결선 (Synapses) -->
-                                    <g stroke="rgba(255,255,255,0.14)" stroke-width="1.3">
-                                        <!-- from 나이 (70, 48) -->
-                                        <line x1="98" y1="48" x2="284" y2="48" />
-                                        <line x1="98" y1="48" x2="284" y2="114" />
-                                        <line x1="98" y1="48" x2="284" y2="184" />
-                                        <line x1="98" y1="48" x2="284" y2="250" />
-                                        <!-- from 직업 (70, 98) -->
-                                        <line x1="98" y1="98" x2="284" y2="48" />
-                                        <line x1="98" y1="98" x2="284" y2="114" />
-                                        <line x1="98" y1="98" x2="284" y2="184" />
-                                        <line x1="98" y1="98" x2="284" y2="250" />
-                                        <!-- from 차종 (70, 148) -->
-                                        <line x1="98" y1="148" x2="284" y2="48" />
-                                        <line x1="98" y1="148" x2="284" y2="114" />
-                                        <line x1="98" y1="148" x2="284" y2="184" />
-                                        <line x1="98" y1="148" x2="284" y2="250" />
-                                        <!-- from 소득 (70, 198) -->
-                                        <line x1="98" y1="198" x2="284" y2="48" />
-                                        <line x1="98" y1="198" x2="284" y2="114" />
-                                        <line x1="98" y1="198" x2="284" y2="184" />
-                                        <line x1="98" y1="198" x2="284" y2="250" />
-                                        <!-- from 연체 (70, 248) -->
-                                        <line x1="98" y1="248" x2="284" y2="48" />
-                                        <line x1="98" y1="248" x2="284" y2="114" />
-                                        <line x1="98" y1="248" x2="284" y2="184" />
-                                        <line x1="98" y1="248" x2="284" y2="250" />
+                                    <g stroke="rgba(255,255,255,0.15)" stroke-width="1.4">
+                                        <!-- from 나이 (75, 46) -->
+                                        <line x1="101" y1="46" x2="302" y2="46" />
+                                        <line x1="101" y1="46" x2="302" y2="112" />
+                                        <line x1="101" y1="46" x2="302" y2="180" />
+                                        <line x1="101" y1="46" x2="302" y2="246" />
+                                        <!-- from 직업 (75, 96) -->
+                                        <line x1="101" y1="96" x2="302" y2="46" />
+                                        <line x1="101" y1="96" x2="302" y2="112" />
+                                        <line x1="101" y1="96" x2="302" y2="180" />
+                                        <line x1="101" y1="96" x2="302" y2="246" />
+                                        <!-- from 차종 (75, 146) -->
+                                        <line x1="101" y1="146" x2="302" y2="46" />
+                                        <line x1="101" y1="146" x2="302" y2="112" />
+                                        <line x1="101" y1="146" x2="302" y2="180" />
+                                        <line x1="101" y1="146" x2="302" y2="246" />
+                                        <!-- from 소득 (75, 196) -->
+                                        <line x1="101" y1="196" x2="302" y2="46" />
+                                        <line x1="101" y1="196" x2="302" y2="112" />
+                                        <line x1="101" y1="196" x2="302" y2="180" />
+                                        <line x1="101" y1="196" x2="302" y2="246" />
+                                        <!-- from 연체 (75, 246) -->
+                                        <line x1="101" y1="246" x2="302" y2="46" />
+                                        <line x1="101" y1="246" x2="302" y2="112" />
+                                        <line x1="101" y1="246" x2="302" y2="180" />
+                                        <line x1="101" y1="246" x2="302" y2="246" />
 
-                                        <!-- Hidden -> Output (560, 148) -->
-                                        <line x1="336" y1="48" x2="515" y2="148" stroke="#ff3b5c" stroke-width="1.8"
+                                        <!-- Hidden -> Output (600, 146) -->
+                                        <line x1="358" y1="46" x2="552" y2="146" stroke="#ff3b5c" stroke-width="1.8"
                                             stroke-dasharray="4 3" />
-                                        <line x1="336" y1="114" x2="515" y2="148" stroke="#ff3b5c" stroke-width="2.2" />
-                                        <line x1="336" y1="184" x2="515" y2="148" stroke="#ff3b5c" stroke-width="2.2" />
-                                        <line x1="336" y1="250" x2="515" y2="148" stroke="#ff3b5c" stroke-width="1.8"
+                                        <line x1="358" y1="112" x2="552" y2="146" stroke="#ff3b5c" stroke-width="2.2" />
+                                        <line x1="358" y1="180" x2="552" y2="146" stroke="#ff3b5c" stroke-width="2.2" />
+                                        <line x1="358" y1="246" x2="552" y2="146" stroke="#ff3b5c" stroke-width="1.8"
                                             stroke-dasharray="4 3" />
                                     </g>
 
                                     <!-- 가중치 흐름 펄스 라인 (애니메이션) -->
-                                    <line x1="98" y1="98" x2="284" y2="114" stroke="url(#synapseGradCyan)"
-                                        stroke-width="2.8" class="anim-synapse-pulse" stroke-dasharray="20 40" />
-                                    <line x1="98" y1="248" x2="284" y2="184" stroke="url(#synapseGradCyan)"
-                                        stroke-width="2.8" class="anim-synapse-pulse" stroke-dasharray="20 40"
+                                    <line x1="101" y1="96" x2="302" y2="112" stroke="url(#synapseGradCyan)"
+                                        stroke-width="3.2" class="anim-synapse-pulse" stroke-dasharray="20 40" />
+                                    <line x1="101" y1="246" x2="302" y2="180" stroke="url(#synapseGradCyan)"
+                                        stroke-width="3.2" class="anim-synapse-pulse" stroke-dasharray="20 40"
                                         style="animation-delay: 0.8s" />
-                                    <line x1="336" y1="114" x2="515" y2="148" stroke="url(#synapseGradRed)"
-                                        stroke-width="3.2" class="anim-synapse-pulse" stroke-dasharray="25 35"
+                                    <line x1="358" y1="112" x2="552" y2="146" stroke="url(#synapseGradRed)"
+                                        stroke-width="3.5" class="anim-synapse-pulse" stroke-dasharray="25 35"
                                         style="animation-delay: 1.2s" />
 
-                                    <!-- 2. 레이어 라벨 텍스트 (깔끔하고 직관적인 한국어 라벨) -->
-                                    <text x="70" y="20" fill="#94a3b8" font-size="12" font-weight="700"
+                                    <!-- 2. 레이어 라벨 텍스트 (깔끔하고 시원한 한국어 라벨) -->
+                                    <text x="75" y="16" fill="#94a3b8" font-size="14" font-weight="700"
                                         text-anchor="middle">입력 데이터</text>
-                                    <text x="310" y="20" fill="#818cf8" font-size="12" font-weight="700"
+                                    <text x="330" y="16" fill="#818cf8" font-size="14" font-weight="700"
                                         text-anchor="middle">인공신경망 (특징 분석)</text>
-                                    <text x="560" y="20" fill="#ff4d6d" font-size="12" font-weight="700"
+                                    <text x="600" y="16" fill="#ff4d6d" font-size="14" font-weight="700"
                                         text-anchor="middle">최종 판정 결과</text>
 
-                                    <!-- 3. 입력 노드들 (기호 X 없이 깔끔한 한글 텍스트) -->
-                                    <g transform="translate(70, 48)">
-                                        <circle r="22" fill="#0f172a" stroke="#38bdf8" stroke-width="2" />
-                                        <text y="4" fill="#ffffff" font-size="11" font-weight="700"
+                                    <!-- 3. 입력 노드들 (글자 크고 선명하게 확대) -->
+                                    <g transform="translate(75, 46)">
+                                        <circle r="26" fill="#0f172a" stroke="#38bdf8" stroke-width="2.2" />
+                                        <text y="5" fill="#ffffff" font-size="14" font-weight="700"
                                             text-anchor="middle">나이</text>
                                     </g>
-                                    <g transform="translate(70, 98)">
-                                        <circle r="22" fill="#0f172a" stroke="#38bdf8" stroke-width="2" />
-                                        <text y="4" fill="#ffffff" font-size="11" font-weight="700"
+                                    <g transform="translate(75, 96)">
+                                        <circle r="26" fill="#0f172a" stroke="#38bdf8" stroke-width="2.2" />
+                                        <text y="5" fill="#ffffff" font-size="14" font-weight="700"
                                             text-anchor="middle">직업</text>
                                     </g>
-                                    <g transform="translate(70, 148)">
-                                        <circle r="22" fill="#0f172a" stroke="#38bdf8" stroke-width="2" />
-                                        <text y="4" fill="#ffffff" font-size="11" font-weight="700"
+                                    <g transform="translate(75, 146)">
+                                        <circle r="26" fill="#0f172a" stroke="#38bdf8" stroke-width="2.2" />
+                                        <text y="5" fill="#ffffff" font-size="14" font-weight="700"
                                             text-anchor="middle">차종</text>
                                     </g>
-                                    <g transform="translate(70, 198)">
-                                        <circle r="22" fill="#0f172a" stroke="#38bdf8" stroke-width="2" />
-                                        <text y="4" fill="#ffffff" font-size="11" font-weight="700"
+                                    <g transform="translate(75, 196)">
+                                        <circle r="26" fill="#0f172a" stroke="#38bdf8" stroke-width="2.2" />
+                                        <text y="5" fill="#ffffff" font-size="14" font-weight="700"
                                             text-anchor="middle">소득</text>
                                     </g>
-                                    <g transform="translate(70, 248)">
-                                        <circle r="22" fill="#0f172a" stroke="#38bdf8" stroke-width="2" />
-                                        <text y="4" fill="#ffffff" font-size="11" font-weight="700"
+                                    <g transform="translate(75, 246)">
+                                        <circle r="26" fill="#0f172a" stroke="#38bdf8" stroke-width="2.2" />
+                                        <text y="5" fill="#ffffff" font-size="14" font-weight="700"
                                             text-anchor="middle">연체</text>
                                     </g>
 
-                                    <!-- 4. 은닉 뉴런들 (Hidden Neurons) -->
-                                    <g transform="translate(310, 48)">
-                                        <circle r="24" fill="#1e1b4b" stroke="#818cf8" stroke-width="2" />
-                                        <text y="4" fill="#c7d2fe" font-size="10" font-weight="700"
+                                    <!-- 4. 은닉 뉴런들 (글자 크고 선명하게 확대) -->
+                                    <g transform="translate(330, 46)">
+                                        <circle r="28" fill="#1e1b4b" stroke="#818cf8" stroke-width="2.2" />
+                                        <text y="5" fill="#c7d2fe" font-size="13.5" font-weight="700"
                                             text-anchor="middle">특징 1</text>
                                     </g>
-                                    <g transform="translate(310, 114)">
-                                        <circle r="24" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"
+                                    <g transform="translate(330, 112)">
+                                        <circle r="28" fill="#1e1b4b" stroke="#818cf8" stroke-width="2.2"
                                             filter="url(#nnGlow)" />
-                                        <text y="4" fill="#c7d2fe" font-size="10" font-weight="700"
+                                        <text y="5" fill="#c7d2fe" font-size="13.5" font-weight="700"
                                             text-anchor="middle">특징 2</text>
                                     </g>
-                                    <g transform="translate(310, 184)">
-                                        <circle r="24" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"
+                                    <g transform="translate(330, 180)">
+                                        <circle r="28" fill="#1e1b4b" stroke="#818cf8" stroke-width="2.2"
                                             filter="url(#nnGlow)" />
-                                        <text y="4" fill="#c7d2fe" font-size="10" font-weight="700"
+                                        <text y="5" fill="#c7d2fe" font-size="13.5" font-weight="700"
                                             text-anchor="middle">특징 3</text>
                                     </g>
-                                    <g transform="translate(310, 250)">
-                                        <circle r="24" fill="#1e1b4b" stroke="#818cf8" stroke-width="2" />
-                                        <text y="4" fill="#c7d2fe" font-size="10" font-weight="700"
+                                    <g transform="translate(330, 246)">
+                                        <circle r="28" fill="#1e1b4b" stroke="#818cf8" stroke-width="2.2" />
+                                        <text y="5" fill="#c7d2fe" font-size="13.5" font-weight="700"
                                             text-anchor="middle">특징 4</text>
                                     </g>
 
-                                    <!-- 5. 출력 노드 (글자가 삐져나오지 않도록 정중앙 여유 있게 배치!) -->
-                                    <g transform="translate(560, 148)">
-                                        <circle r="42" fill="rgba(218, 31, 61, 0.25)" stroke="#ff3b5c" stroke-width="3"
-                                            filter="url(#nnGlow)" />
-                                        <text y="-8" fill="#ffffff" font-size="12" font-weight="700"
+                                    <!-- 5. 출력 노드 (크고 또렷하게 확대!) -->
+                                    <g transform="translate(600, 146)">
+                                        <circle r="48" fill="rgba(218, 31, 61, 0.25)" stroke="#ff3b5c"
+                                            stroke-width="3.2" filter="url(#nnGlow)" />
+                                        <text y="-9" fill="#ffffff" font-size="14.5" font-weight="700"
                                             text-anchor="middle">연체 위험도</text>
-                                        <text y="15" fill="#ff4d6d" font-size="17" font-weight="900"
+                                        <text y="16" fill="#ff4d6d" font-size="21" font-weight="900"
                                             text-anchor="middle">91% ⚠️</text>
-                                        <rect x="-44" y="48" width="88" height="20" rx="10" fill="#0f172a"
-                                            stroke="rgba(255,59,92,0.6)" />
-                                        <text y="62" fill="#ff8599" font-size="9.5" font-weight="700"
+                                        <rect x="-48" y="54" width="96" height="23" rx="11.5" fill="#0f172a"
+                                            stroke="rgba(255,59,92,0.65)" stroke-width="1.2" />
+                                        <text y="70" fill="#ff8599" font-size="11.5" font-weight="700"
                                             text-anchor="middle">고위험군 판정</text>
                                     </g>
                                 </svg>
@@ -7395,9 +8031,7 @@
                                 <!-- 공식 하이라이트 박스 -->
                                 <div class="formula-box">
                                     <div class="formula-tag">Mathematical Model of AI</div>
-                                    <div class="formula-main"
-                                        style="font-size: 22px; letter-spacing: -0.5px; white-space: nowrap;">예측 결과 = f(
-                                        가중치 × 데이터 )</div>
+                                    <div class="formula-main">예측 결과 = f( 가중치 × 데이터 )</div>
                                     <div class="formula-desc">
                                         인공지능의 본질은 마법이 아니라, 각 정보에 적절한 <span
                                             style="color: #38bdf8; font-weight: 700;">중요도(가중치)</span>를 곱해 결과를 산출하는
@@ -7435,12 +8069,12 @@
 
                     <!-- 하단 캡션: 1문장 1줄 정렬 -->
                     <div class="caption srv-caption reveal delay-1">
-                        <h3>AI & Deep Learning Mechanism</h3>
-                        <h2 class="srv-title-single">Weights Calculation & Mathematical Model Generation</h2>
-                        <p class="srv-desc-line">정제된 수치들이 신경망 노드를 거치며 최적의 가중치(Weight)와 곱해지는 과정이 곧 '딥러닝 학습'의 실체입니다.</p>
-                        <p class="srv-desc-line">AI 모델의 목표는 복잡한 마법이 아닌 정교한 '수학 함수'를 도출하는 것이며, 이를 통해 오릭스캐피탈의 리스 리스크를 선제
-                            방어합니다.</p>
-                    </div>
+ <h3>AI & Deep Learning Mechanism</h3>
+ <h2 class="srv-title-single">Weights Calculation & Mathematical Model Generation</h2>
+ <p class="srv-desc-line">정제된 수치들이 신경망 노드를 거치며 최적의 가중치(Weight)와 곱해지는 과정이 곧 '딥러닝 학습'의 실체입니다.</p>
+ <p class="srv-desc-line">AI 모델의 목표는 복잡한 마법이 아닌 정교한 '수학 함수'를 도출하는 것이며, 이를 통해 오릭스캐피탈의 리스 리스크를 선제
+ 방어합니다.</p>
+ </div>
                 </div>
             </section>
 
@@ -7724,12 +8358,12 @@
 
                     <!-- 하단 캡션: 1문장 1줄 정렬 -->
                     <div class="caption srv-caption reveal delay-1">
-                        <h3>LLM & Deep Learning Mechanism</h3>
-                        <h2 class="srv-title-single">Token Vectorization & Mathematical Model Generation</h2>
-                        <p class="srv-desc-line">자연어 문장을 컴퓨터가 연산할 수 있는 숫자 벡터(토큰)로 변환하여 인공신경망 입력층에 주입합니다.</p>
-                        <p class="srv-desc-line">수많은 신경망 뉴런들이 가중치(W)를 곱하고 오차를 좁혀가며, 문맥을 완벽히 계산하는 하나의 거대한 '수학 공식'을 완성합니다.
-                        </p>
-                    </div>
+ <h3>LLM & Deep Learning Mechanism</h3>
+ <h2 class="srv-title-single">Token Vectorization & Mathematical Model Generation</h2>
+ <p class="srv-desc-line">자연어 문장을 컴퓨터가 연산할 수 있는 숫자 벡터(토큰)로 변환하여 인공신경망 입력층에 주입합니다.</p>
+ <p class="srv-desc-line">수많은 신경망 뉴런들이 가중치(W)를 곱하고 오차를 좁혀가며, 문맥을 완벽히 계산하는 하나의 거대한 '수학 공식'을 완성합니다.
+ </p>
+ </div>
                 </div>
             </section>
 
@@ -7817,7 +8451,8 @@
                                 </defs>
 
                                 <!-- 중앙 가이드 궤도선 (단일 라인) -->
-                                <line x1="60" y1="280" x2="1360" y2="280" stroke="rgba(255,255,255,0.03)" stroke-width="1.2" stroke-dasharray="6 6" />
+                                <line x1="60" y1="280" x2="1360" y2="280" stroke="rgba(255,255,255,0.03)"
+                                    stroke-width="1.2" stroke-dasharray="6 6" />
 
                                 <!-- ================================================================= -->
                                 <!-- 🔴 ROUND 1 LAYER: 1단어 학습 ['사과는'] ➔ 예측 vs 정답 ➔ 오차 피드백 ➔ 업그레이드 -->
@@ -7826,9 +8461,12 @@
                                     <!-- 1-0. 초기 기본 노출: 좌측 입력 토큰 "사과는" (가만히 고정) -->
                                     <g class="r1-token-input">
                                         <g transform="translate(130, 280)">
-                                            <text y="-26" fill="#ffffff" font-size="28" font-weight="900" text-anchor="middle">"사과는"</text>
-                                            <line x1="0" y1="-12" x2="0" y2="16" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrowCyanTr)" />
-                                            <text y="42" fill="#38bdf8" font-size="17" font-family="monospace" font-weight="800" text-anchor="middle">[ 0.28, 0.84 ]</text>
+                                            <text y="-26" fill="#ffffff" font-size="28" font-weight="900"
+                                                text-anchor="middle">"사과는"</text>
+                                            <line x1="0" y1="-12" x2="0" y2="16" stroke="#38bdf8" stroke-width="2.5"
+                                                marker-end="url(#arrowCyanTr)" />
+                                            <text y="42" fill="#38bdf8" font-size="17" font-family="monospace"
+                                                font-weight="800" text-anchor="middle">[ 0.28, 0.84 ]</text>
                                         </g>
                                     </g>
 
@@ -7836,24 +8474,36 @@
                                     <g class="step-item r1-step-model">
                                         <!-- 입력 ➔ 중앙 모델 주입 레이저 광선 -->
                                         <line x1="235" y1="280" x2="435" y2="280" stroke="#38bdf8" stroke-width="2.8"
-                                            class="anim-laser-cyan" stroke-dasharray="14 7" marker-end="url(#arrowCyanTr)" />
+                                            class="anim-laser-cyan" stroke-dasharray="14 7"
+                                            marker-end="url(#arrowCyanTr)" />
 
                                         <!-- 중앙: 초기 수학적 모델 f(W₀) (유기적 호흡 코어) -->
                                         <g transform="translate(510, 280)">
                                             <!-- 1. 은은한 오라 글로우 링 (부드러운 숨결) -->
-                                            <circle r="48" fill="none" stroke="rgba(255, 59, 92, 0.3)" stroke-width="1.2">
-                                                <animate attributeName="r" values="47; 52; 47" dur="3.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
-                                                <animate attributeName="opacity" values="0.35; 0.75; 0.35" dur="3.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+                                            <circle r="48" fill="none" stroke="rgba(255, 59, 92, 0.3)"
+                                                stroke-width="1.2">
+                                                <animate attributeName="r" values="47; 52; 47" dur="3.6s"
+                                                    repeatCount="indefinite" calcMode="spline"
+                                                    keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+                                                <animate attributeName="opacity" values="0.35; 0.75; 0.35" dur="3.6s"
+                                                    repeatCount="indefinite" calcMode="spline"
+                                                    keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
                                             </circle>
 
                                             <!-- 2. 중심 코어 구체 (글래스모피즘 그라데이션) -->
-                                            <circle r="44" fill="url(#coreGradRed)" stroke="#ff3b5c" stroke-width="2.5" filter="url(#glowModelCore)">
-                                                <animate attributeName="r" values="43.5; 45.5; 43.5" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+                                            <circle r="44" fill="url(#coreGradRed)" stroke="#ff3b5c" stroke-width="2.5"
+                                                filter="url(#glowModelCore)">
+                                                <animate attributeName="r" values="43.5; 45.5; 43.5" dur="3s"
+                                                    repeatCount="indefinite" calcMode="spline"
+                                                    keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
                                             </circle>
 
-                                            <text y="-12" fill="#ff8599" font-size="12" font-weight="800" text-anchor="middle">수학적 모델</text>
-                                            <text y="8" fill="#ffffff" font-size="17" font-weight="900" text-anchor="middle">f( W₀ )</text>
-                                            <text y="26" fill="#cbd5e1" font-size="10.5" font-weight="700" text-anchor="middle">초기 가중치</text>
+                                            <text y="-12" fill="#ff8599" font-size="12" font-weight="800"
+                                                text-anchor="middle">수학적 모델</text>
+                                            <text y="8" fill="#ffffff" font-size="17" font-weight="900"
+                                                text-anchor="middle">f( W₀ )</text>
+                                            <text y="26" fill="#cbd5e1" font-size="10.5" font-weight="700"
+                                                text-anchor="middle">초기 가중치</text>
                                         </g>
                                     </g>
 
@@ -7861,26 +8511,34 @@
                                     <g class="step-item r1-step-pred">
                                         <!-- 모델 ➔ 예측 도출 광선 -->
                                         <line x1="585" y1="280" x2="695" y2="280" stroke="#ff3b5c" stroke-width="2.5"
-                                            class="anim-laser-red" stroke-dasharray="12 6" marker-end="url(#arrowRedTr)" />
+                                            class="anim-laser-red" stroke-dasharray="12 6"
+                                            marker-end="url(#arrowRedTr)" />
 
                                         <!-- 모델 예측값 (틀림 ❌) (네모 박스 없음) -->
                                         <g transform="translate(785, 280)">
-                                            <text y="-20" fill="#f87171" font-size="14" font-weight="800" text-anchor="middle">❌ 모델 예측값</text>
-                                            <text y="9" fill="#ffffff" font-size="26" font-weight="900" text-anchor="middle">"네모다"</text>
-                                            <text y="30" fill="#94a3b8" font-size="14" font-family="monospace" font-weight="700" text-anchor="middle">[ 0.12, 0.45 ]</text>
+                                            <text y="-20" fill="#f87171" font-size="14" font-weight="800"
+                                                text-anchor="middle">❌ 모델 예측값</text>
+                                            <text y="9" fill="#ffffff" font-size="26" font-weight="900"
+                                                text-anchor="middle">"네모다"</text>
+                                            <text y="30" fill="#94a3b8" font-size="14" font-family="monospace"
+                                                font-weight="700" text-anchor="middle">[ 0.12, 0.45 ]</text>
                                         </g>
                                     </g>
 
                                     <!-- 1-3. Step 3: 실제 정답 (Target) 및 비교 기호 -->
                                     <g class="step-item r1-step-target">
                                         <!-- 차이 비교 ≠ 기호 -->
-                                        <text x="895" y="289" fill="#f43f5e" font-size="30" font-weight="900" text-anchor="middle">≠</text>
+                                        <text x="895" y="289" fill="#f43f5e" font-size="30" font-weight="900"
+                                            text-anchor="middle">≠</text>
 
                                         <!-- 실제 정답 데이터 (목표 ✅) (네모 박스 없음) -->
                                         <g transform="translate(1015, 280)">
-                                            <text y="-20" fill="#34d399" font-size="14" font-weight="800" text-anchor="middle">✅ 실제 정답 (Target)</text>
-                                            <text y="9" fill="#ffffff" font-size="26" font-weight="900" text-anchor="middle">"빨간색이고"</text>
-                                            <text y="30" fill="#6ee7b7" font-size="14" font-family="monospace" font-weight="700" text-anchor="middle">[ 0.73, 0.12 ]</text>
+                                            <text y="-20" fill="#34d399" font-size="14" font-weight="800"
+                                                text-anchor="middle">✅ 실제 정답 (Target)</text>
+                                            <text y="9" fill="#ffffff" font-size="26" font-weight="900"
+                                                text-anchor="middle">"빨간색이고"</text>
+                                            <text y="30" fill="#6ee7b7" font-size="14" font-family="monospace"
+                                                font-weight="700" text-anchor="middle">[ 0.73, 0.12 ]</text>
                                         </g>
                                     </g>
 
@@ -7888,8 +8546,10 @@
                                     <g class="step-item r1-step-loss">
                                         <!-- 오차(Loss) 계산 텍스트 (네모 박스 없음) -->
                                         <g transform="translate(1230, 280)">
-                                            <text y="-18" fill="#ff8599" font-size="15" font-weight="800" text-anchor="middle">오차(Loss) 계산</text>
-                                            <text y="14" fill="#ff3b5c" font-size="25" font-weight="900" text-anchor="middle" filter="url(#glowTextRed)">Δ = 0.61 ⚠️</text>
+                                            <text y="-18" fill="#ff8599" font-size="15" font-weight="800"
+                                                text-anchor="middle">오차(Loss) 계산</text>
+                                            <text y="14" fill="#ff3b5c" font-size="25" font-weight="900"
+                                                text-anchor="middle" filter="url(#glowTextRed)">Δ = 0.61 ⚠️</text>
                                         </g>
                                     </g>
 
@@ -7897,16 +8557,18 @@
                                     <g class="step-item r1-step-backprop">
                                         <!-- 상단 역전파 포물선 궤도선 (Arc Track) -->
                                         <path d="M 1230,235 C 1230,45 585,45 518,222" fill="none"
-                                            stroke="url(#gradBackpropRed)" stroke-width="3" stroke-dasharray="14 7" class="anim-backprop-beam" />
+                                            stroke="url(#gradBackpropRed)" stroke-width="3" stroke-dasharray="14 7"
+                                            class="anim-backprop-beam" />
 
                                         <!-- 🚀 [던지는 모션] 오차 계산 지점에서 모델 중심을 향해 포물선을 날아가는 화살표 & 펄스 볼 -->
                                         <g>
                                             <animateMotion dur="1.7s" repeatCount="indefinite" rotate="auto"
-                                                path="M 1230,235 C 1230,45 585,45 518,222"
-                                                keyPoints="0; 0.12; 0.88; 1" keyTimes="0; 0.08; 0.92; 1" calcMode="spline"
+                                                path="M 1230,235 C 1230,45 585,45 518,222" keyPoints="0; 0.12; 0.88; 1"
+                                                keyTimes="0; 0.08; 0.92; 1" calcMode="spline"
                                                 keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1" />
                                             <!-- 화살표 테일 꼬리 광선 -->
-                                            <line x1="-45" y1="0" x2="0" y2="0" stroke="url(#tailGradRed)" stroke-width="5" stroke-linecap="round" />
+                                            <line x1="-45" y1="0" x2="0" y2="0" stroke="url(#tailGradRed)"
+                                                stroke-width="5" stroke-linecap="round" />
                                             <!-- 날아가는 에너지 구체 코어 -->
                                             <circle cx="0" cy="0" r="6.5" fill="#ffffff" filter="url(#glowThrowHead)" />
                                             <!-- 전방 뾰족한 화살촉 (모델 방향으로 꽂히는 화살표) -->
@@ -7915,7 +8577,8 @@
 
                                         <!-- 역전파 설명 텍스트 (네모 박스 없이 네온 텍스트로) -->
                                         <g transform="translate(870, 50)">
-                                            <text y="0" fill="#ff8599" font-size="15" font-weight="800" text-anchor="middle" filter="url(#glowTextRed)">
+                                            <text y="0" fill="#ff8599" font-size="15" font-weight="800"
+                                                text-anchor="middle" filter="url(#glowTextRed)">
                                                 🔄 [오차 역전파 Backpropagation] 오차 주입 ➔ 모델 가중치 업그레이드 (W₀ ➔ W₁)
                                             </text>
                                         </g>
@@ -7929,9 +8592,13 @@
                                     <!-- 2-0. Step 6: Round 1 사라지고 동일 중앙 위치에 "사과는 빨간색이고" 등장 (가만히 고정) -->
                                     <g class="step-item r2-switch r2-step-init">
                                         <g transform="translate(130, 280)">
-                                            <text y="-26" fill="#ffffff" font-size="26" font-weight="900" text-anchor="middle">"사과는 빨간색이고"</text>
-                                            <line x1="0" y1="-12" x2="0" y2="16" stroke="#818cf8" stroke-width="2.5" marker-end="url(#arrowPurpleTr)" />
-                                            <text y="42" fill="#a5b4fc" font-size="16" font-family="monospace" font-weight="800" text-anchor="middle">[0.28, 0.84] + [0.73, 0.12]</text>
+                                            <text y="-26" fill="#ffffff" font-size="26" font-weight="900"
+                                                text-anchor="middle">"사과는 빨간색이고"</text>
+                                            <line x1="0" y1="-12" x2="0" y2="16" stroke="#818cf8" stroke-width="2.5"
+                                                marker-end="url(#arrowPurpleTr)" />
+                                            <text y="42" fill="#a5b4fc" font-size="16" font-family="monospace"
+                                                font-weight="800" text-anchor="middle">[0.28, 0.84] + [0.73,
+                                                0.12]</text>
                                         </g>
                                     </g>
 
@@ -7939,24 +8606,36 @@
                                     <g class="step-item r2-step-model">
                                         <!-- 결합 입력 ➔ 업그레이드된 모델 주입 광선 -->
                                         <line x1="260" y1="280" x2="435" y2="280" stroke="#818cf8" stroke-width="2.8"
-                                            class="anim-laser-purple" stroke-dasharray="14 7" marker-end="url(#arrowPurpleTr)" />
+                                            class="anim-laser-purple" stroke-dasharray="14 7"
+                                            marker-end="url(#arrowPurpleTr)" />
 
                                         <!-- 중앙: 업그레이드된 수학적 모델 f(W₁) (유기적 호흡 코어 - Cyan Theme) -->
                                         <g transform="translate(510, 280)">
                                             <!-- 1. 은은한 오라 글로우 링 (부드러운 숨결) -->
-                                            <circle r="48" fill="none" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2">
-                                                <animate attributeName="r" values="47; 52; 47" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
-                                                <animate attributeName="opacity" values="0.35; 0.75; 0.35" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+                                            <circle r="48" fill="none" stroke="rgba(56, 189, 248, 0.35)"
+                                                stroke-width="1.2">
+                                                <animate attributeName="r" values="47; 52; 47" dur="3s"
+                                                    repeatCount="indefinite" calcMode="spline"
+                                                    keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+                                                <animate attributeName="opacity" values="0.35; 0.75; 0.35" dur="3s"
+                                                    repeatCount="indefinite" calcMode="spline"
+                                                    keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
                                             </circle>
 
                                             <!-- 2. 중심 코어 구체 (글래스모피즘 그라데이션) -->
-                                            <circle r="44" fill="url(#coreGradCyan)" stroke="#38bdf8" stroke-width="2.5" filter="url(#glowModelCore)">
-                                                <animate attributeName="r" values="43.5; 45.5; 43.5" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+                                            <circle r="44" fill="url(#coreGradCyan)" stroke="#38bdf8" stroke-width="2.5"
+                                                filter="url(#glowModelCore)">
+                                                <animate attributeName="r" values="43.5; 45.5; 43.5" dur="3s"
+                                                    repeatCount="indefinite" calcMode="spline"
+                                                    keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
                                             </circle>
 
-                                            <text y="-12" fill="#38bdf8" font-size="12" font-weight="800" text-anchor="middle">업그레이드 모델</text>
-                                            <text y="8" fill="#ffffff" font-size="17" font-weight="900" text-anchor="middle">f( W₁ )</text>
-                                            <text y="26" fill="#a5f3fc" font-size="10.5" font-weight="700" text-anchor="middle">1차 개선 완료</text>
+                                            <text y="-12" fill="#38bdf8" font-size="12" font-weight="800"
+                                                text-anchor="middle">업그레이드 모델</text>
+                                            <text y="8" fill="#ffffff" font-size="17" font-weight="900"
+                                                text-anchor="middle">f( W₁ )</text>
+                                            <text y="26" fill="#a5f3fc" font-size="10.5" font-weight="700"
+                                                text-anchor="middle">1차 개선 완료</text>
                                         </g>
                                     </g>
 
@@ -7964,26 +8643,34 @@
                                     <g class="step-item r2-step-pred">
                                         <!-- 모델 ➔ 2차 예측 도출 광선 -->
                                         <line x1="585" y1="280" x2="695" y2="280" stroke="#818cf8" stroke-width="2.5"
-                                            class="anim-laser-purple" stroke-dasharray="12 6" marker-end="url(#arrowPurpleTr)" />
+                                            class="anim-laser-purple" stroke-dasharray="12 6"
+                                            marker-end="url(#arrowPurpleTr)" />
 
                                         <!-- 2차 예측값 (정답에 가까워짐) (네모 박스 없음) -->
                                         <g transform="translate(785, 280)">
-                                            <text y="-20" fill="#a5b4fc" font-size="14" font-weight="800" text-anchor="middle">⚠️ 개선된 예측값</text>
-                                            <text y="9" fill="#ffffff" font-size="26" font-weight="900" text-anchor="middle">"파랗다"</text>
-                                            <text y="30" fill="#94a3b8" font-size="14" font-family="monospace" font-weight="700" text-anchor="middle">[ 0.40, 0.80 ]</text>
+                                            <text y="-20" fill="#a5b4fc" font-size="14" font-weight="800"
+                                                text-anchor="middle">⚠️ 개선된 예측값</text>
+                                            <text y="9" fill="#ffffff" font-size="26" font-weight="900"
+                                                text-anchor="middle">"파랗다"</text>
+                                            <text y="30" fill="#94a3b8" font-size="14" font-family="monospace"
+                                                font-weight="700" text-anchor="middle">[ 0.40, 0.80 ]</text>
                                         </g>
                                     </g>
 
                                     <!-- 2-3. Step 8: 실제 정답 (Target) 및 근접 기호 -->
                                     <g class="step-item r2-step-target">
                                         <!-- 차이 비교 ≒ 기호 -->
-                                        <text x="895" y="289" fill="#818cf8" font-size="30" font-weight="900" text-anchor="middle">≒</text>
+                                        <text x="895" y="289" fill="#818cf8" font-size="30" font-weight="900"
+                                            text-anchor="middle">≒</text>
 
                                         <!-- 실제 정답 데이터 (목표 ✅) (네모 박스 없음) -->
                                         <g transform="translate(1015, 280)">
-                                            <text y="-20" fill="#34d399" font-size="14" font-weight="800" text-anchor="middle">🎯 실제 정답 (Target)</text>
-                                            <text y="9" fill="#ffffff" font-size="26" font-weight="900" text-anchor="middle">"맛있다."</text>
-                                            <text y="30" fill="#6ee7b7" font-size="14" font-family="monospace" font-weight="700" text-anchor="middle">[ 0.91, 0.65 ]</text>
+                                            <text y="-20" fill="#34d399" font-size="14" font-weight="800"
+                                                text-anchor="middle">🎯 실제 정답 (Target)</text>
+                                            <text y="9" fill="#ffffff" font-size="26" font-weight="900"
+                                                text-anchor="middle">"맛있다."</text>
+                                            <text y="30" fill="#6ee7b7" font-size="14" font-family="monospace"
+                                                font-weight="700" text-anchor="middle">[ 0.91, 0.65 ]</text>
                                         </g>
                                     </g>
 
@@ -7991,8 +8678,10 @@
                                     <g class="step-item r2-step-loss">
                                         <!-- 2차 오차 감소 텍스트 (네모 박스 없음) -->
                                         <g transform="translate(1230, 280)">
-                                            <text y="-18" fill="#34d399" font-size="15" font-weight="800" text-anchor="middle">오차 급감 확인</text>
-                                            <text y="14" fill="#34d399" font-size="25" font-weight="900" text-anchor="middle" filter="url(#glowTextCyan)">Δ = 0.26 📉</text>
+                                            <text y="-18" fill="#34d399" font-size="15" font-weight="800"
+                                                text-anchor="middle">오차 급감 확인</text>
+                                            <text y="14" fill="#34d399" font-size="25" font-weight="900"
+                                                text-anchor="middle" filter="url(#glowTextCyan)">Δ = 0.26 📉</text>
                                         </g>
                                     </g>
 
@@ -8000,16 +8689,18 @@
                                     <g class="step-item r2-step-backprop">
                                         <!-- 상단 2차 역전파 포물선 궤도선 (Arc Track 2) -->
                                         <path d="M 1230,235 C 1230,45 585,45 518,222" fill="none"
-                                            stroke="url(#gradBackpropGold)" stroke-width="3" stroke-dasharray="14 7" class="anim-backprop-beam" />
+                                            stroke="url(#gradBackpropGold)" stroke-width="3" stroke-dasharray="14 7"
+                                            class="anim-backprop-beam" />
 
                                         <!-- 🚀 [2차 던지는 모션] 오차 급감 지점에서 모델 중심을 향해 날아가는 화살표 & 펄스 볼 -->
                                         <g>
                                             <animateMotion dur="1.7s" repeatCount="indefinite" rotate="auto"
-                                                path="M 1230,235 C 1230,45 585,45 518,222"
-                                                keyPoints="0; 0.12; 0.88; 1" keyTimes="0; 0.08; 0.92; 1" calcMode="spline"
+                                                path="M 1230,235 C 1230,45 585,45 518,222" keyPoints="0; 0.12; 0.88; 1"
+                                                keyTimes="0; 0.08; 0.92; 1" calcMode="spline"
                                                 keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1" />
                                             <!-- 화살표 테일 꼬리 광선 -->
-                                            <line x1="-45" y1="0" x2="0" y2="0" stroke="url(#tailGradCyan)" stroke-width="5" stroke-linecap="round" />
+                                            <line x1="-45" y1="0" x2="0" y2="0" stroke="url(#tailGradCyan)"
+                                                stroke-width="5" stroke-linecap="round" />
                                             <!-- 날아가는 에너지 구체 코어 -->
                                             <circle cx="0" cy="0" r="6.5" fill="#ffffff" filter="url(#glowThrowHead)" />
                                             <!-- 전방 뾰족한 화살촉 -->
@@ -8018,191 +8709,162 @@
 
                                         <!-- 최종 완성 설명 텍스트 (네모 박스 없음) -->
                                         <g transform="translate(870, 50)">
-                                            <text y="0" fill="#34d399" font-size="15" font-weight="800" text-anchor="middle" filter="url(#glowTextCyan)">
+                                            <text y="0" fill="#34d399" font-size="15" font-weight="800"
+                                                text-anchor="middle" filter="url(#glowTextCyan)">
                                                 ✨ [반복 최적화 완료] 오차 0 수렴 ➔ 문맥을 완벽히 계산하는 최종 공식 f*(W*) 완성!
                                             </text>
                                         </g>
                                     </g>
                                 </g>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            <!-- Slide 8.6: LLM Inference & Autoregressive Generation -->
-            <section class="slide">
-                <div class="slide-content">
-                    <div class="central-diagram" style="height: 420px; margin-bottom: 30px;">
-                        <div class="inference-canvas-wrap">
-                            <svg class="inference-graphic-svg" viewBox="0 0 1260 410">
-                                <defs>
-                                    <!-- Autoregressive Gradient Loop -->
-                                    <linearGradient id="beamAutoregressiveLoop" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%" stop-color="#ff3b5c" stop-opacity="1" />
-                                        <stop offset="50%" stop-color="#c084fc" stop-opacity="0.9" />
-                                        <stop offset="100%" stop-color="#38bdf8" stop-opacity="1" />
-                                    </linearGradient>
-                                    <filter id="glowRedBigInf" x="-30%" y="-30%" width="160%" height="160%">
-                                        <feGaussianBlur stdDeviation="8" result="blur" />
-                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                                    </filter>
-                                    <filter id="glowCyanBigInf" x="-30%" y="-30%" width="160%" height="160%">
-                                        <feGaussianBlur stdDeviation="8" result="blur" />
-                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                                    </filter>
-                                    <marker id="arrowInfCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6"
-                                        markerHeight="6" orient="auto">
-                                        <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8" />
-                                    </marker>
-                                    <marker id="arrowInfPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6"
-                                        markerHeight="6" orient="auto">
-                                        <path d="M 0 1 L 8 5 L 0 9 z" fill="#818cf8" />
-                                    </marker>
-                                    <marker id="arrowInfRed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6"
-                                        markerHeight="6" orient="auto">
-                                        <path d="M 0 1 L 8 5 L 0 9 z" fill="#ff3b5c" />
-                                    </marker>
-                                    <marker id="arrowInfGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6"
-                                        markerHeight="6" orient="auto">
-                                        <path d="M 0 1 L 8 5 L 0 9 z" fill="#10b981" />
-                                    </marker>
-                                </defs>
+                                <!-- ================================================================= -->
+                                <!-- 🔵 ROUND 3 LAYER: 최종 모델 f*(W*) 단독 유지 및 실제 추론 릴레이 -->
+                                <!-- ================================================================= -->
+                                <g class="round-3-layer">
 
-                                <!-- 1. 기본 노출: 좌측 상단 새로운 질문 입력 노드 (x = 160, y = 110) -->
-                                <g class="inf-node-prompt" transform="translate(160, 110)">
-                                    <rect x="-115" y="-22" width="230" height="44" rx="22" fill="#0f172a"
-                                        stroke="#818cf8" stroke-width="2" filter="url(#glowCyanBigInf)" />
-                                    <text y="-4" fill="#818cf8" font-size="10.5" font-weight="700"
-                                        text-anchor="middle">새로운 질문 프롬프트</text>
-                                    <text y="14" fill="#ffffff" font-size="13.5" font-weight="900"
-                                        text-anchor="middle">💬 "사과는 무슨색이야?"</text>
-                                </g>
+                                    <!-- 3-0. Step 12: 이전 Round 1 & 2 모두 사라지고, 최종 완성 모델 f*(W*) 단독 유지 -->
+                                    <g class="step-item r3-switch r3-step-clear">
+                                        <!-- 중앙: 학습이 완료된 최종 공식 f*(W*) 코어 (x=510, y=280 완벽 고정) -->
+                                        <g transform="translate(510, 280)">
+                                            <!-- 에메랄드 오라 링 -->
+                                            <circle r="50" fill="none" stroke="rgba(52, 211, 153, 0.45)"
+                                                stroke-width="1.5">
+                                                <animate attributeName="r" values="48; 54; 48" dur="3s"
+                                                    repeatCount="indefinite" calcMode="spline"
+                                                    keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+                                                <animate attributeName="opacity" values="0.35; 0.8; 0.35" dur="3s"
+                                                    repeatCount="indefinite" calcMode="spline"
+                                                    keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+                                            </circle>
+                                            <!-- 중심 코어 구체 (Cyan-Emerald Theme) -->
+                                            <circle r="44" fill="url(#coreGradCyan)" stroke="#34d399" stroke-width="2.8"
+                                                filter="url(#glowModelCore)">
+                                                <animate attributeName="r" values="43.5; 45.5; 43.5" dur="3s"
+                                                    repeatCount="indefinite" calcMode="spline"
+                                                    keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+                                            </circle>
+                                            <text y="-12" fill="#34d399" font-size="12" font-weight="800"
+                                                text-anchor="middle">최종 완성 모델</text>
+                                            <text y="8" fill="#ffffff" font-size="18" font-weight="900"
+                                                text-anchor="middle">f*( W* )</text>
+                                            <text y="26" fill="#a7f3d0" font-size="10.5" font-weight="700"
+                                                text-anchor="middle">학습 완료 🎯</text>
+                                        </g>
 
-                                <!-- 2. Step 1: 질문 ➔ 1차 확률 계산 허브 주입 및 추론 엔진 등장 -->
-                                <g class="step-item inf-step-engine1">
-                                    <!-- 궤도 광선 (질문 ➔ 1차 확률 계산 허브) -->
-                                    <line x1="275" y1="110" x2="390" y2="70" stroke="#38bdf8" stroke-width="2.5"
-                                        class="anim-laser-cyan" stroke-dasharray="14 7" marker-end="url(#arrowInfCyan)" />
-
-                                    <!-- 중앙 상단: 1차 추론 엔진 (x = 490, y = 70) -->
-                                    <g transform="translate(490, 70)">
-                                        <rect x="-95" y="-18" width="190" height="36" rx="18" fill="#1e1b4b"
-                                            stroke="#38bdf8" stroke-width="1.8" />
-                                        <text y="5" fill="#67e8f9" font-size="11.5" font-weight="800"
-                                            text-anchor="middle">🧠 1차 다음 단어 확률 연산</text>
-                                    </g>
-                                </g>
-
-                                <!-- 3. Step 2: 1차 최고 확률 단어 [빨간색] 도출 -->
-                                <g class="step-item inf-step-word1">
-                                    <!-- 궤도 광선 (허브 ➔ 1차 선택 단어) -->
-                                    <line x1="585" y1="70" x2="685" y2="70" stroke="#ff3b5c" stroke-width="2.5"
-                                        class="anim-laser-cyan" stroke-dasharray="14 7" marker-end="url(#arrowInfRed)" />
-
-                                    <!-- 상단 우측: 1차 선택 단어 [빨간색] (x = 790, y = 70) -->
-                                    <g transform="translate(790, 70)">
-                                        <rect x="-95" y="-22" width="190" height="44" rx="22" fill="rgba(218, 31, 61, 0.22)"
-                                            stroke="#ff3b5c" stroke-width="2.2" filter="url(#glowRedBigInf)" />
-                                        <text y="-4" fill="#ffffff" font-size="14" font-weight="900"
-                                            text-anchor="middle">1️⃣ [ 빨간색 ]</text>
-                                        <text y="14" fill="#ff8599" font-size="11" font-weight="800" text-anchor="middle">최고
-                                            확률 85% 🎯</text>
-                                        <text y="34" fill="#64748b" font-size="9.5" font-weight="600"
-                                            text-anchor="middle">(초록색 12% · 수박 2%)</text>
-                                    </g>
-                                </g>
-
-                                <!-- 4. Step 3: 🔥 거대한 자기회귀 피드백 아크 루프 + 좌측 하단 질문+단어 결합 도킹! -->
-                                <g class="step-item inf-step-loop">
-                                    <!-- [빨간색] 노드에서 출발하여 상단으로 웅장하게 회전해 좌측 하단 결합 노드로 도킹! -->
-                                    <path d="M 790,48 C 790,-25 210,-25 210,245" fill="none"
-                                        stroke="url(#beamAutoregressiveLoop)" stroke-width="3.5"
-                                        class="anim-autoregressive-beam" stroke-dasharray="24 12" />
-                                    <polygon points="210,252 204,240 216,240" fill="#38bdf8" />
-
-                                    <!-- 피드백 루프 라벨 칩 -->
-                                    <g transform="translate(500, 10)">
-                                        <rect x="-165" y="-12" width="330" height="24" rx="12" fill="#091428"
-                                            stroke="#ff3b5c" stroke-width="1.4" />
-                                        <text y="4" fill="#ff8599" font-size="10.5" font-weight="800"
-                                            text-anchor="middle">💫 [자기회귀 Feedback] 방금 뽑은 단어를 질문 뒤에 실시간 재입력!</text>
+                                        <!-- 상단 완료 안내 메시지 (새 질문 시작 시 글씨 겹침 방지를 위해 CSS로 자동 숨김) -->
+                                        <text class="r3-intro-msg" x="710" y="58" fill="#34d399" font-size="20"
+                                            font-weight="900" letter-spacing="0.5px" text-anchor="middle"
+                                            filter="url(#glowTextCyan)">
+                                            🎓 [학습 완료] 최적화된 최종 모델 f*(W*)에 실제 질문을 입력하여 추론을 시작합니다.
+                                        </text>
                                     </g>
 
-                                    <!-- 좌측 하단: 도킹된 누적 문맥 노드 (x = 210, y = 280) -->
-                                    <g transform="translate(210, 280)">
-                                        <rect x="-140" y="-22" width="280" height="44" rx="22" fill="#0f172a"
-                                            stroke="#38bdf8" stroke-width="2" filter="url(#glowCyanBigInf)" />
-                                        <text y="-4" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">🔄
-                                            질문 + 방금 단어 결합 도킹</text>
-                                        <text y="14" fill="#ffffff" font-size="12.5" font-weight="700"
-                                            text-anchor="middle">"사과는 무슨색이야? <tspan fill="#ff4d6d" font-weight="900">빨간색
-                                            </tspan>"</text>
+                                    <!-- 3-1. Step 13: 실제 질의 "사과는 어떤 과일이야?" 토큰화 주입 -->
+                                    <g class="step-item r3-step-query">
+                                        <g class="r3-query-initial">
+                                            <g transform="translate(130, 280)">
+                                                <text y="-26" fill="#818cf8" font-size="13" font-weight="700"
+                                                    text-anchor="middle">💬 새 질문 입력</text>
+                                                <text y="6" fill="#ffffff" font-size="23" font-weight="900"
+                                                    text-anchor="middle">"사과는 어떤 과일이야?"</text>
+                                                <text y="36" fill="#818cf8" font-size="13" font-family="monospace"
+                                                    font-weight="700" text-anchor="middle">[0.31] [0.77] [0.55]
+                                                    [0.42]</text>
+                                            </g>
+                                            <line x1="260" y1="280" x2="435" y2="280" stroke="#818cf8"
+                                                stroke-width="2.8" class="anim-laser-purple" stroke-dasharray="14 7"
+                                                marker-end="url(#arrowPurpleTr)" />
+                                        </g>
                                     </g>
-                                </g>
 
-                                <!-- 5. Step 4: 2차 추론 광선 ➔ 2차 선택 단어 [이다] 도출 -->
-                                <g class="step-item inf-step-word2">
-                                    <!-- 궤도 광선 (도킹 문맥 ➔ 2차 선택 단어) -->
-                                    <line x1="350" y1="280" x2="475" y2="280" stroke="#818cf8" stroke-width="2.5"
-                                        class="anim-laser-purple" stroke-dasharray="14 7"
-                                        marker-end="url(#arrowInfPurple)" />
-
-                                    <!-- 하단 중앙: 2차 선택 단어 [이다] (x = 565, y = 280) -->
-                                    <g transform="translate(565, 280)">
-                                        <rect x="-85" y="-22" width="170" height="44" rx="22"
-                                            fill="rgba(56, 189, 248, 0.22)" stroke="#38bdf8" stroke-width="2.2"
-                                            filter="url(#glowCyanBigInf)" />
-                                        <text y="-4" fill="#ffffff" font-size="14" font-weight="900"
-                                            text-anchor="middle">2️⃣ [ 이다 ]</text>
-                                        <text y="14" fill="#38bdf8" font-size="11" font-weight="800" text-anchor="middle">최고
-                                            확률 90% 🎯</text>
-                                        <text y="34" fill="#64748b" font-size="9.5" font-weight="600"
-                                            text-anchor="middle">(맛있다 7% · 아니다 3%)</text>
+                                    <!-- 3-2. Step 14: 모델 ➔ 1차 다음 단어 확률 연산 -->
+                                    <g class="step-item r3-step-engine">
+                                        <line x1="585" y1="260" x2="700" y2="150" stroke="#38bdf8" stroke-width="2.5"
+                                            class="anim-laser-cyan" stroke-dasharray="14 7"
+                                            marker-end="url(#arrowCyanTr)" />
+                                        <text x="800" y="155" fill="#67e8f9" font-size="14" font-weight="800"
+                                            text-anchor="middle" filter="url(#glowTextCyan)">🧠 1차 다음 단어 확률 연산</text>
                                     </g>
-                                </g>
 
-                                <!-- 6. Step 5: <EOS> 문장 종결 신호 및 최종 완성 답변 도출! -->
-                                <g class="step-item inf-step-eos-final">
-                                    <!-- 문장 종결 신호 <EOS> 비콘 (x = 730, y = 280) -->
-                                    <line x1="650" y1="280" x2="685" y2="280" stroke="#10b981" stroke-width="2"
-                                        stroke-dasharray="4 2" />
-                                    <g transform="translate(730, 280)">
-                                        <rect x="-42" y="-12" width="84" height="24" rx="12" fill="rgba(16, 185, 129, 0.2)"
-                                            stroke="#10b981" stroke-width="1.5" />
-                                        <text y="4" fill="#34d399" font-size="10" font-weight="800"
+                                    <!-- 3-3. Step 15: 1번째 단어 [ 빨간색이고 ] 도출 (이전 학습 슬라이드 Target 1과 일치) -->
+                                    <g class="step-item r3-step-word1">
+                                        <line x1="900" y1="150" x2="980" y2="150" stroke="#ff3b5c" stroke-width="2.5"
+                                            class="anim-laser-red" stroke-dasharray="12 6"
+                                            marker-end="url(#arrowRedTr)" />
+                                        <g transform="translate(1090, 150)">
+                                            <text y="-20" fill="#ff8599" font-size="14" font-weight="800"
+                                                text-anchor="middle">1️⃣ 최고 확률 91% 🎯</text>
+                                            <text y="10" fill="#ffffff" font-size="28" font-weight="900"
+                                                text-anchor="middle">"빨간색이고"</text>
+                                            <text y="32" fill="#64748b" font-size="12" font-weight="600"
+                                                text-anchor="middle">(초록색이고 7% · 둥글고 2%)</text>
+                                        </g>
+                                    </g>
+
+                                    <!-- 3-4. Step 16: 🔥 자기회귀 Feedback 루프 (빨간색이고 ➔ 질문 맨 뒤로 회귀 재입력) -->
+                                    <g class="step-item r3-step-loop">
+                                        <path d="M 1090,115 C 1090,15 130,15 130,225" fill="none"
+                                            stroke="url(#gradBackpropGold)" stroke-width="3.5" stroke-dasharray="20 10"
+                                            class="anim-autoregressive-beam" />
+                                        <polygon points="130,238 123,222 137,222" fill="#34d399" />
+                                        <text x="610" y="42" fill="#ff8599" font-size="14" font-weight="800"
+                                            text-anchor="middle" filter="url(#glowTextCyan)">💫 [자기회귀 Feedback] 방금 도출된
+                                            단어 "빨간색이고"를 질문 맨 뒤에 실시간 재입력!</text>
+                                    </g>
+
+                                    <!-- 3-5. Step 17: 기존 질문 사라지고 "사과는 어떤 과일이야? 빨간색이고" 결합 재질문 등장 및 모델 재주입 -->
+                                    <g class="step-item r3-step-refeed">
+                                        <g transform="translate(130, 280)">
+                                            <text y="-26" fill="#38bdf8" font-size="13" font-weight="700"
+                                                text-anchor="middle">🔄 질문 + 단어 결합 재입력</text>
+                                            <text y="6" fill="#ffffff" font-size="20" font-weight="900"
+                                                text-anchor="middle">"사과는 어떤 과일이야? <tspan fill="#ff4d6d"
+                                                    font-weight="900">빨간색이고</tspan>"</text>
+                                            <text y="36" fill="#38bdf8" font-size="12.5" font-family="monospace"
+                                                font-weight="700" text-anchor="middle">[0.31] [0.77] [0.55] [0.42] +
+                                                [0.73, 0.12]</text>
+                                        </g>
+                                        <line x1="285" y1="280" x2="435" y2="280" stroke="#38bdf8" stroke-width="2.8"
+                                            class="anim-laser-cyan" stroke-dasharray="14 7"
+                                            marker-end="url(#arrowCyanTr)" />
+                                    </g>
+
+                                    <!-- 3-6. Step 18: 2번째 단어 [ 맛있다. ] 도출 (이전 학습 슬라이드 Target 2와 일치) -->
+                                    <g class="step-item r3-step-word2">
+                                        <line x1="585" y1="300" x2="710" y2="400" stroke="#38bdf8" stroke-width="2.5"
+                                            class="anim-laser-cyan" stroke-dasharray="14 7"
+                                            marker-end="url(#arrowCyanTr)" />
+                                        <g transform="translate(830, 400)">
+                                            <text y="-20" fill="#38bdf8" font-size="14" font-weight="800"
+                                                text-anchor="middle">2️⃣ 최고 확률 95% 🎯</text>
+                                            <text y="10" fill="#ffffff" font-size="28" font-weight="900"
+                                                text-anchor="middle">"맛있다."</text>
+                                            <text y="32" fill="#64748b" font-size="12" font-weight="600"
+                                                text-anchor="middle">(달콤하다 3% · 시다 2%)</text>
+                                        </g>
+                                    </g>
+
+                                    <!-- 3-7. Step 19: <EOS> 문장 종결 및 최종 완성 답변 "빨간색이고 맛있다." 도출 -->
+                                    <g class="step-item r3-step-final">
+                                        <line x1="920" y1="400" x2="980" y2="400" stroke="#10b981" stroke-width="2"
+                                            stroke-dasharray="4 2" />
+                                        <text x="1030" y="405" fill="#34d399" font-size="13" font-weight="800"
                                             text-anchor="middle">&lt;EOS&gt; 종결</text>
+                                        <path d="M 1070,400 C 1095,370 1125,305 1172,286" fill="none" stroke="#10b981"
+                                            stroke-width="3" stroke-dasharray="6 3" marker-end="url(#arrowGreenTr)" />
+                                        <g transform="translate(1315, 280)">
+                                            <text y="-32" fill="#ff8599" font-size="13" font-weight="800"
+                                                text-anchor="middle">🏁 실시간 ChatGPT 타이핑 완성</text>
+                                            <text y="8" fill="#ffffff" font-size="30" font-weight="900"
+                                                text-anchor="middle" filter="url(#glowTextRed)">"빨간색이고 맛있다."</text>
+                                            <text y="38" fill="#cbd5e1" font-size="12" font-weight="600"
+                                                text-anchor="middle">단어 릴레이 결합으로 완성된 최종 응답</text>
+                                        </g>
                                     </g>
 
-                                    <!-- 최종 결과 합류 레이저 아크 -->
-                                    <path d="M 772,280 C 840,280 870,185 915,185" fill="none" stroke="#10b981"
-                                        stroke-width="2.8" stroke-dasharray="6 3" marker-end="url(#arrowInfGreen)" />
-
-                                    <!-- 최종 완성 답변 노드 -->
-                                    <g transform="translate(1060, 185)">
-                                        <rect x="-140" y="-48" width="280" height="96" rx="24"
-                                            fill="rgba(218, 31, 61, 0.14)" stroke="#ff3b5c" stroke-width="2.5"
-                                            filter="url(#glowRedBigInf)" />
-                                        <text y="-18" fill="#ff8599" font-size="11" font-weight="800"
-                                            text-anchor="middle">🏁 실시간 ChatGPT 타이핑 완성</text>
-                                        <text y="14" fill="#ffffff" font-size="24" font-weight="900" text-anchor="middle"
-                                            letter-spacing="1px">"빨간색이다." 🎯</text>
-                                        <text y="34" fill="#cbd5e1" font-size="10.5" font-weight="600"
-                                            text-anchor="middle">단어 릴레이 결합으로 완성된 최종 응답</text>
-                                    </g>
                                 </g>
                             </svg>
                         </div>
-                    </div>
-
-                    <!-- 하단 캡션: 1문장 1줄 정렬 -->
-                    <div class="caption srv-caption reveal delay-1">
-                        <h3>LLM Inference Mechanism</h3>
-                        <h2 class="srv-title-single">Probability-Based Next-Word Prediction Relay</h2>
-                        <p class="srv-desc-line">AI는 질문의 의미를 사람처럼 이해하는 것이 아니라, 학습된 공식을 통해 '통계적 확률이 가장 높은 다음 단어'를 쉼 없이
-                            예측합니다.</p>
-                        <p class="srv-desc-line">방금 자신이 뱉은 단어를 질문 뒤에 스스로 덧붙여 다음 단어를 예측하는 '자기회귀 릴레이'가 ChatGPT의 실시간 타이핑
-                            원리입니다.</p>
                     </div>
                 </div>
             </section>
@@ -8221,7 +8883,7 @@
         </main>
 
         <!-- Persistent Chrome -->
-        <div class="slide-counter" id="slideCounter">1 / 19</div>
+        <div class="slide-counter" id="slideCounter">1 / 20</div>
         <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
         <canvas id="laserCanvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 9999;"></canvas>
     </div>
@@ -8310,11 +8972,32 @@
 
             updateSlideStepState(slideEl) {
                 if (!slideEl) return;
+                const isR3Active = !!slideEl.querySelector('.r3-switch.step-active');
                 const isR2Active = !!slideEl.querySelector('.r2-switch.step-active');
-                if (isR2Active) {
-                    slideEl.classList.add('r2-active');
-                } else {
+                if (isR3Active) {
+                    slideEl.classList.add('r3-active');
                     slideEl.classList.remove('r2-active');
+                } else if (isR2Active) {
+                    slideEl.classList.add('r2-active');
+                    slideEl.classList.remove('r3-active');
+                } else {
+                    slideEl.classList.remove('r2-active', 'r3-active');
+                }
+
+                // Check for step-active to dim background keywords on Slide 3
+                const hasActiveSteps = !!slideEl.querySelector('.step-item.step-active');
+                if (hasActiveSteps) {
+                    slideEl.classList.add('steps-dimmed');
+                } else {
+                    slideEl.classList.remove('steps-dimmed');
+                }
+
+                // Slide 7 (Data Pipeline) 9-Step Animations
+                const pipeSteps = slideEl.querySelectorAll('.pipe-step-controller .step-item.step-active');
+                if (pipeSteps.length > 0) {
+                    slideEl.setAttribute('data-pipe-step', pipeSteps.length.toString());
+                } else {
+                    slideEl.removeAttribute('data-pipe-step');
                 }
             }
 
@@ -8322,22 +9005,23 @@
                 this.currentSlide = index;
 
                 this.slides.forEach((slide, i) => {
-                    slide.classList.remove('active', 'visible', 'r2-active');
-                    if (i !== this.currentSlide) {
-                        slide.querySelectorAll('.step-item').forEach(step => step.classList.remove('step-active'));
-                    }
-
-                    // Reset animations by forcing reflow
-                    const animatedElements = slide.querySelectorAll('[class*="anim-"]');
-                    animatedElements.forEach(el => {
-                        el.style.animation = 'none';
-                        el.offsetHeight; /* trigger reflow */
-                        el.style.animation = null;
-                    });
-
                     if (i === this.currentSlide) {
+                        slide.classList.remove('r2-active', 'r3-active', 'steps-dimmed');
+                        slide.querySelectorAll('.step-item').forEach(step => step.classList.remove('step-active'));
+                        slide.removeAttribute('data-pipe-step');
+
+                        // Reset animations by forcing reflow
+                        const animatedElements = slide.querySelectorAll('[class*="anim-"]');
+                        animatedElements.forEach(el => {
+                            el.style.animation = 'none';
+                            el.offsetHeight; /* trigger reflow */
+                            el.style.animation = null;
+                        });
+
                         slide.classList.add('active', 'visible');
                         this.updateSlideStepState(slide);
+                    } else {
+                        slide.classList.remove('active', 'visible');
                     }
                 });
 
