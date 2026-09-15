@@ -155,37 +155,51 @@
 
         h2 {
             font-family: var(--font-display);
-            font-size: 48px;
-            font-weight: 500;
-            margin: 0 0 20px 0;
+            font-size: 46px;
+            font-weight: 600;
+            margin: 0 0 18px 0;
             color: var(--text);
+            letter-spacing: -0.015em;
+            line-height: 1.25;
         }
 
         h3 {
             font-family: var(--font-display);
-            font-size: 24px;
-            color: var(--primary);
+            font-size: 14px;
+            color: #ff3b5c;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin: 0 0 10px 0;
-            font-weight: 500;
+            letter-spacing: 0.16em;
+            margin: 0 auto 14px auto;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(218, 31, 61, 0.08);
+            border: 1px solid rgba(218, 31, 61, 0.28);
+            padding: 5px 18px;
+            border-radius: 20px;
+            line-height: 1.4;
+            box-shadow: 0 0 15px rgba(218, 31, 61, 0.15);
+            width: fit-content;
         }
 
         p {
-            font-size: 24px;
-            color: var(--text-muted);
+            font-size: 23px;
+            color: #94a3b8;
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.68;
             font-weight: 300;
         }
 
         .highlight {
-            color: var(--text);
-            font-weight: 500;
+            color: #ffffff;
+            font-weight: 600;
         }
 
         .red-text {
-            color: var(--primary);
+            color: #ff3b5c;
+            font-weight: 600;
         }
 
         /* Shared Diagram Styles */
@@ -3921,33 +3935,56 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            height: 3px;
-            background: var(--primary);
-            transition: width 0.4s ease;
+            height: 4px;
+            background: linear-gradient(90deg, #DA1F3D 0%, #ff4d6d 50%, #38bdf8 100%);
+            transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 1000;
-            box-shadow: 0 0 10px var(--primary-glow);
+            box-shadow: 0 0 14px rgba(218, 31, 61, 0.7);
         }
 
         .slide-counter {
             position: fixed;
-            bottom: 40px;
-            right: 40px;
+            bottom: 24px;
+            right: 32px;
             font-family: var(--font-display);
-            font-size: 16px;
-            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            color: #94a3b8;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 6px 16px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             z-index: 1000;
+            letter-spacing: 0.06em;
+            user-select: none;
         }
 
-        .orix-logo {
+        .nav-hint {
             position: fixed;
-            top: 40px;
-            left: 40px;
+            bottom: 26px;
+            left: 32px;
             font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 24px;
-            color: var(--text);
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 0.05em;
             z-index: 1000;
-            letter-spacing: -0.02em;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-hint kbd {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            padding: 2px 7px;
+            font-family: var(--font-display);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.65);
         }
 
         /* 2.5 Failure Animation */
@@ -5905,9 +5942,14 @@
                 <div class="slide-content">
                     <h3 class="reveal">IT Sizing & Architecture Review</h3>
                     <h1 class="reveal delay-1">인프라 패러다임의 전환</h1>
-                    <div style="width: 80px; height: 4px; background: var(--primary); border-radius: 2px; margin: 40px 0; box-shadow: 0 0 15px var(--primary-glow);"
+                    <div style="width: 80px; height: 4px; background: var(--primary); border-radius: 2px; margin: 36px 0; box-shadow: 0 0 15px var(--primary-glow);"
                         class="reveal delay-2"></div>
-                    <p class="reveal delay-3" style="font-size: 28px;">안정성과 민첩성을 동시에 확보하는 차세대 하이브리드 아키텍처</p>
+                    <p class="reveal delay-3" style="font-size: 28px; max-width: 900px;">안정성과 민첩성을 동시에 확보하는 차세대 하이브리드 아키텍처</p>
+                    <div class="reveal delay-3" style="margin-top: 48px; display: inline-flex; align-items: center; gap: 14px; padding: 10px 28px; border-radius: 40px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); font-size: 17px; color: #94a3b8; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <span style="color: #ff3b5c; font-weight: 700; letter-spacing: 0.05em;">KPC IT 인프라 기초 교육 리뷰</span>
+                        <span style="color: rgba(255,255,255,0.2);">|</span>
+                        <span style="color: #ffffff; font-weight: 500;">오릭스캐피탈 MIS 기획팀</span>
+                    </div>
                 </div>
             </section>
 
@@ -6019,13 +6061,19 @@
                     </div>
 
                     <!-- Main Highlighted Focus Words (Step-by-Step Click Reveal) -->
-                    <div class="focus-keyword-wrap">
-                        <span class="focus-keyword step-item"
-                            style="font-family: var(--font-display); font-size: 110px; font-weight: 800; color: #ff2e54; text-shadow: 0 0 50px rgba(255, 46, 84, 0.6); letter-spacing: -0.02em;">CLOUD</span>
-                        <span class="focus-keyword step-item"
-                            style="font-family: var(--font-display); font-size: 110px; font-weight: 800; color: #38bdf8; text-shadow: 0 0 50px rgba(56, 189, 248, 0.6); letter-spacing: -0.02em;">DATA</span>
-                        <span class="focus-keyword step-item"
-                            style="font-family: var(--font-display); font-size: 110px; font-weight: 800; color: #c084fc; text-shadow: 0 0 50px rgba(192, 132, 252, 0.6); letter-spacing: -0.02em;">AI</span>
+                    <div class="focus-keyword-wrap" style="gap: 80px;">
+                        <div class="focus-keyword step-item" style="display: flex; flex-direction: column; align-items: center;">
+                            <span style="font-family: var(--font-display); font-size: 110px; font-weight: 800; color: #ff2e54; text-shadow: 0 0 50px rgba(255, 46, 84, 0.6); letter-spacing: -0.02em; line-height: 1;">CLOUD</span>
+                            <span style="font-size: 16px; font-weight: 700; color: #ff8599; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 18px; background: rgba(255, 46, 84, 0.12); padding: 6px 20px; border-radius: 20px; border: 1px solid rgba(255, 46, 84, 0.35); box-shadow: 0 0 15px rgba(255, 46, 84, 0.2);">PART 1 · 아키텍처 진화</span>
+                        </div>
+                        <div class="focus-keyword step-item" style="display: flex; flex-direction: column; align-items: center;">
+                            <span style="font-family: var(--font-display); font-size: 110px; font-weight: 800; color: #38bdf8; text-shadow: 0 0 50px rgba(56, 189, 248, 0.6); letter-spacing: -0.02em; line-height: 1;">DATA</span>
+                            <span style="font-size: 16px; font-weight: 700; color: #7dd3fc; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 18px; background: rgba(56, 189, 248, 0.12); padding: 6px 20px; border-radius: 20px; border: 1px solid rgba(56, 189, 248, 0.35); box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);">PART 2 · 파이프라인 분리</span>
+                        </div>
+                        <div class="focus-keyword step-item" style="display: flex; flex-direction: column; align-items: center;">
+                            <span style="font-family: var(--font-display); font-size: 110px; font-weight: 800; color: #c084fc; text-shadow: 0 0 50px rgba(192, 132, 252, 0.6); letter-spacing: -0.02em; line-height: 1;">AI</span>
+                            <span style="font-size: 16px; font-weight: 700; color: #d8b4fe; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 18px; background: rgba(192, 132, 252, 0.12); padding: 6px 20px; border-radius: 20px; border: 1px solid rgba(192, 132, 252, 0.35); box-shadow: 0 0 15px rgba(192, 132, 252, 0.2);">PART 3 · 모델 연산 원리</span>
+                        </div>
                     </div>
 
                 </div>
@@ -8866,16 +8914,84 @@
                             </svg>
                         </div>
                     </div>
+
+                    <!-- 하단 캡션: 1문장 1줄 정렬 -->
+                    <div class="caption srv-caption reveal delay-1" style="margin-top: 15px;">
+                        <h3>LLM Inference & Optimization</h3>
+                        <h2 class="srv-title-single" style="font-size: 34px; margin-bottom: 8px;">Next-Token Prediction Relay & Loss Backpropagation</h2>
+                        <p class="srv-desc-line" style="font-size: 19px; line-height: 1.6;">문맥 정보를 입력받아 가장 확률이 높은 단어를 한 글자씩 릴레이로 생성하는 것이 생성형 AI의 실체입니다.</p>
+                        <p class="srv-desc-line" style="font-size: 19px; line-height: 1.6;">실제 정답과의 오차(Loss)를 역전파하여 가중치를 지속 갱신하는 것이 딥러닝 학습(Training)의 본질입니다.</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- Slide 11: Q&A -->
+            <!-- Slide 20: Summary & Q&A -->
             <section class="slide">
-                <div class="slide-content">
-                    <h1 class="reveal delay-1" style="font-size: 120px;">Q&A</h1>
-                    <p class="reveal delay-2" style="font-size: 32px; margin-top: 20px;">경청해 주셔서 감사합니다.</p>
-                    <div class="reveal delay-3" style="margin-top: 60px;">
-                        <div class="box red-box" style="border-radius: 100px; padding: 15px 40px;">MIS 기획팀</div>
+                <div class="slide-content" style="padding: 0 100px; max-width: 1500px; margin: 0 auto;">
+                    <div class="caption reveal" style="margin-bottom: 40px;">
+                        <h3>Summary & Key Takeaways</h3>
+                        <h2 style="font-size: 50px; font-weight: 700; margin-bottom: 10px;">IT 인프라 패러다임 전환 요약</h2>
+                        <p style="font-size: 22px; color: var(--text-muted);">정적 온프레미스에서 소프트웨어 정의(Software-Defined) 클라우드·데이터·AI 아키텍처로의 도약</p>
+                    </div>
+
+                    <!-- 3 Pillars Takeaway Grid -->
+                    <div class="reveal delay-1" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; width: 100%; margin-bottom: 44px;">
+                        <!-- Card 1: Cloud -->
+                        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 46, 84, 0.28); border-radius: 18px; padding: 28px 24px; text-align: left; position: relative; overflow: hidden; backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ff2e54, transparent);"></div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                                <span style="font-size: 13px; font-weight: 700; color: #ff3b5c; letter-spacing: 0.12em;">PART 01</span>
+                                <span style="font-size: 26px;">☁️</span>
+                            </div>
+                            <h4 style="font-family: var(--font-display); font-size: 21px; color: #ffffff; margin: 0 0 10px 0; font-weight: 700;">동적 확장과 유연성</h4>
+                            <p style="font-size: 15px; color: #cbd5e1; line-height: 1.7; margin: 0; word-break: keep-all;">
+                                • 모놀리식 ➔ MSA & K8s 오토스케일링<br>
+                                • L2/L3 물리 한계 ➔ SDN 가상 오버레이 제어<br>
+                                • 피크 트래픽 ➔ 서버리스(Lambda) 비용 $0 최적화
+                            </p>
+                        </div>
+
+                        <!-- Card 2: Data -->
+                        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 18px; padding: 28px 24px; text-align: left; position: relative; overflow: hidden; backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #38bdf8, transparent);"></div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                                <span style="font-size: 13px; font-weight: 700; color: #38bdf8; letter-spacing: 0.12em;">PART 02</span>
+                                <span style="font-size: 26px;">📊</span>
+                            </div>
+                            <h4 style="font-family: var(--font-display); font-size: 21px; color: #ffffff; margin: 0 0 10px 0; font-weight: 700;">운영·분석계 완전 분리</h4>
+                            <p style="font-size: 15px; color: #cbd5e1; line-height: 1.7; margin: 0; word-break: keep-all;">
+                                • OLTP(초고속 트랜잭션)와 OLAP(분석 DW) 격리<br>
+                                • CDC/ETL 비동기 전송으로 운영계 부하 0%<br>
+                                • 금융 비정형 데이터를 AI 연산용 벡터 행렬로 규격화
+                            </p>
+                        </div>
+
+                        <!-- Card 3: AI -->
+                        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(192, 132, 252, 0.28); border-radius: 18px; padding: 28px 24px; text-align: left; position: relative; overflow: hidden; backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #c084fc, transparent);"></div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                                <span style="font-size: 13px; font-weight: 700; color: #c084fc; letter-spacing: 0.12em;">PART 03</span>
+                                <span style="font-size: 26px;">🧠</span>
+                            </div>
+                            <h4 style="font-family: var(--font-display); font-size: 21px; color: #ffffff; margin: 0 0 10px 0; font-weight: 700;">AI 워크로드 인프라 요건</h4>
+                            <p style="font-size: 15px; color: #cbd5e1; line-height: 1.7; margin: 0; word-break: keep-all;">
+                                • 딥러닝/LLM의 본질은 방대한 가중치 행렬 연산 모델<br>
+                                • AI 도입 시 GPU 클러스터 및 고속 I/O 스토리지 필수<br>
+                                • 실시간 모델 서빙을 위한 초저지연 전송망 준비
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q&A Box -->
+                    <div class="reveal delay-2" style="display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 50px; padding: 16px 40px; width: 100%; max-width: 920px; margin: 0 auto; box-shadow: 0 6px 30px rgba(0,0,0,0.6);">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <span style="font-family: var(--font-display); font-size: 26px; font-weight: 800; color: #ffffff; letter-spacing: 0.05em;">Q & A</span>
+                            <span style="color: #475569;">|</span>
+                            <span style="font-size: 17px; color: #94a3b8;">경청해 주셔서 감사합니다. 자유로운 질문을 환영합니다.</span>
+                        </div>
+                        <div style="display: inline-flex; align-items: center; gap: 10px; background: rgba(218, 31, 61, 0.15); border: 1px solid var(--primary); padding: 7px 22px; border-radius: 30px; color: #ff4d6d; font-weight: 600; font-size: 15px; box-shadow: 0 0 15px rgba(218,31,61,0.3);">
+                            오릭스캐피탈 MIS 기획팀
+                        </div>
                     </div>
                 </div>
             </section>
@@ -8883,6 +8999,7 @@
         </main>
 
         <!-- Persistent Chrome -->
+        <div class="nav-hint"><kbd>Space</kbd> / <kbd>➔</kbd> 다음 슬라이드 &nbsp;•&nbsp; <kbd>←</kbd> 이전</div>
         <div class="slide-counter" id="slideCounter">1 / 20</div>
         <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
         <canvas id="laserCanvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 9999;"></canvas>
@@ -9031,6 +9148,7 @@
                 if (this.slideCounter) {
                     this.slideCounter.textContent = `${this.currentSlide + 1} / ${this.slides.length}`;
                 }
+
                 try {
                     history.replaceState(null, '', '#' + (this.currentSlide + 1));
                 } catch (e) { }
