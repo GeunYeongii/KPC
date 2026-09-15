@@ -2147,11 +2147,11 @@
             letter-spacing: -0.2px !important;
         }
 
-        /* 5. SDN (Private Cloud) vs Traditional L2/L3 (Physical Infrastructure) Architecture Diagram */
+        /* 5. SDN (Software-Defined) vs Traditional Hardware Network (Aesthetic Redesign) */
         .sdn-central-diagram {
-            width: 1480px !important;
-            height: 510px !important;
-            margin-bottom: 20px !important;
+            width: 1540px !important;
+            height: 540px !important;
+            margin-bottom: 25px !important;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2164,207 +2164,206 @@
             display: flex;
             align-items: stretch;
             justify-content: space-between;
-            width: 1480px;
-            height: 500px;
+            width: 1540px;
+            height: 530px;
             position: relative;
             background: transparent;
-            gap: 16px;
+            gap: 20px;
         }
 
-        /* 좌측: 전통적 온프레미스 물리 인프라 */
-        .sdn-col-legacy {
+        .sdn-card {
             flex: 1;
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            padding: 0 8px;
+            border-radius: 22px;
+            padding: 24px 26px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: space-between;
             position: relative;
+            backdrop-filter: blur(16px);
+            transition: all 0.3s ease;
         }
 
-        /* 중앙 VS 분할선 */
+        .sdn-card-legacy {
+            background: rgba(15, 23, 42, 0.45);
+            border: 1.5px solid rgba(239, 68, 68, 0.3);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .sdn-card-cloud {
+            flex: 1.08;
+            background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.12) 0%, rgba(8, 25, 44, 0.6) 70%);
+            border: 1.5px solid rgba(6, 182, 212, 0.45);
+            box-shadow: 0 12px 40px rgba(6, 182, 212, 0.15), inset 0 1px 0 rgba(6, 182, 212, 0.35);
+        }
+
+        .sdn-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .sdn-card-title-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .sdn-card-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.3px;
+        }
+
+        .sdn-card-sub {
+            font-size: 13px;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .sdn-badge-legacy {
+            font-size: 12.5px;
+            background: rgba(239, 68, 68, 0.18);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.45);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .sdn-badge-sdn {
+            font-size: 12.5px;
+            background: rgba(6, 182, 212, 0.2);
+            color: #67e8f9;
+            border: 1.2px solid rgba(6, 182, 212, 0.6);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            box-shadow: 0 0 16px rgba(6, 182, 212, 0.35);
+            letter-spacing: 0.2px;
+        }
+
+        .sdn-svg-wrapper {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 8px 0;
+        }
+
+        .sdn-svg-stage {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
         .sdn-vs-divider {
             width: 2px;
-            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.18) 25%, rgba(255, 255, 255, 0.18) 75%, transparent);
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, transparent);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            margin: 15px 0;
+            margin: 20px 0;
         }
 
         .sdn-vs-badge {
             position: absolute;
-            width: 32px;
-            height: 32px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             background: #0f172a;
-            border: 1.5px solid rgba(255, 255, 255, 0.25);
-            color: #94a3b8;
-            font-size: 11px;
-            font-weight: 800;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            color: #cbd5e1;
+            font-size: 12px;
+            font-weight: 900;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.85);
             letter-spacing: 0.5px;
         }
 
-        /* 우측: SDN 사내 프라이빗 클라우드 */
-        .sdn-col-cloud {
-            flex: 1.15;
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            padding: 0 8px;
+        .sdn-pillars-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .sdn-pillar-card {
+            padding: 12px 14px;
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            position: relative;
+            gap: 4px;
+            transition: transform 0.2s ease;
         }
 
-        /* 섹션 상단 헤더 바 */
-        .sdn-section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-bottom: 8px;
-            margin-bottom: 8px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        .sdn-pillar-card.legacy {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .sdn-sec-title {
-            font-size: 15px;
+        .sdn-pillar-card.cloud {
+            background: rgba(6, 182, 212, 0.08);
+            border: 1px solid rgba(6, 182, 212, 0.28);
+        }
+
+        .sdn-pillar-title {
+            font-size: 14.5px;
             font-weight: 700;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            letter-spacing: -0.2px;
         }
 
-        .sdn-badge-legacy {
-            font-size: 11px;
-            background: rgba(239, 68, 68, 0.15);
+        .sdn-pillar-card.legacy .sdn-pillar-title {
             color: #fca5a5;
-            border: 1px solid rgba(239, 68, 68, 0.4);
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-weight: 600;
         }
 
-        .sdn-badge-sdn {
-            font-size: 11px;
-            background: rgba(6, 182, 212, 0.18);
+        .sdn-pillar-card.cloud .sdn-pillar-title {
             color: #67e8f9;
-            border: 1px solid rgba(6, 182, 212, 0.5);
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-weight: 600;
-            box-shadow: 0 0 12px rgba(6, 182, 212, 0.3);
         }
 
-        /* SVG 캔버스 스타일 */
-        .sdn-svg-stage {
-            width: 100%;
-            height: 440px;
-            overflow: visible;
+        .sdn-pillar-desc {
+            font-size: 12.5px;
+            color: #94a3b8;
+            line-height: 1.45;
+            word-break: keep-all;
         }
 
-        /* 점멸 LED 애니메이션 */
-        @keyframes ledBlinkGreen {
-
-            0%,
-            100% {
-                opacity: 1;
-                filter: drop-shadow(0 0 3px #22c55e);
-            }
-
-            50% {
-                opacity: 0.3;
-                filter: none;
-            }
-        }
-
-        @keyframes ledBlinkOrange {
-
-            0%,
-            100% {
-                opacity: 1;
-                filter: drop-shadow(0 0 3px #f59e0b);
-            }
-
-            50% {
-                opacity: 0.2;
-                filter: none;
-            }
-        }
-
-        .anim-led-green {
-            animation: ledBlinkGreen 1.2s infinite ease-in-out;
-        }
-
-        .anim-led-orange {
-            animation: ledBlinkOrange 0.8s infinite ease-in-out;
-        }
-
-        /* SDN 컨트롤러 브레인 펄스 */
         @keyframes sdnBrainPulse {
-
-            0%,
-            100% {
-                filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.6));
+            0%, 100% {
+                filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.5));
             }
-
             50% {
-                filter: drop-shadow(0 0 18px rgba(6, 182, 212, 0.95)) drop-shadow(0 0 26px rgba(16, 185, 129, 0.5));
+                filter: drop-shadow(0 0 22px rgba(6, 182, 212, 0.95)) drop-shadow(0 0 28px rgba(16, 185, 129, 0.6));
             }
         }
 
         .anim-brain-pulse {
-            animation: sdnBrainPulse 3s infinite ease-in-out;
+            animation: sdnBrainPulse 2.8s infinite ease-in-out;
         }
 
-        /* 신규 Pod 트래픽 수신 글로우 */
-        @keyframes activePodGlow {
-
-            0%,
-            100% {
-                stroke: #10b981;
-                filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.4));
-            }
-
-            50% {
-                stroke: #34d399;
-                filter: drop-shadow(0 0 16px rgba(52, 211, 153, 0.85));
-            }
-        }
-
-        .anim-pod-active {
-            animation: activePodGlow 2s infinite ease-in-out;
-        }
-
-        /* 제어 빔 펄스 */
-        @keyframes controlBeamPulse {
-
-            0%,
-            100% {
-                stroke-opacity: 0.5;
+        @keyframes sdnBeamFlow {
+            0% {
                 stroke-dashoffset: 0;
             }
-
-            50% {
-                stroke-opacity: 1;
-                stroke-dashoffset: -12;
+            100% {
+                stroke-dashoffset: -20;
             }
         }
 
         .anim-control-beam {
-            stroke-dasharray: 6 4;
-            animation: controlBeamPulse 1.5s infinite linear;
+            animation: sdnBeamFlow 1.2s infinite linear;
         }
-
+        
         /* 6. ZTNA Animation */
         .radar-ring {
             border: 1px dashed var(--border);
@@ -7124,210 +7123,107 @@
                 <div class="slide-content">
                     <div class="central-diagram sdn-central-diagram">
                         <div class="sdn-infra-container">
-                            <!-- [좌측] 전통적 온프레미스 물리 인프라 (물리 L2/L3 스위치 + 일반 베어메탈 물리 서버 랙) -->
-                            <div class="sdn-col-legacy">
-                                <div class="sdn-section-header">
-                                    <div class="sdn-sec-title">
-                                        <span>🏛️ 전통적 온프레미스 인프라</span>
+                            <!-- [좌측] 전통적 물리 인프라 (하드웨어 종속 & 일체형) -->
+                            <div class="sdn-card sdn-card-legacy">
+                                <div class="sdn-card-header">
+                                    <div class="sdn-card-title-wrap">
+                                        <div class="sdn-card-title">
+                                            <span>🏛️ Traditional Network</span>
+                                        </div>
+                                        <div class="sdn-card-sub">물리 하드웨어 일체형 (Coupled Architecture)</div>
                                     </div>
-                                    <span class="sdn-badge-legacy">물리 배선 & 고정 IP 바인딩</span>
+                                    <span class="sdn-badge-legacy">경직성 高 · 수동 작업</span>
                                 </div>
 
-                                <svg class="sdn-svg-stage" viewBox="0 0 660 420">
-                                    <!-- 필터 & 그라데이션 -->
-                                    <defs>
-                                        <filter id="legRedGlow" x="-50%" y="-50%" width="200%" height="200%">
-                                            <feGaussianBlur stdDeviation="4" result="blur" />
-                                            <feMerge>
-                                                <feMergeNode in="blur" />
-                                                <feMergeNode in="SourceGraphic" />
-                                            </feMerge>
-                                        </filter>
-                                        <linearGradient id="hwSwitchGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                            <stop offset="0%" stop-color="#1e293b" />
-                                            <stop offset="50%" stop-color="#0f172a" />
-                                            <stop offset="100%" stop-color="#090d16" />
-                                        </linearGradient>
-                                        <linearGradient id="serverRackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" stop-color="#1a2234" />
-                                            <stop offset="100%" stop-color="#0c101d" />
-                                        </linearGradient>
-                                    </defs>
+                                <!-- 시각화 SVG 다이어그램 -->
+                                <div class="sdn-svg-wrapper">
+                                    <svg class="sdn-svg-stage" viewBox="0 0 640 290">
+                                        <defs>
+                                            <linearGradient id="legacyBoxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                <stop offset="0%" stop-color="#1e293b" />
+                                                <stop offset="100%" stop-color="#0f172a" />
+                                            </linearGradient>
+                                            <filter id="legRedGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                                <feGaussianBlur stdDeviation="4" result="blur" />
+                                                <feMerge>
+                                                    <feMergeNode in="blur" />
+                                                    <feMergeNode in="SourceGraphic" />
+                                                </feMerge>
+                                            </filter>
+                                        </defs>
 
-                                    <!-- 1. 상단: 사용자 요청 노드 -->
-                                    <g transform="translate(225, 8)">
-                                        <rect width="210" height="42" rx="21" fill="#141926"
-                                            stroke="rgba(255,255,255,0.18)" stroke-width="1.5" />
-                                        <text x="105" y="21" fill="#e2e8f0" font-size="12" font-weight="700"
-                                            text-anchor="middle">👤 사용자 / 사내 업무망 요청</text>
-                                        <text x="105" y="34" fill="#f87171" font-size="9.5" font-family="monospace"
-                                            text-anchor="middle">HTTP/S 요청 (Data Plane)</text>
-                                    </g>
+                                        <!-- 1. 상단: 유저 트래픽 인입 -->
+                                        <g transform="translate(220, 10)">
+                                            <rect width="200" height="38" rx="19" fill="#1e293b" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+                                            <text x="100" y="24" fill="#e2e8f0" font-size="13.5" font-weight="700" text-anchor="middle">👤 유저 / 업무망 트래픽</text>
+                                        </g>
+                                        <line x1="320" y1="48" x2="320" y2="76" stroke="#64748b" stroke-width="3" stroke-dasharray="3 3" />
 
-                                    <!-- 물리 UTP 인입 케이블 (수직 배선) -->
-                                    <line x1="330" y1="50" x2="330" y2="100" stroke="#475569" stroke-width="4" />
-                                    <line x1="330" y1="50" x2="330" y2="100" stroke="#cbd5e1" stroke-width="1.5"
-                                        stroke-dasharray="2 3" opacity="0.7" />
+                                        <!-- 2. 하드웨어 일체형 스위치 (Control + Data가 갇혀 있음) -->
+                                        <g transform="translate(100, 76)">
+                                            <!-- 외부 섀시 -->
+                                            <rect width="440" height="120" rx="16" fill="url(#legacyBoxGrad)" stroke="rgba(239, 68, 68, 0.45)" stroke-width="1.8" filter="drop-shadow(0 10px 20px rgba(0,0,0,0.6))" />
+                                            
+                                            <!-- 내부 상단: Control Plane -->
+                                            <rect x="18" y="16" width="404" height="40" rx="8" fill="rgba(239, 68, 68, 0.12)" stroke="rgba(239, 68, 68, 0.35)" />
+                                            <text x="32" y="41" fill="#fca5a5" font-size="14" font-weight="700">🧠 Control Plane (제어 로직)</text>
+                                            <text x="406" y="41" fill="#94a3b8" font-size="11" text-anchor="end">펌웨어/OS 장비 고정</text>
 
-                                    <!-- 2. 중간: 물리 하드웨어 L2/L3 스위치 랙 장비 -->
-                                    <g transform="translate(60, 100)">
-                                        <!-- 스위치 케이스 -->
-                                        <rect width="540" height="78" rx="8" fill="url(#hwSwitchGrad)"
-                                            stroke="rgba(255,255,255,0.22)" stroke-width="1.5"
-                                            filter="drop-shadow(0 8px 16px rgba(0,0,0,0.5))" />
-                                        <!-- 랙 귀(Ear) 볼트 -->
-                                        <circle cx="12" cy="14" r="3" fill="#334155" stroke="#64748b"
-                                            stroke-width="1" />
-                                        <circle cx="12" cy="64" r="3" fill="#334155" stroke="#64748b"
-                                            stroke-width="1" />
-                                        <circle cx="528" cy="14" r="3" fill="#334155" stroke="#64748b"
-                                            stroke-width="1" />
-                                        <circle cx="528" cy="64" r="3" fill="#334155" stroke="#64748b"
-                                            stroke-width="1" />
+                                            <!-- 내부 하단: Data Plane -->
+                                            <rect x="18" y="64" width="404" height="40" rx="8" fill="rgba(255, 255, 255, 0.03)" stroke="rgba(255, 255, 255, 0.12)" />
+                                            <text x="32" y="89" fill="#cbd5e1" font-size="14" font-weight="700">⚡ Data Plane (패킷 전송)</text>
+                                            <text x="406" y="89" fill="#94a3b8" font-size="11" text-anchor="end">물리 ASIC 칩셋 직결</text>
 
-                                        <!-- 스위치 상단 인입 RJ-45 포트 소켓 -->
-                                        <rect x="258" y="-6" width="24" height="10" rx="2" fill="#0f172a"
-                                            stroke="#38bdf8" stroke-width="1.2" />
-                                        <circle cx="270" cy="-10" r="2.5" fill="#38bdf8" class="anim-led-green" />
-
-                                        <!-- 스위치 라벨 및 상태 -->
-                                        <text x="32" y="28" fill="#f8fafc" font-size="13" font-weight="700">🎛️ 물리 L2/L3
-                                            하드웨어 스위치 랙 (1U)</text>
-                                        <text x="32" y="44" fill="#94a3b8" font-size="10.5">고정 MAC/IP 스위칭 테이블 내장 (HW
-                                            일체형)</text>
-
-                                        <!-- 전면 RJ-45 포트 베이 -->
-                                        <g transform="translate(32, 52)">
-                                            <!-- Port 1 (Uplink) -->
-                                            <rect x="0" y="0" width="22" height="16" rx="2" fill="#0f172a"
-                                                stroke="#38bdf8" stroke-width="1.2" />
-                                            <circle cx="11" cy="-5" r="2.5" fill="#38bdf8" class="anim-led-green" />
-                                            <text x="11" y="11" fill="#94a3b8" font-size="7" font-family="monospace"
-                                                text-anchor="middle">#1</text>
-
-                                            <!-- Port 2 (Web 직결) -->
-                                            <rect x="30" y="0" width="22" height="16" rx="2" fill="#0f172a"
-                                                stroke="#f59e0b" stroke-width="1.2" />
-                                            <circle cx="41" cy="-5" r="2.5" fill="#f59e0b" class="anim-led-orange" />
-                                            <text x="41" y="11" fill="#f59e0b" font-size="7" font-family="monospace"
-                                                text-anchor="middle">#2</text>
-
-                                            <!-- Port 3 (DB 직결) -->
-                                            <rect x="60" y="0" width="22" height="16" rx="2" fill="#0f172a"
-                                                stroke="#f59e0b" stroke-width="1.2" />
-                                            <circle cx="71" cy="-5" r="2.5" fill="#f59e0b" class="anim-led-orange" />
-                                            <text x="71" y="11" fill="#f59e0b" font-size="7" font-family="monospace"
-                                                text-anchor="middle">#3</text>
-
-                                            <!-- Port 4..8 (Empty) -->
-                                            <rect x="90" y="0" width="22" height="16" rx="2" fill="#0b0f19"
-                                                stroke="#334155" stroke-width="0.8" />
-                                            <text x="101" y="11" fill="#475569" font-size="7" font-family="monospace"
-                                                text-anchor="middle">#4</text>
-                                            <rect x="120" y="0" width="22" height="16" rx="2" fill="#0b0f19"
-                                                stroke="#334155" stroke-width="0.8" />
-                                            <text x="131" y="11" fill="#475569" font-size="7" font-family="monospace"
-                                                text-anchor="middle">#5</text>
-                                            <rect x="150" y="0" width="22" height="16" rx="2" fill="#0b0f19"
-                                                stroke="#334155" stroke-width="0.8" />
-                                            <text x="161" y="11" fill="#475569" font-size="7" font-family="monospace"
-                                                text-anchor="middle">#6</text>
+                                            <!-- 중앙 분리 불가 자물쇠 뱃지 -->
+                                            <rect x="305" y="47" width="105" height="26" rx="13" fill="#7f1d1d" stroke="#ef4444" stroke-width="1.2" />
+                                            <text x="357" y="64" fill="#ffffff" font-size="11.5" font-weight="800" text-anchor="middle">🔒 분리 불가</text>
                                         </g>
 
-                                        <!-- 우측 스펙 뱃지 -->
-                                        <rect x="360" y="20" width="155" height="38" rx="6" fill="rgba(0,0,0,0.5)"
-                                            stroke="rgba(255,255,255,0.1)" />
-                                        <text x="372" y="35" fill="#cbd5e1" font-size="10" font-weight="600">Port #2 ➔
-                                            고정 서버 1 바인딩</text>
-                                        <text x="372" y="49" fill="#94a3b8" font-size="9.5"
-                                            font-family="monospace">Static Routing Entry</text>
-                                    </g>
+                                        <!-- 3. 고정 물리 케이블 (경직된 꺾임선) -->
+                                        <path d="M 210,196 L 210,230 L 150,230 L 150,248" stroke="#f59e0b" stroke-width="3.5" fill="none" />
+                                        <path d="M 430,196 L 430,230 L 490,230 L 490,248" stroke="#475569" stroke-width="3" stroke-dasharray="4 3" fill="none" />
 
-                                    <!-- 3. 물리 구리선 분기 배선 (직각 라인) -->
-                                    <!-- 케이블 1: Port 2 (x=122, y=178) -> 서버 1 (x=175, y=250) -->
-                                    <path d="M 122,178 L 122,215 L 175,215 L 175,250" stroke="#f59e0b"
-                                        stroke-width="3.5" fill="none" />
-                                    <!-- 케이블 2: Port 3 (x=152, y=178) -> 서버 2 (x=465, y=250) -->
-                                    <path d="M 152,178 L 152,205 L 465,205 L 465,250" stroke="#64748b" stroke-width="3"
-                                        fill="none" stroke-dasharray="4 2" />
+                                        <!-- 수동 배선 경고 태그 -->
+                                        <g transform="translate(200, 216)">
+                                            <rect width="240" height="26" rx="13" fill="#1e151a" stroke="rgba(239, 68, 68, 0.5)" stroke-width="1" />
+                                            <text x="120" y="17" fill="#fca5a5" font-size="11" font-weight="700" text-anchor="middle">⚠️ 변경 시 전산실 방문 수동 배선</text>
+                                        </g>
 
-                                    <!-- 고정 배선 안내 태그 -->
-                                    <rect x="220" y="196" width="160" height="22" rx="4" fill="#0f172a"
-                                        stroke="rgba(245,158,11,0.5)" stroke-width="1" />
-                                    <text x="300" y="211" fill="#fcd34d" font-size="9.5" font-weight="600"
-                                        text-anchor="middle">물리 UTP 케이블 1:1 직결</text>
+                                        <!-- 4. 하단 물리 서버 2대 (단순하고 깔끔한 캡슐) -->
+                                        <g transform="translate(60, 248)">
+                                            <rect width="180" height="36" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.6" />
+                                            <circle cx="20" cy="18" r="4" fill="#22c55e" />
+                                            <text x="34" y="23" fill="#f8fafc" font-size="12.5" font-weight="700">🖥️ 물리 서버 1 (고정 IP)</text>
+                                        </g>
 
-                                    <!-- 4. 하단: 온프레미스 일반 베어메탈 물리 서버 2대 (Bare-Metal Servers) -->
-                                    <!-- 물리 서버 1 (Web) -->
-                                    <g transform="translate(55, 250)">
-                                        <rect width="240" height="96" rx="8" fill="url(#serverRackGrad)"
-                                            stroke="#f59e0b" stroke-width="1.8"
-                                            filter="drop-shadow(0 6px 14px rgba(0,0,0,0.6))" />
-                                        <rect x="14" y="12" width="10" height="10" rx="2" fill="#22c55e"
-                                            class="anim-led-green" />
-                                        <text x="32" y="22" fill="#f8fafc" font-size="12" font-weight="700">🖥️ 물리 서버 1
-                                            (Web)</text>
-                                        <rect x="175" y="12" width="52" height="16" rx="4" fill="rgba(245,158,11,0.2)"
-                                            stroke="#f59e0b" stroke-width="0.8" />
-                                        <text x="201" y="23" fill="#fcd34d" font-size="8.5" font-weight="700"
-                                            text-anchor="middle">Port #2</text>
+                                        <g transform="translate(400, 248)">
+                                            <rect width="180" height="36" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1.2" />
+                                            <circle cx="20" cy="18" r="4" fill="#64748b" />
+                                            <text x="34" y="23" fill="#94a3b8" font-size="12.5" font-weight="600">🖥️ 물리 서버 2 (고정 IP)</text>
+                                        </g>
 
-                                        <!-- 서버 스펙 & 고정 IP -->
-                                        <text x="14" y="44" fill="#cbd5e1" font-size="10.5">온프레미스 베어메탈 서버 (Dell
-                                            R740)</text>
-                                        <rect x="14" y="54" width="135" height="18" rx="3" fill="rgba(0,0,0,0.5)" />
-                                        <text x="20" y="67" fill="#94a3b8" font-size="10" font-family="monospace">고정 IP:
-                                            192.168.10.11</text>
+                                        <!-- 경직된 패킷 애니메이션 -->
+                                        <circle r="5" fill="#f43f5e" filter="url(#legRedGlow)">
+                                            <animateMotion dur="3.2s" repeatCount="indefinite" path="M 320,48 L 320,76 L 320,196 L 210,196 L 210,230 L 150,230 L 150,250" />
+                                        </circle>
+                                    </svg>
+                                </div>
 
-                                        <!-- 서버 하단 디스크 베이 그래픽 -->
-                                        <rect x="14" y="78" width="45" height="8" rx="1" fill="#334155" />
-                                        <rect x="64" y="78" width="45" height="8" rx="1" fill="#334155" />
-                                        <rect x="114" y="78" width="45" height="8" rx="1" fill="#334155" />
-                                        <text x="225" y="86" fill="#64748b" font-size="9" text-anchor="end">하드웨어
-                                            직결</text>
-                                    </g>
-
-                                    <!-- 물리 서버 2 (DB) -->
-                                    <g transform="translate(345, 250)">
-                                        <rect width="240" height="96" rx="8" fill="url(#serverRackGrad)"
-                                            stroke="rgba(255,255,255,0.15)" stroke-width="1.2"
-                                            filter="drop-shadow(0 6px 14px rgba(0,0,0,0.6))" />
-                                        <rect x="14" y="12" width="10" height="10" rx="2" fill="#22c55e"
-                                            class="anim-led-green" />
-                                        <text x="32" y="22" fill="#cbd5e1" font-size="12" font-weight="700">🖥️ 물리 서버 2
-                                            (DB)</text>
-                                        <rect x="175" y="12" width="52" height="16" rx="4" fill="rgba(255,255,255,0.08)"
-                                            stroke="rgba(255,255,255,0.2)" stroke-width="0.8" />
-                                        <text x="201" y="23" fill="#94a3b8" font-size="8.5" text-anchor="middle">Port
-                                            #3</text>
-
-                                        <text x="14" y="44" fill="#94a3b8" font-size="10.5">스토리지 직결 베어메탈 서버</text>
-                                        <rect x="14" y="54" width="135" height="18" rx="3" fill="rgba(0,0,0,0.5)" />
-                                        <text x="20" y="67" fill="#64748b" font-size="10" font-family="monospace">고정 IP:
-                                            192.168.10.12</text>
-
-                                        <rect x="14" y="78" width="45" height="8" rx="1" fill="#1e293b" />
-                                        <rect x="64" y="78" width="45" height="8" rx="1" fill="#1e293b" />
-                                        <rect x="114" y="78" width="45" height="8" rx="1" fill="#1e293b" />
-                                        <text x="225" y="86" fill="#64748b" font-size="9" text-anchor="end">내부 DB
-                                            연동</text>
-                                    </g>
-
-                                    <!-- 5. 하단 경고 배너 -->
-                                    <g transform="translate(45, 363)">
-                                        <rect width="550" height="36" rx="8" fill="rgba(239,68,68,0.14)"
-                                            stroke="rgba(239,68,68,0.4)" stroke-width="1.2" />
-                                        <text x="275" y="23" fill="#fca5a5" font-size="13" font-weight="700"
-                                            text-anchor="middle">⚠️ 한계: 서버 증설 시 관리자가 데이터센터에 방문해 수동 케이블 배선 필수 (경직성
-                                            高)</text>
-                                    </g>
-
-                                    <!-- 패킷 이동 애니메이션 (경직된 직각 패킷) -->
-                                    <circle r="5" fill="#f43f5e" filter="url(#legRedGlow)">
-                                        <animateMotion dur="3.5s" repeatCount="indefinite"
-                                            path="M 330,50 L 330,100 L 330,135 L 122,135 L 122,178 L 122,215 L 175,215 L 175,250" />
-                                    </circle>
-                                </svg>
+                                <!-- 하단 3대 핵심 특징 요약 카드 -->
+                                <div class="sdn-pillars-row">
+                                    <div class="sdn-pillar-card legacy">
+                                        <div class="sdn-pillar-title">🔒 하드웨어 종속</div>
+                                        <div class="sdn-pillar-desc">제어부와 전송부가 일체형으로 묶여 특정 벤더 CLI에 종속</div>
+                                    </div>
+                                    <div class="sdn-pillar-card legacy">
+                                        <div class="sdn-pillar-title">🔌 물리 수동 배선</div>
+                                        <div class="sdn-pillar-desc">서버 증설·격리 시 전산실(IDC) 방문 후 물리 케이블 직접 포설</div>
+                                    </div>
+                                    <div class="sdn-pillar-card legacy">
+                                        <div class="sdn-pillar-title">⏱️ 수일~수주일 소요</div>
+                                        <div class="sdn-pillar-desc">네트워크 변경 기안·결재·수동 작업으로 인프라 배포 리드타임 지연</div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- 중앙 VS 구분선 -->
@@ -7335,221 +7231,146 @@
                                 <div class="sdn-vs-badge">VS</div>
                             </div>
 
-                            <!-- [우측] SDN 사내 프라이빗 클라우드 인프라 -->
-                            <div class="sdn-col-cloud">
-                                <div class="sdn-section-header">
-                                    <div class="sdn-sec-title">
-                                        <span>☁️ SDN 사내 프라이빗 클라우드</span>
+                            <!-- [우측] SDN 소프트웨어 정의 가상 네트워크 (두뇌와 전송의 완전 분리) -->
+                            <div class="sdn-card sdn-card-cloud">
+                                <div class="sdn-card-header">
+                                    <div class="sdn-card-title-wrap">
+                                        <div class="sdn-card-title">
+                                            <span>⚡ Software-Defined Network (SDN)</span>
+                                        </div>
+                                        <div class="sdn-card-sub">두뇌(Control)와 손발(Data)의 완전 분리 (Decoupled)</div>
                                     </div>
-                                    <span class="sdn-badge-sdn">SW 가상화 & 무중단 동적 제어</span>
+                                    <span class="sdn-badge-sdn">SW 지능화 · 실시간 자동화</span>
                                 </div>
 
-                                <svg class="sdn-svg-stage" viewBox="0 0 740 420">
-                                    <defs>
-                                        <filter id="sdnCyanGlow" x="-50%" y="-50%" width="200%" height="200%">
-                                            <feGaussianBlur stdDeviation="5" result="blur" />
-                                            <feMerge>
-                                                <feMergeNode in="blur" />
-                                                <feMergeNode in="SourceGraphic" />
-                                            </feMerge>
-                                        </filter>
-                                        <filter id="sdnGreenGlow" x="-50%" y="-50%" width="200%" height="200%">
-                                            <feGaussianBlur stdDeviation="6" result="blur" />
-                                            <feMerge>
-                                                <feMergeNode in="blur" />
-                                                <feMergeNode in="SourceGraphic" />
-                                            </feMerge>
-                                        </filter>
-                                        <linearGradient id="sdnBrainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" stop-color="#083344" />
-                                            <stop offset="50%" stop-color="#0c2333" />
-                                            <stop offset="100%" stop-color="#091824" />
-                                        </linearGradient>
-                                    </defs>
+                                <!-- 시각화 SVG 다이어그램 -->
+                                <div class="sdn-svg-wrapper">
+                                    <svg class="sdn-svg-stage" viewBox="0 0 690 290">
+                                        <defs>
+                                            <linearGradient id="sdnControllerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" stop-color="#083344" />
+                                                <stop offset="50%" stop-color="#0e3b52" />
+                                                <stop offset="100%" stop-color="#092535" />
+                                            </linearGradient>
+                                            <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                                <feGaussianBlur stdDeviation="5" result="blur" />
+                                                <feMerge>
+                                                    <feMergeNode in="blur" />
+                                                    <feMergeNode in="SourceGraphic" />
+                                                </feMerge>
+                                            </filter>
+                                            <filter id="emeraldGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                                <feGaussianBlur stdDeviation="6" result="blur" />
+                                                <feMerge>
+                                                    <feMergeNode in="blur" />
+                                                    <feMergeNode in="SourceGraphic" />
+                                                </feMerge>
+                                            </filter>
+                                        </defs>
 
-                                    <!-- 1. 상단: SDN 중앙 컨트롤러 (지능형 소프트웨어 두뇌 🧠) -->
-                                    <g transform="translate(30, 8)">
-                                        <!-- 컨트롤러 섀시 -->
-                                        <rect width="680" height="74" rx="12" fill="url(#sdnBrainGrad)" stroke="#06b6d4"
-                                            stroke-width="1.8" filter="drop-shadow(0 0 16px rgba(6,182,212,0.3))" />
+                                        <!-- 1. 상단: SDN 중앙 컨트롤러 (지능형 소프트웨어 두뇌 / Floating Island) -->
+                                        <g transform="translate(115, 10)">
+                                            <!-- 플로팅 컨트롤 타워 바디 -->
+                                            <rect width="460" height="62" rx="31" fill="url(#sdnControllerGrad)" stroke="#06b6d4" stroke-width="1.8" filter="url(#cyanGlow)" />
+                                            
+                                            <!-- 두뇌 아이콘 & 타이틀 -->
+                                            <text x="24" y="38" font-size="24" class="anim-brain-pulse">🧠</text>
+                                            <text x="62" y="30" fill="#ffffff" font-size="15" font-weight="800">SDN Central Controller (Software)</text>
+                                            <text x="62" y="48" fill="#67e8f9" font-size="11.5">Terraform(IaC) · 클라우드 콘솔 · API 실시간 중앙 통제</text>
 
-                                        <!-- 두뇌 아이콘 & 타이틀 -->
-                                        <text x="24" y="38" font-size="24" class="anim-brain-pulse">🧠</text>
-                                        <text x="64" y="30" fill="#ffffff" font-size="13.5" font-weight="800">SDN 중앙
-                                            컨트롤러 (Software Control Tower)</text>
-                                        <text x="64" y="48" fill="#67e8f9" font-size="10.5">사내 프라이빗 클라우드 전체 가상 네트워크를
-                                            소프트웨어(API)로 중앙 집중 프로그래밍</text>
-
-                                        <!-- 우측 실시간 판단 지표 칩들 -->
-                                        <g transform="translate(64, 53)">
-                                            <rect x="0" y="0" width="85" height="16" rx="4" fill="rgba(0,0,0,0.5)"
-                                                stroke="rgba(6,182,212,0.4)" />
-                                            <text x="42" y="11" fill="#67e8f9" font-size="8.5" font-weight="600"
-                                                text-anchor="middle">⚡ L7 URL/헤더</text>
-
-                                            <rect x="92" y="0" width="85" height="16" rx="4" fill="rgba(0,0,0,0.5)"
-                                                stroke="rgba(6,182,212,0.4)" />
-                                            <text x="134" y="11" fill="#67e8f9" font-size="8.5" font-weight="600"
-                                                text-anchor="middle">⚖️ 실시간 부하율</text>
-
-                                            <rect x="184" y="0" width="85" height="16" rx="4" fill="rgba(0,0,0,0.5)"
-                                                stroke="rgba(6,182,212,0.4)" />
-                                            <text x="226" y="11" fill="#67e8f9" font-size="8.5" font-weight="600"
-                                                text-anchor="middle">🩺 Pod 헬스체크</text>
-
-                                            <rect x="276" y="0" width="95" height="16" rx="4" fill="rgba(0,0,0,0.5)"
-                                                stroke="rgba(16,185,129,0.5)" />
-                                            <text x="323" y="11" fill="#34d399" font-size="8.5" font-weight="700"
-                                                text-anchor="middle">🔄 동적 오토스케일</text>
+                                            <rect x="365" y="19" width="76" height="24" rx="12" fill="rgba(6,182,212,0.25)" stroke="#06b6d4" />
+                                            <text x="403" y="35" fill="#67e8f9" font-size="10.5" font-weight="800" text-anchor="middle">Control Plane</text>
                                         </g>
 
-                                        <!-- 상태 뱃지 -->
-                                        <rect x="580" y="14" width="84" height="22" rx="11" fill="rgba(6,182,212,0.2)"
-                                            stroke="#06b6d4" />
-                                        <text x="622" y="29" fill="#67e8f9" font-size="9.5" font-weight="700"
-                                            text-anchor="middle">Control Plane</text>
-                                    </g>
+                                        <!-- 2. 제어 빔 & 정책 주입 광선 (Control -> Data Plane) -->
+                                        <!-- 3개의 수직 광선 빔 -->
+                                        <line x1="230" y1="72" x2="230" y2="148" stroke="rgba(6, 182, 212, 0.4)" stroke-width="2" stroke-dasharray="4 4" />
+                                        <line x1="345" y1="72" x2="345" y2="148" stroke="#10b981" stroke-width="3" class="anim-control-beam" />
+                                        <line x1="460" y1="72" x2="460" y2="148" stroke="rgba(6, 182, 212, 0.4)" stroke-width="2" stroke-dasharray="4 4" />
 
-                                    <!-- 2. 중간: Control Plane ➔ Data Plane 제어 빔 & 분산 가상 스위치 -->
-                                    <!-- 제어 광선 (컨트롤러에서 하단 vSwitch로 내리꽂히는 레이저) -->
-                                    <line x1="370" y1="82" x2="370" y2="155" stroke="#10b981" stroke-width="3"
-                                        class="anim-control-beam" />
-
-                                    <!-- 제어 주입 태그 (Control Plane 정책 신호) -->
-                                    <g transform="translate(370, 118)">
-                                        <rect x="-155" y="-12" width="310" height="24" rx="12" fill="#091e2e"
-                                            stroke="#10b981" stroke-width="1.2"
-                                            filter="drop-shadow(0 0 10px rgba(16,185,129,0.4))" />
-                                        <text x="0" y="4" fill="#34d399" font-size="10.5" font-weight="700"
-                                            text-anchor="middle">⚡ [Control Plane] 실시간 동적 라우팅 룰 주입</text>
-                                    </g>
-
-                                    <!-- 사용자 요청 노드 및 인입선 (Data Plane 실제 데이터 트래픽) -->
-                                    <g transform="translate(16, 142)">
-                                        <rect width="150" height="24" rx="5" fill="#0f172a" stroke="#06b6d4"
-                                            stroke-width="1.2" />
-                                        <text x="75" y="16" fill="#67e8f9" font-size="9.5" font-weight="700"
-                                            text-anchor="middle">👤 [Data] 사용자 요청</text>
-                                    </g>
-                                    <path d="M 166,154 L 350,154" stroke="#06b6d4" stroke-width="3.5"
-                                        stroke-dasharray="4 2" />
-
-                                    <!-- 3. 하단: 사내 프라이빗 클라우드 클러스터 (K8s / OpenStack Fabric) -->
-                                    <g transform="translate(20, 168)">
-                                        <!-- 프라이빗 클라우드 대시 바운더리 -->
-                                        <rect width="700" height="190" rx="14" fill="rgba(6,182,212,0.03)"
-                                            stroke="rgba(6,182,212,0.45)" stroke-width="1.5" stroke-dasharray="6 4" />
-
-                                        <!-- 클러스터 헤더 -->
-                                        <text x="24" y="22" fill="#67e8f9" font-size="12" font-weight="700">🏢 사내 프라이빗
-                                            클라우드 (K8s / OpenStack 클러스터)</text>
-                                        <rect x="525" y="8" width="155" height="20" rx="4" fill="rgba(16,185,129,0.15)"
-                                            stroke="rgba(16,185,129,0.4)" />
-                                        <text x="602" y="22" fill="#34d399" font-size="9.5" font-weight="600"
-                                            text-anchor="middle">VXLAN / Geneve 오버레이망</text>
-
-                                        <!-- 가상 분산 스위치 (vSwitch / OVS) 캡슐 -->
-                                        <g transform="translate(350, 42)">
-                                            <rect x="-105" y="-14" width="210" height="28" rx="14" fill="#0f293d"
-                                                stroke="#06b6d4" stroke-width="1.5"
-                                                filter="drop-shadow(0 0 10px rgba(6,182,212,0.5))" />
-                                            <text x="0" y="4" fill="#ffffff" font-size="11" font-weight="700"
-                                                text-anchor="middle">🔀 Distributed vSwitch (OVS / eBPF)</text>
+                                        <!-- 제어 룰 주입 플로팅 뱃지 -->
+                                        <g transform="translate(195, 96)">
+                                            <rect width="300" height="28" rx="14" fill="#091e2e" stroke="#10b981" stroke-width="1.4" filter="drop-shadow(0 0 10px rgba(16,185,129,0.4))" />
+                                            <text x="150" y="18" fill="#34d399" font-size="12" font-weight="800" text-anchor="middle">⚡ [Control Plane] 코드(API)로 0.1초 동적 경로 주입</text>
                                         </g>
 
-                                        <!-- vSwitch에서 3개 Pod로 뻗어나가는 유연한 오버레이 가상 터널 (곡선 패스) -->
-                                        <!-- 터널 1: to App Pod #1 (과부하 우회) -->
-                                        <path d="M 280,56 C 220,75 140,85 110,105" stroke="rgba(148,163,184,0.3)"
-                                            stroke-width="3" fill="none" stroke-dasharray="3 3" />
-                                        <!-- 터널 2: to App Pod #2 (신규 스케일아웃 인스턴스로 동적 라우팅!!) -->
-                                        <path d="M 350,56 C 350,75 350,85 350,105" stroke="#10b981" stroke-width="3.5"
-                                            fill="none" filter="url(#sdnGreenGlow)" />
-                                        <!-- 터널 3: to Cloud DB Pod -->
-                                        <path d="M 420,56 C 480,75 560,85 590,105" stroke="rgba(148,163,184,0.3)"
-                                            stroke-width="2.5" fill="none" stroke-dasharray="3 3" />
+                                        <!-- 3. 하단: Data Plane (초고속 가상 네트워크 오버레이 / High-Speed Fabric) -->
+                                        <g transform="translate(35, 145)">
+                                            <!-- 가상 오버레이 바운더리 -->
+                                            <rect width="620" height="135" rx="18" fill="rgba(6,182,212,0.03)" stroke="rgba(6,182,212,0.4)" stroke-width="1.5" stroke-dasharray="6 4" />
+                                            
+                                            <!-- Data Plane 라벨 -->
+                                            <text x="24" y="22" fill="#67e8f9" font-size="12" font-weight="700">🌐 Data Plane: Distributed Virtual Switch (vSwitch / VPC Fabric)</text>
 
-                                        <!-- 동적 인스턴스 3개 (Pods) -->
-                                        <!-- Pod 1: App Pod #1 (부하 88% - 자동 우회) -->
-                                        <g transform="translate(20, 105)">
-                                            <rect width="200" height="72" rx="8" fill="#0f172a"
-                                                stroke="rgba(255,255,255,0.12)" stroke-width="1.2" />
-                                            <text x="14" y="20" fill="#cbd5e1" font-size="12" font-weight="700">📦
-                                                App-Pod #1</text>
-                                            <rect x="145" y="8" width="45" height="16" rx="3"
-                                                fill="rgba(239,68,68,0.15)" stroke="rgba(239,68,68,0.4)" />
-                                            <text x="167" y="19" fill="#f87171" font-size="8" font-weight="700"
-                                                text-anchor="middle">부하 88%</text>
-                                            <text x="14" y="38" fill="#94a3b8" font-size="9.5"
-                                                font-family="monospace">가상 IP: 10.244.1.42</text>
-                                            <text x="14" y="56" fill="#fca5a5" font-size="9.5">⚠️ 과부하 감지 ➔ 우회</text>
+                                            <!-- 좌측 유저 트래픽 인입 노드 -->
+                                            <g transform="translate(25, 45)">
+                                                <rect width="135" height="46" rx="23" fill="#0f172a" stroke="#06b6d4" stroke-width="1.6" />
+                                                <text x="67" y="24" fill="#ffffff" font-size="12.5" font-weight="700" text-anchor="middle">👤 사용자 트래픽</text>
+                                                <text x="67" y="38" fill="#67e8f9" font-size="9.5" text-anchor="middle">실시간 유입</text>
+                                            </g>
+
+                                            <!-- 유연한 동적 곡선 경로 (Smooth Bezier Highway) -->
+                                            <!-- 경로 1: App-1 우회 점선 -->
+                                            <path d="M 160,68 C 260,68 340,48 430,48" stroke="rgba(148,163,184,0.3)" stroke-width="2.5" stroke-dasharray="4 3" fill="none" />
+                                            
+                                            <!-- 경로 2: App-2 신규 할당 메인 그린 고속도로 -->
+                                            <path d="M 160,68 C 260,68 340,102 430,102" stroke="#10b981" stroke-width="3.5" fill="none" filter="url(#emeraldGlow)" />
+
+                                            <!-- 우측 App Pod 1 (과부하 우회) -->
+                                            <g transform="translate(430, 26)">
+                                                <rect width="165" height="40" rx="20" fill="rgba(239,68,68,0.12)" stroke="rgba(239,68,68,0.4)" stroke-width="1.2" />
+                                                <text x="82" y="25" fill="#fca5a5" font-size="12" font-weight="700" text-anchor="middle">📦 App-1 (부하 88% ➔ 우회)</text>
+                                            </g>
+
+                                            <!-- 우측 App Pod 2 (신규 스케일아웃 즉시 할당) -->
+                                            <g transform="translate(430, 80)">
+                                                <rect width="165" height="44" rx="22" fill="rgba(16,185,129,0.18)" stroke="#10b981" stroke-width="2" filter="drop-shadow(0 0 10px rgba(16,185,129,0.5))" />
+                                                <text x="82" y="23" fill="#ffffff" font-size="12.5" font-weight="800" text-anchor="middle">✨ App-2 (신규 Pod 할당)</text>
+                                                <text x="82" y="37" fill="#34d399" font-size="10.5" font-weight="700" text-anchor="middle">🟢 100% 무중단 자동 라우팅</text>
+                                            </g>
                                         </g>
 
-                                        <!-- Pod 2: App Pod #2 (오토스케일링 신규 생성 ➔ 최적 경로 선정!) -->
-                                        <g transform="translate(250, 105)">
-                                            <rect width="200" height="72" rx="8" fill="rgba(16,185,129,0.12)"
-                                                stroke="#10b981" stroke-width="2" class="anim-pod-active" />
-                                            <text x="14" y="20" fill="#ffffff" font-size="12" font-weight="800">📦
-                                                App-Pod #2 (신규)</text>
-                                            <rect x="135" y="8" width="55" height="16" rx="3" fill="#10b981" />
-                                            <text x="162" y="19" fill="#0f172a" font-size="8.5" font-weight="800"
-                                                text-anchor="middle">Scale-Out</text>
-                                            <text x="14" y="38" fill="#6ee7b7" font-size="9.5"
-                                                font-family="monospace">가상 IP: 10.244.2.88</text>
-                                            <text x="14" y="56" fill="#34d399" font-size="9.5" font-weight="700">🟢 실시간
-                                                트래픽 자동 수신</text>
-                                        </g>
+                                        <!-- 패킷 애니메이션 1: Control 펄스 신호 (위 -> 아래) -->
+                                        <circle r="4.5" fill="#34d399" filter="url(#emeraldGlow)">
+                                            <animateMotion dur="2.0s" repeatCount="indefinite" path="M 345,72 L 345,148" />
+                                        </circle>
 
-                                        <!-- Pod 3: Cloud DB Pod -->
-                                        <g transform="translate(480, 105)">
-                                            <rect width="200" height="72" rx="8" fill="#0f172a"
-                                                stroke="rgba(255,255,255,0.12)" stroke-width="1.2" />
-                                            <text x="14" y="20" fill="#cbd5e1" font-size="12" font-weight="700">🗄️
-                                                Cloud DB Pod</text>
-                                            <rect x="140" y="8" width="50" height="16" rx="3"
-                                                fill="rgba(56,189,248,0.15)" stroke="rgba(56,189,248,0.4)" />
-                                            <text x="165" y="19" fill="#38bdf8" font-size="8.5"
-                                                text-anchor="middle">Active</text>
-                                            <text x="14" y="38" fill="#94a3b8" font-size="9.5"
-                                                font-family="monospace">가상 IP: 10.244.3.15</text>
-                                            <text x="14" y="56" fill="#94a3b8" font-size="9.5">사내 DB 가상 오버레이 직결</text>
-                                        </g>
-                                    </g>
+                                        <!-- 패킷 애니메이션 2: 유연한 가상 고속도로 타고 초고속 이동하는 데이터 패킷 -->
+                                        <circle r="6" fill="#06b6d4" filter="url(#cyanGlow)">
+                                            <animateMotion dur="2.2s" repeatCount="indefinite" path="M 195,213 C 295,213 375,247 465,247" />
+                                        </circle>
+                                    </svg>
+                                </div>
 
-                                    <!-- 4. 하단 요약 안내 바 -->
-                                    <g transform="translate(15, 363)">
-                                        <rect width="710" height="36" rx="8" fill="rgba(16,185,129,0.14)"
-                                            stroke="rgba(16,185,129,0.45)" stroke-width="1.2" />
-                                        <text x="355" y="23" fill="#6ee7b7" font-size="13" font-weight="700"
-                                            text-anchor="middle">🟢 혁신: 물리 장비 재배선 없이 소프트웨어(API)로 트래픽을 신규 Pod로 무중단 자동
-                                            전환</text>
-                                    </g>
-
-                                    <!-- 패킷 이동 애니메이션 1: SDN 제어 펄스 (컨트롤러 -> vSwitch) -->
-                                    <circle r="4.5" fill="#34d399" filter="url(#sdnGreenGlow)">
-                                        <animateMotion dur="2.2s" repeatCount="indefinite" path="M 370,82 L 370,210" />
-                                    </circle>
-
-                                    <!-- 패킷 이동 애니메이션 2: 사용자 트래픽 -> vSwitch -> 신규 App-Pod #2 로 곡선 이동! -->
-                                    <circle r="6" fill="#06b6d4" filter="url(#sdnCyanGlow)">
-                                        <animateMotion dur="2.8s" repeatCount="indefinite"
-                                            path="M 166,154 L 350,154 L 350,210 L 350,273" />
-                                    </circle>
-                                </svg>
+                                <!-- 하단 3대 핵심 특징 요약 카드 -->
+                                <div class="sdn-pillars-row">
+                                    <div class="sdn-pillar-card cloud">
+                                        <div class="sdn-pillar-title">🧠 두뇌·전송 완전 분리</div>
+                                        <div class="sdn-pillar-desc">중앙 SW 컨트롤러가 전사 가상 네트워크 토폴로지를 지능적으로 총괄</div>
+                                    </div>
+                                    <div class="sdn-pillar-card cloud">
+                                        <div class="sdn-pillar-title">💻 코드 기반 자동화 (IaC)</div>
+                                        <div class="sdn-pillar-desc">Terraform 스크립트나 API 호출만으로 1초 만에 VPC·서브넷·보안그룹 생성</div>
+                                    </div>
+                                    <div class="sdn-pillar-card cloud">
+                                        <div class="sdn-pillar-title">⚡ 0.1초 무중단 재구성</div>
+                                        <div class="sdn-pillar-desc">트래픽 폭주나 장애 발생 시 소프트웨어가 실시간으로 최적 경로 자동 전환</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- 하단 캡션: 1문장 1줄 정렬 -->
                     <div class="caption srv-caption reveal delay-1">
- <h3>Network Architecture</h3>
- <h2 class="srv-title-single">SDN (Private Cloud) vs Traditional L2/L3 (On-Premises)</h2>
- <p class="srv-desc-line">전통적 인프라는 물리 스위치와 고정 서버를 케이블로 직접 연결하여 네트워크 변경 시 수동 작업과 경직성이 큽니다.</p>
- <p class="srv-desc-line">SDN 기반 프라이빗 클라우드는 중앙 SW 컨트롤러가 가상 네트워크를 실시간 제어하여 무중단 동적 라우팅을 실현합니다.</p>
- </div>
+                        <h3>Network Architecture</h3>
+                        <h2 class="srv-title-single">SDN (Software-Defined) vs Traditional Hardware Network</h2>
+                        <p class="srv-desc-line">전통적 네트워크는 하드웨어와 제어 로직이 일체형으로 묶여 있어 변경 시 물리 배선 작업과 경직성이 큽니다.</p>
+                        <p class="srv-desc-line">SDN은 <span class="highlight">두뇌(Control Plane)와 전송부(Data Plane)를 분리</span>하여, 소프트웨어 코드(API)로 <span class="green-text">가상 네트워크를 0.1초 만에 동적 제어</span>합니다.</p>
+                    </div>
                 </div>
             </section>
-
-            <!-- Slide 6: OLTP vs OLAP -->
+<!-- Slide 6: OLTP vs OLAP -->
             <section class="slide">
                 <div class="slide-content">
                     <div class="central-diagram" style="height: 380px; margin-bottom: 45px;">
