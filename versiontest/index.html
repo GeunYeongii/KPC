@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPC IT 인프라 프레젠테이션 테마 셀렉터</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #06080e;
+            --card-bg: rgba(13, 18, 30, 0.7);
+            --border: rgba(255, 255, 255, 0.09);
+            --primary: #DA1F3D;
+            --primary-glow: rgba(218, 31, 61, 0.4);
+            --font-display: 'Plus Jakarta Sans', 'Noto Sans KR', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg);
+            color: #f8fafc;
+            font-family: var(--font-display);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
+            background-image: 
+                radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+                radial-gradient(ellipse at 50% 0%, rgba(218, 31, 61, 0.12) 0%, transparent 60%);
+            background-size: 32px 32px, 100% 100%;
+        }
+        .header {
+            text-align: center;
+            max-width: 860px;
+            margin-bottom: 50px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 18px;
+            border-radius: 999px;
+            background: rgba(218, 31, 61, 0.12);
+            border: 1px solid rgba(218, 31, 61, 0.35);
+            color: #ff3358;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            box-shadow: 0 0 20px rgba(218, 31, 61, 0.2);
+        }
+        .badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ff3358;
+            box-shadow: 0 0 8px #ff3358;
+        }
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 14px;
+            background: linear-gradient(180deg, #ffffff 20%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p.subtitle {
+            font-size: 18px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            max-width: 1400px;
+            width: 100%;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.7);
+        }
+        .card-v1:hover::before { background: linear-gradient(90deg, #DA1F3D, #00f2fe); }
+        .card-v2:hover::before { background: linear-gradient(90deg, #0284c7, #DA1F3D); }
+        .card-v3:hover::before { background: linear-gradient(90deg, #00f5d4, #f72585); }
+        .card-v4:hover::before { background: linear-gradient(90deg, #DA1F3D, #fbbf24); }
+
+        .card-tag {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        .tag-v1 { color: #ff3358; }
+        .tag-v2 { color: #38bdf8; }
+        .tag-v3 { color: #00f5d4; }
+        .tag-v4 { color: #fbbf24; }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+        .card-desc {
+            font-size: 15px;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+        .card-features {
+            list-style: none;
+            margin-bottom: 28px;
+            font-size: 13.5px;
+            color: #cbd5e1;
+        }
+        .card-features li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-features li::before {
+            content: '✓';
+            color: #ff3358;
+            font-weight: bold;
+        }
+        .btn-launch {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            transition: all 0.25s ease;
+        }
+        .card:hover .btn-launch {
+            background: #DA1F3D;
+            border-color: #DA1F3D;
+            box-shadow: 0 10px 25px rgba(218, 31, 61, 0.4);
+        }
+        .card-v2:hover .btn-launch { background: #0284c7; border-color: #0284c7; box-shadow: 0 10px 25px rgba(2, 132, 199, 0.4); }
+        .card-v3:hover .btn-launch { background: #00f5d4; border-color: #00f5d4; color: #051412; box-shadow: 0 10px 25px rgba(0, 245, 212, 0.4); }
+        .card-v4:hover .btn-launch { background: linear-gradient(90deg, #DA1F3D, #b45309); border-color: #fbbf24; box-shadow: 0 10px 25px rgba(218, 31, 61, 0.4); }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 13px;
+            color: #64748b;
+            text-align: center;
+            font-family: var(--font-mono);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="badge">ORIX CAPITAL • MIS IT INFRASTRUCTURE</div>
+        <h1>프레젠테이션 디자인 에디션 셀렉터</h1>
+        <p class="subtitle">청중과 발표 환경에 맞춰 최적화된 4가지 테크 키노트 버전을 바로 실행해 보세요.</p>
+    </div>
+
+    <div class="grid">
+        <!-- V1 -->
+        <a href="./kpc_infrastructure_review.html" class="card card-v1">
+            <div>
+                <span class="card-tag tag-v1">VERSION 01 • MAIN KEYNOTE</span>
+                <h2 class="card-title">Cyber Obsidian Keynote</h2>
+                <p class="card-desc">애플/엔비디아 키노트 스타일의 딥 다크 옵시디언 테마. 3색 오로라 글로우와 글래스모피즘이 결합되어 가장 화려하고 감각적인 몰입감을 제공합니다.</p>
+                <ul class="card-features">
+                    <li>시네마틱 3색 오로라 펄스 배경</li>
+                    <li>모던 글래스모피즘 인사이트 독</li>
+                    <li>네온 레이저 빔 프로그레스 & 퀵 점프 도크</li>
+                </ul>
+            </div>
+            <div class="btn-launch">프레젠테이션 실행 ➔</div>
+        </a>
+
+        <!-- V2 -->
+        <a href="./kpc_infrastructure_v2_titanium_light.html" class="card card-v2">
+            <div>
+                <span class="card-tag tag-v2">VERSION 02 • LIGHT KEYNOTE</span>
+                <h2 class="card-title">Titanium White Keynote</h2>
+                <p class="card-desc">밝은 대회의실 및 빔프로젝터 환경에 최적화된 실리콘밸리 클린 라이트 테마. 명도 대비가 높아 다이어그램과 텍스트의 가독성이 압도적입니다.</p>
+                <ul class="card-features">
+                    <li>고대비 티타늄 펄 화이트 배경</li>
+                    <li>밝은 환경 맞춤형 다이어그램 렌더링</li>
+                    <li>시인성 최상급 딥 차콜 타이포그래피</li>
+                </ul>
+            </div>
+            <div class="btn-launch">프레젠테이션 실행 ➔</div>
+        </a>
+
+        <!-- V3 -->
+        <a href="./kpc_infrastructure_v3_neon_matrix.html" class="card card-v3">
+            <div>
+                <span class="card-tag tag-v3">VERSION 03 • FUTURE TECH</span>
+                <h2 class="card-title">Deep Tech Cyber Matrix</h2>
+                <p class="card-desc">엔지니어링과 아키텍처 깊이감을 극대화한 미래형 사이버 테크 테마. 일렉트릭 민트와 네온 시안 회로망 비주얼로 하이테크 느낌을 배가합니다.</p>
+                <ul class="card-features">
+                    <li>사이버 매트릭스 도트 그리드</li>
+                    <li>네온 에메랄드 & 시안 액센트</li>
+                    <li>아키텍처 회로 다이어그램 발광 효과</li>
+                </ul>
+            </div>
+            <div class="btn-launch">프레젠테이션 실행 ➔</div>
+        </a>
+
+        <!-- V4 -->
+        <a href="./kpc_infrastructure_v4_executive_navy.html" class="card card-v4">
+            <div>
+                <span class="card-tag tag-v4">VERSION 04 • EXECUTIVE REPORT</span>
+                <h2 class="card-title">Executive Royal Navy</h2>
+                <p class="card-desc">오릭스캐피탈 경영진 및 임원 보고에 최적화된 럭셔리 핀테크 테마. 딥 로얄 사파이어 네이비와 골드/크림슨 림라이트로 신뢰감과 권위를 부여합니다.</p>
+                <ul class="card-features">
+                    <li>로얄 사파이어 네이비 & 샴페인 골드</li>
+                    <li>중후하고 정갈한 경영진 브리핑 레이아웃</li>
+                    <li>오릭스 시그니처 크림슨 포인트</li>
+                </ul>
+            </div>
+            <div class="btn-launch">프레젠테이션 실행 ➔</div>
+        </a>
+    </div>
+
+    <div class="footer">
+        KPC INFRASTRUCTURE ARCHITECTURE REVIEW • ORIX CAPITAL MIS PLANNING TEAM
+    </div>
+</body>
+</html>
