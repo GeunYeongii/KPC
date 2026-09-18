@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KPC IT 인프라 기초 교육 리뷰 (Dark Minimal)</title>
+    <title>KPC IT 인프라 기초 교육 리뷰 — Modern Infrastructure Review</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1157,7 +1157,7 @@
             border-right: 9px solid rgba(52, 211, 153, 0.9);
         }
 
-        /* 눈에 확 띄는 선명한 네온 캡슐 뱃지 (가려지지 않고 선명하게 표시) */
+        /* 눈에 확 띄는 선명한 네온 ���슐 뱃지 (가려지지 않고 선명하게 표시) */
         .srv-rail-badge {
             position: absolute;
             top: -24px;
@@ -5929,6 +5929,90 @@
                     filter: drop-shadow(0 0 25px var(--glow-color, rgba(255, 77, 109, 0.85))) drop-shadow(0 0 6px #ffffff) !important;
                     z-index: 99;
                 }
+        /* KPC Editorial Refresh — restrained, cinematic, and presentation-first */
+        :root {
+            --bg: #08090d;
+            --bg-soft: #0e1118;
+            --primary: #e62f4f;
+            --primary-soft: rgba(230, 47, 79, 0.16);
+            --primary-glow: rgba(230, 47, 79, 0.32);
+            --text: #f7f8fa;
+            --text-muted: #8e98aa;
+            --border: rgba(255, 255, 255, 0.085);
+            --font-display: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+            --font-body: 'Inter', 'Noto Sans KR', sans-serif;
+        }
+
+        html, body { background: #050609; }
+        body { -webkit-font-smoothing: antialiased; }
+        .deck-viewport { background: #050609; }
+        .deck-stage {
+            background-color: var(--bg);
+            background-image:
+                linear-gradient(rgba(255,255,255,0.026) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.026) 1px, transparent 1px),
+                radial-gradient(circle at 50% 45%, rgba(230,47,79,0.08), transparent 36%),
+                radial-gradient(circle at 8% 92%, rgba(38,170,207,0.06), transparent 28%);
+            background-size: 72px 72px, 72px 72px, auto, auto;
+        }
+        .deck-stage::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(5,6,9,0.08), rgba(5,6,9,0.34));
+            z-index: 0;
+        }
+        .slide { z-index: 1; padding: 112px 110px 96px; box-sizing: border-box; }
+        .slide-content { position: relative; z-index: 1; }
+        .orix-logo {
+            top: 40px; left: 56px; font-size: 24px; letter-spacing: 0.12em;
+            text-shadow: 0 0 24px rgba(230,47,79,0.38);
+        }
+        .orix-logo span { font-size: 14px !important; letter-spacing: 0.18em; opacity: .7; }
+        h1, h2, h3, h4 { text-wrap: balance; }
+        h1 { font-size: clamp(68px, 5.2vw, 96px); letter-spacing: -0.055em; line-height: .98; }
+        h2 { font-size: 50px; letter-spacing: -0.045em; line-height: 1.08; }
+        h3 {
+            color: #ff6680; border: 1px solid rgba(230,47,79,.28); background: rgba(230,47,79,.07);
+            box-shadow: 0 0 28px rgba(230,47,79,.10); padding: 8px 16px; font-size: 12px;
+            letter-spacing: .2em; backdrop-filter: blur(14px);
+        }
+        p { color: #9aa5b8; font-size: 21px; line-height: 1.72; }
+        .highlight { color: #fff; }
+        .red-text { color: #ff6680; }
+        .box, .mono-box-static, .cdn-origin-box, .cdn-user-card {
+            background: linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
+            border-color: rgba(255,255,255,.12); box-shadow: 0 18px 55px rgba(0,0,0,.24); backdrop-filter: blur(18px);
+        }
+        .red-box { background: linear-gradient(145deg, rgba(230,47,79,.18), rgba(230,47,79,.04)); border-color: #e62f4f; box-shadow: 0 0 42px rgba(230,47,79,.22); }
+        .slide > *, .slide-content > * { max-width: 100%; }
+        .nav-hint, .slide-counter {
+            position: fixed; z-index: 100; bottom: 34px; color: rgba(255,255,255,.48); font-size: 12px;
+            letter-spacing: .04em; font-family: var(--font-body); text-transform: none;
+        }
+        .nav-hint { left: 56px; }
+        .slide-counter { right: 56px; color: rgba(255,255,255,.72); font-variant-numeric: tabular-nums; }
+        kbd {
+            display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px;
+            padding: 0 6px; border: 1px solid rgba(255,255,255,.18); border-radius: 6px;
+            background: rgba(255,255,255,.06); color: rgba(255,255,255,.74); font-size: 10px;
+        }
+        .progress-bar {
+            height: 2px !important; bottom: 0 !important; top: auto !important; left: 0 !important;
+            background: linear-gradient(90deg, #e62f4f, #ff7087) !important; box-shadow: 0 0 18px rgba(230,47,79,.7);
+        }
+        .reveal { transform: translateY(22px); transition-duration: .7s; }
+        .slide.visible .reveal { transition-timing-function: cubic-bezier(.22,1,.36,1); }
+        @media (max-width: 900px) {
+            .slide { padding: 92px 52px 80px; }
+            .orix-logo { left: 34px; top: 30px; }
+            .nav-hint { left: 34px; }
+            .slide-counter { right: 34px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+        }
     </style>
 </head>
 
@@ -6760,7 +6844,7 @@
                                 <div class="az-dc-nodes" style="justify-content: flex-start; gap: 20px;">
                                     <div class="az-dc-item"
                                         style="border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.15);">
-                                        🏢 서초 DC</div>
+                                        ��� 서초 DC</div>
                                     <div class="az-dc-item"
                                         style="border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.15);">
                                         🏢 송파 DC</div>
@@ -8860,7 +8944,7 @@
                                             단어 "빨간색이고"를 질문 맨 뒤에 실시간 재입력!</text>
                                     </g>
 
-                                    <!-- 3-5. Step 17: 기존 질문 사라지고 "사과는 어떤 과일이야? 빨간색이고" 결합 재질문 등장 및 모델 재주입 -->
+                                    <!-- 3-5. Step 17: 기존 질문 사라지고 "사과는 어떤 과일이야? 빨��색이고" 결합 재질문 등장 및 모델 재주입 -->
                                     <g class="step-item r3-step-refeed">
                                         <g transform="translate(130, 280)">
                                             <text y="-26" fill="#38bdf8" font-size="13" font-weight="700"
