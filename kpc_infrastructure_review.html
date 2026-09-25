@@ -4760,6 +4760,497 @@
             }
         }
 
+        /* 2.85 4-Axis Auto-Scaling (Clean, High Y-Axis, Extra Wide Board) */
+        .central-diagram.scaling-stage-wrapper {
+            width: 1560px;
+            height: 600px;
+            margin-bottom: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scaling-quadrant-board {
+            width: 1520px;
+            height: 580px;
+            position: relative;
+            border-radius: 20px;
+            background: rgba(15, 23, 42, 0.65);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 50px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+        }
+
+        /* Ambient grid pattern */
+        .scaling-quadrant-board::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 44px 44px;
+            pointer-events: none;
+        }
+
+        /* Extra-Tall Vertical Y-Axis */
+        .axis-y {
+            position: absolute;
+            left: 140px;
+            bottom: 70px;
+            width: 3px;
+            height: 470px;
+            background: linear-gradient(to top, rgba(168, 85, 247, 0.2), #c084fc);
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+            z-index: 2;
+        }
+
+        .axis-y-arrow {
+            position: absolute;
+            top: -16px;
+            left: -6px;
+            color: #c084fc;
+            font-size: 16px;
+            line-height: 1;
+            text-shadow: 0 0 10px #c084fc;
+        }
+
+        .axis-y-label {
+            position: absolute;
+            top: -6px;
+            left: 20px;
+            font-size: 15px;
+            font-weight: 800;
+            color: #d8b4fe;
+            white-space: nowrap;
+            letter-spacing: -0.01em;
+            text-shadow: 0 0 12px rgba(192, 132, 252, 0.7);
+        }
+
+        .axis-y-ticks {
+            position: absolute;
+            left: -115px;
+            top: 20px;
+            bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 700;
+            color: #c084fc;
+            text-align: right;
+            padding-right: 14px;
+        }
+
+        /* Horizontal X-Axis (Roomy spacing inside board) */
+        .axis-x {
+            position: absolute;
+            left: 140px;
+            bottom: 70px;
+            height: 3px;
+            width: 1330px;
+            background: linear-gradient(to right, rgba(56, 189, 248, 0.2), #38bdf8);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+            z-index: 2;
+        }
+
+        .axis-x-arrow {
+            position: absolute;
+            right: -14px;
+            top: -7px;
+            color: #38bdf8;
+            font-size: 16px;
+            line-height: 1;
+            text-shadow: 0 0 10px #38bdf8;
+        }
+
+        .axis-x-label {
+            position: absolute;
+            right: 20px;
+            top: 22px;
+            font-size: 14px;
+            font-weight: 800;
+            color: #7dd3fc;
+            white-space: nowrap;
+            letter-spacing: -0.01em;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+        }
+
+        .axis-x-ticks {
+            position: absolute;
+            left: 60px;
+            right: 420px;
+            top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 700;
+            color: #38bdf8;
+        }
+
+        /* Origin Crosshair Marker */
+        .origin-indicator {
+            position: absolute;
+            left: 140px;
+            bottom: 70px;
+            transform: translate(-50%, 50%);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .origin-crosshair {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 16px #ffffff, 0 0 25px #38bdf8;
+            position: relative;
+        }
+
+        .origin-label {
+            position: absolute;
+            top: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #94a3b8;
+            white-space: nowrap;
+        }
+
+        /* Pod Cluster Stage (Aligned on X-Axis) */
+        .pod-cluster-stage {
+            position: absolute;
+            left: 180px;
+            bottom: 84px;
+            display: flex;
+            align-items: flex-end;
+            gap: 36px;
+            z-index: 6;
+        }
+
+        .docker-pod {
+            width: 255px;
+            position: relative;
+            border-radius: 14px;
+            background: rgba(17, 24, 39, 0.96);
+            border: 2px solid rgba(56, 189, 248, 0.35);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.45s cubic-bezier(0.34, 1.3, 0.64, 1);
+        }
+
+        .pod-body {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pod-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 8px;
+        }
+
+        .pod-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pod-icon {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .pod-name {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .pod-status-chip {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .chip-origin {
+            background: rgba(56, 189, 248, 0.2);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+        }
+
+        .chip-replica {
+            background: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+        }
+
+        .pod-spec-box {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 10px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .spec-label {
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .spec-val {
+            color: #f1f5f9;
+            font-weight: 800;
+        }
+
+        .spec-gauge {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            margin-top: 4px;
+        }
+
+        .gauge-fill {
+            height: 100%;
+            width: 35%;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            border-radius: 3px;
+            transition: width 0.4s ease;
+        }
+
+        .pod-foot {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulseDot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 0.6; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.15); box-shadow: 0 0 12px #10b981; }
+        }
+
+        /* TALL Dynamic Vertical CPU Booster Tower on Pod #1 */
+        .cpu-boost-tower {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            right: 0;
+            margin-bottom: 12px;
+            background: rgba(88, 28, 135, 0.9);
+            border: 2.5px solid #c084fc;
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.7), inset 0 0 20px rgba(192, 132, 252, 0.35);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            backdrop-filter: blur(12px);
+            z-index: 10;
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: bottom center;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.34, 1.35, 0.64, 1);
+        }
+
+        .boost-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding-bottom: 8px;
+        }
+
+        .boost-badge {
+            font-size: 13px;
+            font-weight: 900;
+            color: #f5d0fe;
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 10px #c084fc;
+        }
+
+        .boost-cores {
+            font-size: 18px;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 0 12px #e879f9;
+        }
+
+        .cpu-core-layers {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .core-layer {
+            height: 38px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+            font-size: 12px;
+            font-weight: 800;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .core-pulse-bar {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: coreShine 2s infinite linear;
+        }
+
+        @keyframes coreShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Dynamic Step Actions */
+
+        /* Step 1: Scale-Up (Soar Vertically) */
+        #slide-autoscaling[data-scale-step="1"] .pod-origin {
+            border-color: #c084fc;
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.6), 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+
+        #slide-autoscaling[data-scale-step="1"] .cpu-boost-tower {
+            opacity: 1;
+            transform: scaleY(1);
+            max-height: 300px;
+        }
+
+        #slide-autoscaling[data-scale-step="1"] .pod-origin .gauge-fill {
+            width: 95%;
+            background: linear-gradient(90deg, #a855f7, #ec4899);
+        }
+
+        #slide-autoscaling[data-scale-step="1"] .pod-origin .cpu-val {
+            color: #f472b6;
+            font-size: 15px;
+        }
+
+        /* Step 2: Scale-Down (Smooth return to baseline origin) */
+        #slide-autoscaling[data-scale-step="2"] .pod-origin {
+            border-color: #34d399;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+        }
+
+        #slide-autoscaling[data-scale-step="2"] .cpu-boost-tower {
+            opacity: 0;
+            transform: scaleY(0);
+            max-height: 0;
+            transition: all 0.45s ease-in-out;
+        }
+
+        #slide-autoscaling[data-scale-step="2"] .pod-origin .gauge-fill {
+            width: 35%;
+            background: linear-gradient(90deg, #10b981, #34d399);
+        }
+
+        /* Horizontal Replicas (Pod 2, 3, 4) States */
+        .pod-replica {
+            opacity: 0;
+            transform: translateX(-40px) scale(0.85);
+            pointer-events: none;
+            max-width: 0;
+            margin-right: -32px;
+            overflow: hidden;
+            transition: all 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+        }
+
+        /* Step 3: Scale-Out (Multi-pod spread horizontally) */
+        #slide-autoscaling[data-scale-step="3"] .pod-origin {
+            border-color: #38bdf8;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+        }
+
+        #slide-autoscaling[data-scale-step="3"] .pod-replica {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            pointer-events: auto;
+            max-width: 250px;
+            margin-right: 0;
+            border-color: #38bdf8;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.35), 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        #slide-autoscaling[data-scale-step="3"] .replica-2 {
+            transition-delay: 0.1s;
+        }
+
+        #slide-autoscaling[data-scale-step="3"] .replica-3 {
+            transition-delay: 0.25s;
+        }
+
+        #slide-autoscaling[data-scale-step="3"] .replica-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* Step 4: Scale-In (Shrink back to origin) */
+        #slide-autoscaling[data-scale-step="4"] .pod-origin {
+            border-color: #fbbf24;
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.45);
+        }
+
+        #slide-autoscaling[data-scale-step="4"] .pod-replica {
+            opacity: 0;
+            transform: scale(0.7) translateY(25px);
+            pointer-events: none;
+            max-width: 0;
+            margin-right: -32px;
+            transition: all 0.35s ease-in;
+        }
+
+        #slide-autoscaling[data-scale-step="4"] .replica-4 {
+            transition-delay: 0.05s;
+        }
+
+        #slide-autoscaling[data-scale-step="4"] .replica-3 {
+            transition-delay: 0.18s;
+        }
+
+        #slide-autoscaling[data-scale-step="4"] .replica-2 {
+            transition-delay: 0.32s;
+        }
+
         /* 2.9 API Gateway Path Routing & Dynamic Load Balancing Diagram */
         .apigw-layout {
             display: flex;
@@ -5305,6 +5796,225 @@
 
         .vpc-box.step-active {
             display: flex !important;
+        }
+
+
+/* -------------------------------------------
+           Slide 2.92: Pure Minimalist Architecture (Boxless, Fluid Wires, 1-Line Labels)
+           ------------------------------------------- */
+        .arch-fullscreen-stage {
+            width: 1580px;
+            max-width: 96vw;
+            height: 680px;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            position: relative;
+            box-sizing: border-box;
+            overflow: visible;
+        }
+
+        .arch-fullscreen-stage::before {
+            display: none !important;
+        }
+
+        /* SVG Wiring Canvas */
+        .arch-wires-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .wire-path {
+            fill: none;
+            stroke-width: 3;
+            stroke-dasharray: 10 8;
+            animation: wireFlow 1.2s linear infinite;
+        }
+
+        .wire-glow {
+            fill: none;
+            stroke-width: 7;
+            opacity: 0.35;
+        }
+
+        @keyframes wireFlow {
+            from { stroke-dashoffset: 36; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Minimalist Floating Wire Tags */
+        .wire-tag {
+            position: absolute;
+            z-index: 2;
+            font-size: 13px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: -0.01em;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+        }
+
+        /* Boxless Architecture Nodes (No Cards, No Borders, Pure Content) */
+        .arch-node {
+            position: absolute;
+            z-index: 3;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            transition: transform 0.25s ease;
+        }
+
+        .arch-node:hover {
+            transform: scale(1.05);
+        }
+
+        /* Large Nodes (User, Web Server, API Gateway) */
+        .arch-node-lg {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .arch-node-icon {
+            font-size: 52px;
+            line-height: 1;
+            margin-bottom: 2px;
+            filter: drop-shadow(0 0 16px currentColor);
+        }
+
+        .arch-node-name {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .arch-node-sub {
+            font-size: 13.5px;
+            font-weight: 700;
+            white-space: nowrap;
+            letter-spacing: -0.01em;
+        }
+
+        /* Service & DB Nodes (Horizontal, Single-line, No Box) */
+        .arch-node-sm {
+            flex-direction: row;
+            align-items: center;
+            gap: 14px;
+            white-space: nowrap;
+        }
+
+        .arch-node-sm .arch-node-icon {
+            font-size: 38px;
+            line-height: 1;
+            margin-bottom: 0;
+            filter: drop-shadow(0 0 12px currentColor);
+        }
+
+        .arch-node-sm-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* 아이콘 우측 기준선에 칼같이 좌측 정렬 */
+            text-align: left;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .arch-node-sm-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            white-space: nowrap; /* 절대 줄바꿈 금지 */
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        .arch-node-sm-sub {
+            font-size: 13px;
+            font-weight: 700;
+            color: #94a3b8;
+            white-space: nowrap;
+            text-align: left; /* 하단 영어 라벨 완벽 좌측 정렬 */
+            padding-left: 2px;
+        }
+
+        /* Clean Accent Badges (Language & DB Type) */
+        .lang-pill {
+            font-size: 13px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 8px;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        .pill-rust {
+            background: rgba(249, 115, 22, 0.25);
+            color: #fb923c;
+            border: 1px solid rgba(249, 115, 22, 0.6);
+            box-shadow: 0 0 12px rgba(249, 115, 22, 0.3);
+        }
+        .pill-go {
+            background: rgba(6, 182, 212, 0.25);
+            color: #67e8f9;
+            border: 1px solid rgba(6, 182, 212, 0.6);
+            box-shadow: 0 0 12px rgba(6, 182, 212, 0.3);
+        }
+        .pill-python {
+            background: rgba(234, 179, 8, 0.25);
+            color: #fde047;
+            border: 1px solid rgba(234, 179, 8, 0.6);
+            box-shadow: 0 0 12px rgba(234, 179, 8, 0.3);
+        }
+        .pill-java {
+            background: rgba(239, 68, 68, 0.25);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.6);
+            box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+        }
+
+        /* EKS / ECS Dashed Grouping Animation */
+        .eks-ecs-boundary {
+            opacity: 0;
+            transform: scale(0.97);
+            transform-origin: 1080px 330px;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .eks-ecs-boundary.step-active {
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+
+        .eks-dashed-rect {
+            stroke-dasharray: 10 7;
+            animation: eksDashFlow 2.5s linear infinite;
+            filter: drop-shadow(0 0 14px rgba(6, 182, 212, 0.5));
+        }
+
+        @keyframes eksDashFlow {
+            from { stroke-dashoffset: 34; }
+            to { stroke-dashoffset: 0; }
         }
 
         /* -------------------------------------------
@@ -6287,6 +6997,344 @@
                 </div>
             </section>
 
+            <!-- Slide 2.85: 4-Axis Auto-Scaling (Scale Up/Down & Scale Out/In) -->
+            <section class="slide" id="slide-autoscaling">
+                <div class="slide-content">
+                    <!-- Hidden Controller for Step Transitions -->
+                    <div class="scale-step-controller" style="display: none;">
+                        <div class="step-item step-scale-up"></div>
+                        <div class="step-item step-scale-down"></div>
+                        <div class="step-item step-scale-out"></div>
+                        <div class="step-item step-scale-in"></div>
+                    </div>
+
+                    <!-- Central 4-Quadrant Coordinate Scaling Stage (Maximized Height) -->
+                    <div class="central-diagram scaling-stage-wrapper">
+                        <div class="scaling-quadrant-board">
+                            <!-- Background Coordinate Axes & Grid -->
+                            <div class="axis-y">
+                                <div class="axis-y-arrow">▲</div>
+                                <div class="axis-y-label">
+                                    <span class="axis-title">Vertical Scaling (단일 인스턴스 사양: CPU / Memory)</span>
+                                </div>
+                                <div class="axis-y-ticks">
+                                    <span class="tick tick-top">8 vCPU (Boost)</span>
+                                    <span class="tick tick-mid">4 vCPU</span>
+                                    <span class="tick tick-low">2 vCPU</span>
+                                    <span class="tick tick-base">1 vCPU (Base)</span>
+                                </div>
+                            </div>
+
+                            <div class="axis-x">
+                                <div class="axis-x-arrow">▶</div>
+                                <div class="axis-x-label">
+                                    <span class="axis-title">Horizontal Scaling (컨테이너 인스턴스 복제 개수: Pod Replicas)</span>
+                                </div>
+                                <div class="axis-x-ticks">
+                                    <span class="tick-x tx-1">Pod #1 (Base)</span>
+                                    <span class="tick-x tx-2">Pod #2</span>
+                                    <span class="tick-x tx-3">Pod #3</span>
+                                    <span class="tick-x tx-4">Pod #4</span>
+                                </div>
+                            </div>
+
+                            <!-- Origin Point Indicator -->
+                            <div class="origin-indicator">
+                                <div class="origin-crosshair"></div>
+                                <span class="origin-label">원점 (Origin)</span>
+                            </div>
+
+                            <!-- Pod Container Cluster Stage -->
+                            <div class="pod-cluster-stage">
+                                <!-- Pod #1: The Base Docker Container at Origin (Can Scale Up Vertically) -->
+                                <div class="docker-pod pod-origin" id="pod-1">
+                                    <!-- Dynamic Vertical CPU Expansion Tower (Scales Up on Step 1) -->
+                                    <div class="cpu-boost-tower">
+                                        <div class="boost-header">
+                                            <span class="boost-badge">⚡ SPEC BOOSTED (Scale-Up)</span>
+                                            <span class="boost-cores">8 vCPU / 32GB RAM</span>
+                                        </div>
+                                        <div class="cpu-core-layers">
+                                            <div class="core-layer core-tier-4">
+                                                <span>Core #7, #8 (Heavy Job Queue)</span>
+                                                <div class="core-pulse-bar"></div>
+                                            </div>
+                                            <div class="core-layer core-tier-3">
+                                                <span>Core #5, #6 (Multi-Threading)</span>
+                                                <div class="core-pulse-bar"></div>
+                                            </div>
+                                            <div class="core-layer core-tier-2">
+                                                <span>Core #3, #4 (Load Spike Buffer)</span>
+                                                <div class="core-pulse-bar"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Base Container Body -->
+                                    <div class="pod-body">
+                                        <div class="pod-header">
+                                            <div class="pod-title-wrap">
+                                                <span class="pod-icon">🐳</span>
+                                                <span class="pod-name">web-service-1</span>
+                                            </div>
+                                            <span class="pod-status-chip chip-origin">Origin Pod</span>
+                                        </div>
+                                        <div class="pod-spec-box">
+                                            <div class="spec-row">
+                                                <span class="spec-label">Base CPU:</span>
+                                                <span class="spec-val cpu-val">1 vCPU</span>
+                                            </div>
+                                            <div class="spec-row">
+                                                <span class="spec-label">Base RAM:</span>
+                                                <span class="spec-val">2 GB</span>
+                                            </div>
+                                            <div class="spec-gauge">
+                                                <div class="gauge-fill"></div>
+                                            </div>
+                                        </div>
+                                        <div class="pod-foot">
+                                            <span class="status-dot"></span>
+                                            <span class="foot-text">Active Container</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pod #2: Horizontal Replica 2 (Scales Out on Step 3) -->
+                                <div class="docker-pod pod-replica replica-2" id="pod-2">
+                                    <div class="pod-body">
+                                        <div class="pod-header">
+                                            <div class="pod-title-wrap">
+                                                <span class="pod-icon">🐳</span>
+                                                <span class="pod-name">web-service-2</span>
+                                            </div>
+                                            <span class="pod-status-chip chip-replica">Replica #2</span>
+                                        </div>
+                                        <div class="pod-spec-box">
+                                            <div class="spec-row">
+                                                <span class="spec-label">CPU:</span>
+                                                <span class="spec-val">1 vCPU</span>
+                                            </div>
+                                            <div class="spec-row">
+                                                <span class="spec-label">RAM:</span>
+                                                <span class="spec-val">2 GB</span>
+                                            </div>
+                                            <div class="spec-gauge">
+                                                <div class="gauge-fill"></div>
+                                            </div>
+                                        </div>
+                                        <div class="pod-foot">
+                                            <span class="status-dot"></span>
+                                            <span class="foot-text">Scale-Out Pod</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pod #3: Horizontal Replica 3 (Scales Out on Step 3) -->
+                                <div class="docker-pod pod-replica replica-3" id="pod-3">
+                                    <div class="pod-body">
+                                        <div class="pod-header">
+                                            <div class="pod-title-wrap">
+                                                <span class="pod-icon">🐳</span>
+                                                <span class="pod-name">web-service-3</span>
+                                            </div>
+                                            <span class="pod-status-chip chip-replica">Replica #3</span>
+                                        </div>
+                                        <div class="pod-spec-box">
+                                            <div class="spec-row">
+                                                <span class="spec-label">CPU:</span>
+                                                <span class="spec-val">1 vCPU</span>
+                                            </div>
+                                            <div class="spec-row">
+                                                <span class="spec-label">RAM:</span>
+                                                <span class="spec-val">2 GB</span>
+                                            </div>
+                                            <div class="spec-gauge">
+                                                <div class="gauge-fill"></div>
+                                            </div>
+                                        </div>
+                                        <div class="pod-foot">
+                                            <span class="status-dot"></span>
+                                            <span class="foot-text">Scale-Out Pod</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pod #4: Horizontal Replica 4 (Scales Out on Step 3) -->
+                                <div class="docker-pod pod-replica replica-4" id="pod-4">
+                                    <div class="pod-body">
+                                        <div class="pod-header">
+                                            <div class="pod-title-wrap">
+                                                <span class="pod-icon">🐳</span>
+                                                <span class="pod-name">web-service-4</span>
+                                            </div>
+                                            <span class="pod-status-chip chip-replica">Replica #4</span>
+                                        </div>
+                                        <div class="pod-spec-box">
+                                            <div class="spec-row">
+                                                <span class="spec-label">CPU:</span>
+                                                <span class="spec-val">1 vCPU</span>
+                                            </div>
+                                            <div class="spec-row">
+                                                <span class="spec-label">RAM:</span>
+                                                <span class="spec-val">2 GB</span>
+                                            </div>
+                                            <div class="spec-gauge">
+                                                <div class="gauge-fill"></div>
+                                            </div>
+                                        </div>
+                                        <div class="pod-foot">
+                                            <span class="status-dot"></span>
+                                            <span class="foot-text">Scale-Out Pod</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Caption -->
+                    <div class="caption reveal">
+                        <h3>ELASTICITY & CAPACITY MANAGEMENT</h3>
+                        <h2>오토스케일링 4대 메커니즘 (Vertical vs Horizontal)</h2>
+                        <p>단일 인스턴스의 하드웨어 스펙을 높이는 <span class="highlight">Scale-Up/Down(수직)</span>과 클러스터에 컨테이너를 복제·회수하는 <span class="highlight">Scale-Out/In(수평)</span>의 핵심 원리입니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 2.10: AWS Region & Availability Zones (AZ) Clustered DC -->
+            <section class="slide">
+                <div class="slide-content">
+                    <div class="central-diagram">
+                        <div class="az-region-box">
+                            <div class="az-region-header">
+                                <div class="az-region-title">
+                                    <span>🇰🇷 AWS 서울 리전 (Region: ap-northeast-2)</span>
+                                </div>
+                                <div class="az-badge">지리적 데이터센터 그룹 (12 Secret Data Centers)</div>
+                            </div>
+
+                            <div class="az-grid-4">
+                                <!-- AZ-a -->
+                                <div class="az-group-card step-item">
+                                    <div class="az-group-title">
+                                        <span>🏢 AZ-a (ap-northeast-2a)</span>
+                                        <span style="font-size: 12px; font-weight: normal;">독립 전력 & 냉각 ⚡</span>
+                                    </div>
+                                    <div class="az-dc-nodes">
+                                        <div class="az-dc-item">🏢 서초 Data Center</div>
+                                        <div class="az-dc-item">🏢 송파 Data Center</div>
+                                        <div class="az-dc-item">🏢 하남 Data Center</div>
+                                    </div>
+                                </div>
+
+                                <!-- AZ-b -->
+                                <div class="az-group-card step-item">
+                                    <div class="az-group-title">
+                                        <span>🏢 AZ-b (ap-northeast-2b)</span>
+                                        <span style="font-size: 12px; font-weight: normal;">독립 전력 & 냉각 ⚡</span>
+                                    </div>
+                                    <div class="az-dc-nodes">
+                                        <div class="az-dc-item">🏢 마포 Data Center</div>
+                                        <div class="az-dc-item">🏢 일산 Data Center</div>
+                                        <div class="az-dc-item">🏢 목동 Data Center</div>
+                                    </div>
+                                </div>
+
+                                <!-- AZ-c -->
+                                <div class="az-group-card step-item">
+                                    <div class="az-group-title">
+                                        <span>🏢 AZ-c (ap-northeast-2c)</span>
+                                        <span style="font-size: 12px; font-weight: normal;">독립 전력 & 냉각 ⚡</span>
+                                    </div>
+                                    <div class="az-dc-nodes">
+                                        <div class="az-dc-item">🏢 분당 Data Center</div>
+                                        <div class="az-dc-item">🏢 판교 Data Center</div>
+                                        <div class="az-dc-item">🏢 용인 Data Center</div>
+                                    </div>
+                                </div>
+
+                                <!-- AZ-d -->
+                                <div class="az-group-card step-item">
+                                    <div class="az-group-title">
+                                        <span>🏢 AZ-d (ap-northeast-2d)</span>
+                                        <span style="font-size: 12px; font-weight: normal;">독립 전력 & 냉각 ⚡</span>
+                                    </div>
+                                    <div class="az-dc-nodes">
+                                        <div class="az-dc-item">🏢 평택 Data Center</div>
+                                        <div class="az-dc-item">🏢 인천 Data Center</div>
+                                        <div class="az-dc-item">🏢 광진 Data Center</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 5 & Step 6 Focus Containers -->
+                            <div class="az-single-focus step-item">
+                                <div class="az-group-title" style="color: #4ade80; font-size: 18px;">
+                                    <span>🏢 선택된 가용영역: AZ-a (ap-northeast-2a)</span>
+                                    <span style="font-size: 13px; font-weight: normal; color: #fff;">독립 전력/냉각 데이터센터 그룹
+                                        ⚡</span>
+                                </div>
+
+                                <div class="az-dc-nodes" style="justify-content: flex-start; gap: 20px;">
+                                    <div class="az-dc-item"
+                                        style="border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.15);">
+                                        🏢 서초 DC</div>
+                                    <div class="az-dc-item"
+                                        style="border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.15);">
+                                        🏢 송파 DC</div>
+                                    <div class="az-dc-item"
+                                        style="border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.15);">
+                                        🏢 하남 DC</div>
+                                </div>
+
+                                <!-- Step 6: VPC Box -->
+                                <div class="vpc-box step-item">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span
+                                            style="font-family: var(--font-display); font-size: 18px; font-weight: bold; color: var(--primary);">🔒
+                                            AWS VPC (Virtual Private Cloud - 10.0.0.0/16)</span>
+                                        <span
+                                            style="font-size: 12px; color: #fff; background: rgba(218,31,61,0.2); padding: 4px 10px; border-radius: 10px; border: 1px solid var(--primary);">독립
+                                            격리 네트워크 영역</span>
+                                    </div>
+
+                                    <div
+                                        style="display: flex; justify-content: space-around; gap: 15px; margin-top: 10px;">
+                                        <div
+                                            style="flex: 1; border: 1px dashed rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; background: rgba(255,255,255,0.03); text-align: center;">
+                                            <div style="font-weight: bold; color: #93c5fd; font-size: 14px;">🌐 Public
+                                                Subnet</div>
+                                            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">IGW
+                                                / ALB / Bastion</div>
+                                        </div>
+                                        <div
+                                            style="flex: 1; border: 1px dashed rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; background: rgba(255,255,255,0.03); text-align: center;">
+                                            <div style="font-weight: bold; color: #4ade80; font-size: 14px;">🔒 Private
+                                                Subnet</div>
+                                            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">EKS
+                                                Pods / Microservices</div>
+                                        </div>
+                                        <div
+                                            style="flex: 1; border: 1px dashed rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; background: rgba(255,255,255,0.03); text-align: center;">
+                                            <div style="font-weight: bold; color: #fca5a5; font-size: 14px;">🛡️
+                                                Isolated Subnet</div>
+                                            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">RDS
+                                                DB / Storage</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="caption reveal">
+                        <h3>AWS GLOBAL INFRASTRUCTURE & SCALE-OUT</h3>
+                        <h2>Region & Availability Zone (AZ)</h2>
+                        <p>서울 리전 내 비공개 데이터센터들을 묶어 <span class="highlight">총 4개의 독립 가용영역(AZ-a, b, c, d)으로 클러스터링</span>하여 물리적 재해를 차단합니다.<br>
+                        수평 확장(Scale Out) 자원을 즉시 탄력적으로 공급하는 <span class="highlight">클라우드 인프라</span>가 뒷받침되면서, 컨테이너 기반 <strong>MSA 아키텍처</strong>가 본격적으로 각광받게 되었습니다.</p>
+                    </div>
+                </div>
+            </section>
+
             <!-- Slide 2.9: API Gateway Path Routing & Dynamic Load Balancing -->
             <section class="slide">
                 <div class="slide-content">
@@ -6397,6 +7445,221 @@
  <p>요청 URL 경로(<span class="highlight">/search</span>)별로 마이크로서비스를 자동 바인딩하며, <span
  class="highlight">서치 서비스 부하 폭주 시 해당 경로만 독자적으로 오토스케일링 및 동적 로드밸런싱</span>을 수행합니다.</p>
  </div>
+                </div>
+            </section>
+
+
+<!-- Slide 2.92: Full MSA End-to-End Architecture (Boxless, Fluid Wires, 1-Line Labels) -->
+            <section class="slide">
+                <div class="slide-content" style="justify-content: center; align-items: center; padding: 15px; width: 100%; height: 100%;">
+                    <div class="arch-fullscreen-stage">
+                        
+                        <!-- SVG Wiring Connectors -->
+                        <svg class="arch-wires-svg" viewBox="0 0 1580 680">
+                            <defs>
+                                <marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                    <polygon points="0 0, 8 4, 0 8" fill="#38bdf8" />
+                                </marker>
+                                <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                    <polygon points="0 0, 8 4, 0 8" fill="#4ade80" />
+                                </marker>
+                                <marker id="arrow-red" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                    <polygon points="0 0, 8 4, 0 8" fill="#f43f5e" />
+                                </marker>
+                                <marker id="arrow-rust" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                    <polygon points="0 0, 8 4, 0 8" fill="#f97316" />
+                                </marker>
+                                <marker id="arrow-go" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                    <polygon points="0 0, 8 4, 0 8" fill="#06b6d4" />
+                                </marker>
+                                <marker id="arrow-python" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                    <polygon points="0 0, 8 4, 0 8" fill="#eab308" />
+                                </marker>
+                                <marker id="arrow-java" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                    <polygon points="0 0, 8 4, 0 8" fill="#ef4444" />
+                                </marker>
+                            </defs>
+
+                            <!-- Wire 1: User -> Web Server -->
+                            <path d="M 190 340 L 320 340" class="wire-glow" stroke="#38bdf8" />
+                            <path d="M 190 340 L 320 340" class="wire-path" stroke="#38bdf8" marker-end="url(#arrow-blue)" />
+
+                            <!-- Wire 2: Web Server -> API Gateway -->
+                            <path d="M 510 340 L 630 340" class="wire-glow" stroke="#4ade80" />
+                            <path d="M 510 340 L 630 340" class="wire-path" stroke="#4ade80" marker-end="url(#arrow-green)" />
+
+                            <!-- Wire 3-1: API Gateway -> Rust Order Service -->
+                            <path d="M 800 340 C 860 340, 880 95, 940 95" class="wire-glow" stroke="#f97316" />
+                            <path d="M 800 340 C 860 340, 880 95, 940 95" class="wire-path" stroke="#f97316" marker-end="url(#arrow-rust)" />
+
+                            <!-- Wire 3-2: API Gateway -> Go Auth Service -->
+                            <path d="M 800 340 C 860 340, 880 255, 940 255" class="wire-glow" stroke="#06b6d4" />
+                            <path d="M 800 340 C 860 340, 880 255, 940 255" class="wire-path" stroke="#06b6d4" marker-end="url(#arrow-go)" />
+
+                            <!-- Wire 3-3: API Gateway -> Python AI Service -->
+                            <path d="M 800 340 C 860 340, 880 415, 940 415" class="wire-glow" stroke="#eab308" />
+                            <path d="M 800 340 C 860 340, 880 415, 940 415" class="wire-path" stroke="#eab308" marker-end="url(#arrow-python)" />
+
+                            <!-- Wire 3-4: API Gateway -> Java Billing Service -->
+                            <path d="M 800 340 C 860 340, 880 575, 940 575" class="wire-glow" stroke="#ef4444" />
+                            <path d="M 800 340 C 860 340, 880 575, 940 575" class="wire-path" stroke="#ef4444" marker-end="url(#arrow-java)" />
+
+                            <!-- Wire 4-1: Rust Service -> Redis -->
+                            <path d="M 1210 95 L 1290 95" class="wire-glow" stroke="#f87171" />
+                            <path d="M 1210 95 L 1290 95" class="wire-path" stroke="#f87171" marker-end="url(#arrow-rust)" />
+
+                            <!-- Wire 4-2: Go Service -> PostgreSQL -->
+                            <path d="M 1210 255 L 1290 255" class="wire-glow" stroke="#60a5fa" />
+                            <path d="M 1210 255 L 1290 255" class="wire-path" stroke="#60a5fa" marker-end="url(#arrow-go)" />
+
+                            <!-- Wire 4-3: Python Service -> Vector DB -->
+                            <path d="M 1235 415 L 1290 415" class="wire-glow" stroke="#c084fc" />
+                            <path d="M 1235 415 L 1290 415" class="wire-path" stroke="#c084fc" marker-end="url(#arrow-python)" />
+
+                            <!-- Wire 4-4: Java Service -> Oracle DB -->
+                            <path d="M 1210 575 L 1290 575" class="wire-glow" stroke="#fb923c" />
+                            <path d="M 1210 575 L 1290 575" class="wire-path" stroke="#fb923c" marker-end="url(#arrow-java)" />
+
+                            <!-- Step Item: EKS / ECS Dashed Grouping Boundary (Animated on Click) -->
+                            <g class="eks-ecs-boundary step-item">
+                                <!-- Dashed Neon Bounding Box covering all 4 services -->
+                                <rect x="910" y="30" width="340" height="605" rx="22" ry="22" 
+                                      fill="rgba(6, 182, 212, 0.04)" 
+                                      stroke="#06b6d4" stroke-width="2.5" 
+                                      class="eks-dashed-rect" />
+                                
+                                <!-- Floating Label on top of bounding box: EKS / ECS -->
+                                <g transform="translate(945, 30)">
+                                    <rect x="-10" y="-18" width="138" height="36" rx="18" fill="#090d16" stroke="#06b6d4" stroke-width="2" />
+                                    <text x="59" y="6" fill="#67e8f9" font-size="16" font-weight="900" text-anchor="middle" letter-spacing="1">EKS / ECS</text>
+                                </g>
+                            </g>
+                        </svg>
+
+                        <!-- Floating Wire Labels -->
+                        <div class="wire-tag" style="left: 255px; top: 310px; background: rgba(15, 23, 42, 0.9); border: 1px solid #38bdf8; color: #7dd3fc;">
+                            접속 트래픽
+                        </div>
+                        <div class="wire-tag" style="left: 570px; top: 310px; background: rgba(15, 23, 42, 0.9); border: 1px solid #4ade80; color: #86efac;">
+                            동적 API 호출
+                        </div>
+
+                        <!-- Node 1: User -->
+                        <div class="arch-node arch-node-lg" style="left: 60px; top: 275px; width: 130px;">
+                            <div class="arch-node-icon" style="color: #38bdf8;">👤</div>
+                            <div class="arch-node-name">User</div>
+                            <div class="arch-node-sub" style="color: #7dd3fc;">Client Browser</div>
+                        </div>
+
+                        <!-- Node 2: Web Server -->
+                        <div class="arch-node arch-node-lg" style="left: 320px; top: 275px; width: 190px;">
+                            <div class="arch-node-icon" style="color: #4ade80;">🌐</div>
+                            <div class="arch-node-name">Web Server</div>
+                            <div class="arch-node-sub" style="color: #86efac;">정적 페이지 서빙</div>
+                        </div>
+
+                        <!-- Node 3: API Gateway -->
+                        <div class="arch-node arch-node-lg" style="left: 630px; top: 275px; width: 170px;">
+                            <div class="arch-node-icon" style="color: #f43f5e;">🛡️</div>
+                            <div class="arch-node-name">API Gateway</div>
+                            <div class="arch-node-sub" style="color: #fda4af;">인증 & 라우팅</div>
+                        </div>
+
+                        <!-- 4 Polyglot Container Services -->
+                        <!-- Service 1: Rust Order -->
+                        <div class="arch-node arch-node-sm" style="left: 940px; top: 60px;">
+                            <div class="arch-node-icon" style="color: #f97316;">🐳</div>
+                            <div class="arch-node-sm-content">
+                                <div class="arch-node-sm-name">
+                                    <span>주문 서비스</span>
+                                    <span class="lang-pill pill-rust">Rust</span>
+                                </div>
+                                <div class="arch-node-sm-sub">Order Container</div>
+                            </div>
+                        </div>
+
+                        <!-- Service 2: Go Auth -->
+                        <div class="arch-node arch-node-sm" style="left: 940px; top: 220px;">
+                            <div class="arch-node-icon" style="color: #06b6d4;">🐳</div>
+                            <div class="arch-node-sm-content">
+                                <div class="arch-node-sm-name">
+                                    <span>인증 서비스</span>
+                                    <span class="lang-pill pill-go">Go</span>
+                                </div>
+                                <div class="arch-node-sm-sub">Auth Container</div>
+                            </div>
+                        </div>
+
+                        <!-- Service 3: Python AI -->
+                        <div class="arch-node arch-node-sm" style="left: 940px; top: 380px;">
+                            <div class="arch-node-icon" style="color: #eab308;">🐳</div>
+                            <div class="arch-node-sm-content">
+                                <div class="arch-node-sm-name">
+                                    <span>AI 추천 서비스</span>
+                                    <span class="lang-pill pill-python">Python</span>
+                                </div>
+                                <div class="arch-node-sm-sub">AI Container</div>
+                            </div>
+                        </div>
+
+                        <!-- Service 4: Java Billing -->
+                        <div class="arch-node arch-node-sm" style="left: 940px; top: 540px;">
+                            <div class="arch-node-icon" style="color: #ef4444;">🐳</div>
+                            <div class="arch-node-sm-content">
+                                <div class="arch-node-sm-name">
+                                    <span>정산 서비스</span>
+                                    <span class="lang-pill pill-java">Java</span>
+                                </div>
+                                <div class="arch-node-sm-sub">Billing Container</div>
+                            </div>
+                        </div>
+
+                        <!-- 4 Dedicated Databases -->
+                        <!-- DB 1: Redis -->
+                        <div class="arch-node arch-node-sm" style="left: 1290px; top: 60px;">
+                            <div class="arch-node-icon" style="color: #f87171;">⚡</div>
+                            <div class="arch-node-sm-content">
+                                <div class="arch-node-sm-name">
+                                    <span>Redis</span>
+                                </div>
+                                <div class="arch-node-sm-sub" style="color: #fca5a5;">In-Memory Cache</div>
+                            </div>
+                        </div>
+
+                        <!-- DB 2: PostgreSQL -->
+                        <div class="arch-node arch-node-sm" style="left: 1290px; top: 220px;">
+                            <div class="arch-node-icon" style="color: #60a5fa;">🐘</div>
+                            <div class="arch-node-sm-content">
+                                <div class="arch-node-sm-name">
+                                    <span>PostgreSQL</span>
+                                </div>
+                                <div class="arch-node-sm-sub" style="color: #93c5fd;">RDBMS</div>
+                            </div>
+                        </div>
+
+                        <!-- DB 3: Vector DB -->
+                        <div class="arch-node arch-node-sm" style="left: 1290px; top: 380px;">
+                            <div class="arch-node-icon" style="color: #c084fc;">🔮</div>
+                            <div class="arch-node-sm-content">
+                                <div class="arch-node-sm-name">
+                                    <span>Vector DB</span>
+                                </div>
+                                <div class="arch-node-sm-sub" style="color: #d8b4fe;">Milvus / Embedding</div>
+                            </div>
+                        </div>
+
+                        <!-- DB 4: Oracle DB -->
+                        <div class="arch-node arch-node-sm" style="left: 1290px; top: 540px;">
+                            <div class="arch-node-icon" style="color: #fb923c;">🏛️</div>
+                            <div class="arch-node-sm-content">
+                                <div class="arch-node-sm-name">
+                                    <span>Oracle DB</span>
+                                </div>
+                                <div class="arch-node-sm-sub" style="color: #fdba74;">Enterprise RDBMS</div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </section>
 
@@ -6680,140 +7943,6 @@
                         <h2>관리 포인트의 급증 ➔ 공격 표면(Attack Surface)의 기하급수적 확대</h2>
                         <p>과거 온프레미스는 <span class="highlight">외곽 단일 방화벽</span>만 통제하면 안전했으나,<br><span class="highlight">하이브리드 클라우드와 수많은 MSA·API 엔드포인트</span>로 연결되면서,<br><span class="red-text">해커가 침투할 수 있는 접점(공격 표면)이 전방위로 폭증</span>하여 입체적인 제로 트러스트 보안 체계가 필수적입니다.</p>
                     </div>
-                </div>
-            </section>
-
-            <!-- Slide 2.10: AWS Region & Availability Zones (AZ) Clustered DC -->
-            <section class="slide">
-                <div class="slide-content">
-                    <div class="central-diagram">
-                        <div class="az-region-box">
-                            <div class="az-region-header">
-                                <div class="az-region-title">
-                                    <span>🇰🇷 AWS 서울 리전 (Region: ap-northeast-2)</span>
-                                </div>
-                                <div class="az-badge">지리적 데이터센터 그룹 (12 Secret Data Centers)</div>
-                            </div>
-
-                            <div class="az-grid-4">
-                                <!-- AZ-a -->
-                                <div class="az-group-card step-item">
-                                    <div class="az-group-title">
-                                        <span>🏢 AZ-a (ap-northeast-2a)</span>
-                                        <span style="font-size: 12px; font-weight: normal;">독립 전력 & 냉각 ⚡</span>
-                                    </div>
-                                    <div class="az-dc-nodes">
-                                        <div class="az-dc-item">🏢 서초 Data Center</div>
-                                        <div class="az-dc-item">🏢 송파 Data Center</div>
-                                        <div class="az-dc-item">🏢 하남 Data Center</div>
-                                    </div>
-                                </div>
-
-                                <!-- AZ-b -->
-                                <div class="az-group-card step-item">
-                                    <div class="az-group-title">
-                                        <span>🏢 AZ-b (ap-northeast-2b)</span>
-                                        <span style="font-size: 12px; font-weight: normal;">독립 전력 & 냉각 ⚡</span>
-                                    </div>
-                                    <div class="az-dc-nodes">
-                                        <div class="az-dc-item">🏢 마포 Data Center</div>
-                                        <div class="az-dc-item">🏢 일산 Data Center</div>
-                                        <div class="az-dc-item">🏢 목동 Data Center</div>
-                                    </div>
-                                </div>
-
-                                <!-- AZ-c -->
-                                <div class="az-group-card step-item">
-                                    <div class="az-group-title">
-                                        <span>🏢 AZ-c (ap-northeast-2c)</span>
-                                        <span style="font-size: 12px; font-weight: normal;">독립 전력 & 냉각 ⚡</span>
-                                    </div>
-                                    <div class="az-dc-nodes">
-                                        <div class="az-dc-item">🏢 분당 Data Center</div>
-                                        <div class="az-dc-item">🏢 판교 Data Center</div>
-                                        <div class="az-dc-item">🏢 용인 Data Center</div>
-                                    </div>
-                                </div>
-
-                                <!-- AZ-d -->
-                                <div class="az-group-card step-item">
-                                    <div class="az-group-title">
-                                        <span>🏢 AZ-d (ap-northeast-2d)</span>
-                                        <span style="font-size: 12px; font-weight: normal;">독립 전력 & 냉각 ⚡</span>
-                                    </div>
-                                    <div class="az-dc-nodes">
-                                        <div class="az-dc-item">🏢 평택 Data Center</div>
-                                        <div class="az-dc-item">🏢 인천 Data Center</div>
-                                        <div class="az-dc-item">🏢 광진 Data Center</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Step 5 & Step 6 Focus Containers -->
-                            <div class="az-single-focus step-item">
-                                <div class="az-group-title" style="color: #4ade80; font-size: 18px;">
-                                    <span>🏢 선택된 가용영역: AZ-a (ap-northeast-2a)</span>
-                                    <span style="font-size: 13px; font-weight: normal; color: #fff;">독립 전력/냉각 데이터센터 그룹
-                                        ⚡</span>
-                                </div>
-
-                                <div class="az-dc-nodes" style="justify-content: flex-start; gap: 20px;">
-                                    <div class="az-dc-item"
-                                        style="border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.15);">
-                                        🏢 서초 DC</div>
-                                    <div class="az-dc-item"
-                                        style="border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.15);">
-                                        🏢 송파 DC</div>
-                                    <div class="az-dc-item"
-                                        style="border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.15);">
-                                        🏢 하남 DC</div>
-                                </div>
-
-                                <!-- Step 6: VPC Box -->
-                                <div class="vpc-box step-item">
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span
-                                            style="font-family: var(--font-display); font-size: 18px; font-weight: bold; color: var(--primary);">🔒
-                                            AWS VPC (Virtual Private Cloud - 10.0.0.0/16)</span>
-                                        <span
-                                            style="font-size: 12px; color: #fff; background: rgba(218,31,61,0.2); padding: 4px 10px; border-radius: 10px; border: 1px solid var(--primary);">독립
-                                            격리 네트워크 영역</span>
-                                    </div>
-
-                                    <div
-                                        style="display: flex; justify-content: space-around; gap: 15px; margin-top: 10px;">
-                                        <div
-                                            style="flex: 1; border: 1px dashed rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; background: rgba(255,255,255,0.03); text-align: center;">
-                                            <div style="font-weight: bold; color: #93c5fd; font-size: 14px;">🌐 Public
-                                                Subnet</div>
-                                            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">IGW
-                                                / ALB / Bastion</div>
-                                        </div>
-                                        <div
-                                            style="flex: 1; border: 1px dashed rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; background: rgba(255,255,255,0.03); text-align: center;">
-                                            <div style="font-weight: bold; color: #4ade80; font-size: 14px;">🔒 Private
-                                                Subnet</div>
-                                            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">EKS
-                                                Pods / Microservices</div>
-                                        </div>
-                                        <div
-                                            style="flex: 1; border: 1px dashed rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; background: rgba(255,255,255,0.03); text-align: center;">
-                                            <div style="font-weight: bold; color: #fca5a5; font-size: 14px;">🛡️
-                                                Isolated Subnet</div>
-                                            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">RDS
-                                                DB / Storage</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption reveal">
- <h3>AWS GLOBAL INFRASTRUCTURE</h3>
- <h2>Region & Availability Zone (AZ)</h2>
- <p>서울 리전 내 비공개 데이터센터들을 묶어 <span class="highlight">총 4개의 독립 가용영역(AZ-a, b, c, d)으로 클러스터링</span>하여
- 물리적 재해를 완벽 차단합니다.</p>
- </div>
                 </div>
             </section>
 
@@ -9056,6 +10185,24 @@
                         this.next();
                     }
                 });
+
+                document.querySelectorAll('.scale-nav-card').forEach(card => {
+                    card.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const targetStep = parseInt(card.getAttribute('data-step-target'), 10);
+                        const slideEl = document.getElementById('slide-autoscaling');
+                        if (!slideEl) return;
+                        const steps = slideEl.querySelectorAll('.scale-step-controller .step-item');
+                        steps.forEach((st, idx) => {
+                            if (idx < targetStep) {
+                                st.classList.add('step-active');
+                            } else {
+                                st.classList.remove('step-active');
+                            }
+                        });
+                        this.updateSlideStepState(slideEl);
+                    });
+                });
             }
 
             next() {
@@ -9116,6 +10263,14 @@
                 } else {
                     slideEl.removeAttribute('data-pipe-step');
                 }
+
+                // Slide 8 (Auto-Scaling 4-Axis) 4-Step Animations
+                const scaleSteps = slideEl.querySelectorAll('.scale-step-controller .step-item.step-active');
+                if (scaleSteps.length > 0) {
+                    slideEl.setAttribute('data-scale-step', scaleSteps.length.toString());
+                } else {
+                    slideEl.removeAttribute('data-scale-step');
+                }
             }
 
             showSlide(index) {
@@ -9126,6 +10281,7 @@
                         slide.classList.remove('r2-active', 'r3-active', 'steps-dimmed');
                         slide.querySelectorAll('.step-item').forEach(step => step.classList.remove('step-active'));
                         slide.removeAttribute('data-pipe-step');
+                        slide.removeAttribute('data-scale-step');
 
                         // Reset animations by forcing reflow
                         const animatedElements = slide.querySelectorAll('[class*="anim-"]');

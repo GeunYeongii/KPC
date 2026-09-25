@@ -1,0 +1,33 @@
+# IDE & Agent files
+.agent/
+.frontend-slides/
+.vscode/
+.idea/
+.playwright-mcp/
+
+# Document & Temporary text files
+*.pdf
+*.txt
+*.md
+!kpc_infrastructure_review_feedback.md
+!README.md
+
+# Image assets (only if not intended to be tracked)
+*.png
+*.jpg
+*.jpeg
+*.svg
+AI 이미지/
+인프라.png
+vpc_architecture.png
+
+# Backup and old directories
+Old/
+backup/
+규모 산정/
+기술 평가 관련/
+클라우드 관련/
+
+# OS generated files
+.DS_Store
+Thumbs.db
