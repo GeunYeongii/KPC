@@ -6556,9 +6556,23 @@
 
         @keyframes laserStream {
             0% {
-                stroke-dasho
+                stroke-dashoffset: 28;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
 
-                /* ==========================================================================
+        @keyframes laserStreamReverse {
+            0% {
+                stroke-dashoffset: 0;
+            }
+            100% {
+                stroke-dashoffset: 28;
+            }
+        }
+
+        /* ==========================================================================
            Slide 1.5: High-End Minimalist Word Cloud (Presentation Focus & Grayed Background)
            ========================================================================== */
                 .wc-pure-stage {
@@ -6639,6 +6653,378 @@
                     filter: drop-shadow(0 0 25px var(--glow-color, rgba(255, 77, 109, 0.85))) drop-shadow(0 0 6px #ffffff) !important;
                     z-index: 99;
                 }
+/* -------------------------------------------
+           Slide 2.98: AWS IAM (Identity & Access Management) Boxless & Fluid
+           ------------------------------------------- */
+        .iam-fullscreen-stage {
+            width: 1580px;
+            max-width: 96vw;
+            height: 680px;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .iam-stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            margin-bottom: 16px;
+        }
+
+        .iam-stage-title {
+            font-size: 24px;
+            font-weight: 800;
+            font-family: var(--font-display);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .iam-stage-badges {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .iam-badge {
+            font-size: 13px;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        .iam-badge-auth {
+            background: rgba(56, 189, 248, 0.18);
+            border: 1px solid rgba(56, 189, 248, 0.5);
+            color: #7dd3fc;
+        }
+
+        .iam-badge-policy {
+            background: rgba(245, 158, 11, 0.18);
+            border: 1px solid rgba(245, 158, 11, 0.5);
+            color: #fcd34d;
+        }
+
+        .iam-badge-least {
+            background: rgba(74, 222, 128, 0.18);
+            border: 1px solid rgba(74, 222, 128, 0.5);
+            color: #86efac;
+        }
+
+        /* IAM Canvas Stage */
+        .iam-main-canvas {
+            position: relative;
+            width: 100%;
+            height: 600px;
+        }
+
+        /* SVG Wire Canvas */
+        .iam-wires-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .iam-wire-base {
+            fill: none;
+            stroke-width: 2.5;
+            stroke-dasharray: 8 6;
+            animation: iamWireFlow 1.4s linear infinite;
+        }
+
+        .iam-wire-glow {
+            fill: none;
+            stroke-width: 6;
+            opacity: 0.35;
+        }
+
+        @keyframes iamWireFlow {
+            from { stroke-dashoffset: 28; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Flow Indicators */
+        .iam-wire-tag {
+            position: absolute;
+            z-index: 2;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 16px;
+            letter-spacing: -0.01em;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Node Structure (Boxless & Pure Content) */
+        .iam-node {
+            position: absolute;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            white-space: nowrap;
+            transition: transform 0.25s ease;
+        }
+
+        .iam-node:hover {
+            transform: scale(1.04);
+        }
+
+        .iam-node-icon {
+            font-size: 40px;
+            line-height: 1;
+            filter: drop-shadow(0 0 14px currentColor);
+        }
+
+        .iam-node-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .iam-node-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        .iam-node-sub {
+            font-size: 13px;
+            font-weight: 700;
+            color: #94a3b8;
+            white-space: nowrap;
+        }
+
+        /* Column Headers (Category Label) */
+        .iam-col-label {
+            position: absolute;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 8px;
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        /* Center IAM Core Control Tower */
+        .iam-core-center {
+            position: absolute;
+            left: 580px;
+            top: 70px;
+            width: 420px;
+            height: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 4;
+            text-align: center;
+        }
+
+        .iam-core-shield-wrap {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .iam-shield-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2.5px dashed #f59e0b;
+            box-shadow: 0 0 35px rgba(245, 158, 11, 0.35), inset 0 0 25px rgba(245, 158, 11, 0.15);
+            animation: ringRotate 15s linear infinite;
+        }
+
+        .iam-shield-ring-outer {
+            position: absolute;
+            inset: -14px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(56, 189, 248, 0.35);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+            animation: ringRotateRev 22s linear infinite;
+        }
+
+        @keyframes ringRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes ringRotateRev {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        .iam-core-icon {
+            font-size: 68px;
+            line-height: 1;
+            filter: drop-shadow(0 0 20px #f59e0b);
+            animation: shieldPulse 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes shieldPulse {
+            from { transform: scale(1); filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.6)); }
+            to { transform: scale(1.08); filter: drop-shadow(0 0 28px rgba(245, 158, 11, 0.95)); }
+        }
+
+        .iam-core-title {
+            font-size: 26px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+        }
+
+        .iam-core-desc {
+            font-size: 13.5px;
+            color: #cbd5e1;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 14px;
+        }
+
+        .iam-policy-card {
+            background: rgba(15, 23, 42, 0.92);
+            border: 1.5px solid rgba(245, 158, 11, 0.5);
+            border-radius: 14px;
+            padding: 10px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.15);
+            text-align: left;
+            width: 340px;
+        }
+
+        .iam-policy-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12.5px;
+            font-weight: 700;
+        }
+
+        /* -------------------------------------------
+           Slide 2.98: AWS IAM Smooth Sequential Flow Animation (1-Click Trigger)
+           ------------------------------------------- */
+        /* 1) ALLOW & DENY Dynamic Wires */
+        .iam-wire-allow, .iam-wire-deny {
+            opacity: 0;
+            transition: opacity 0.45s ease 0.15s;
+        }
+        .iam-main-canvas.step-active .iam-wire-allow,
+        .iam-main-canvas.step-active .iam-wire-deny {
+            opacity: 1 !important;
+        }
+
+        /* 2) Policy Row Highlights */
+        .policy-allow-row, .policy-deny-row {
+            transition: all 0.4s ease 0.22s;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+        .iam-main-canvas.step-active .policy-allow-row {
+            background: rgba(74, 222, 128, 0.18);
+            border-left: 3px solid #4ade80;
+        }
+        .iam-main-canvas.step-active .policy-deny-row {
+            background: rgba(244, 63, 94, 0.18);
+            border-left: 3px solid #f43f5e;
+        }
+
+        /* 3) ALLOW & DENY Badges (Spring Pop with Delay) */
+        .decision-badge-allow {
+            background: rgba(74, 222, 128, 0.2);
+            border: 1.5px solid #4ade80;
+            color: #86efac;
+            font-size: 13px;
+            font-weight: 900;
+            padding: 4px 12px;
+            border-radius: 20px;
+            box-shadow: 0 0 16px rgba(74, 222, 128, 0.5);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            transform: scale(0.65);
+            transition: opacity 0.4s ease 0.38s, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.38s;
+        }
+        .iam-main-canvas.step-active .decision-badge-allow {
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+
+        .decision-badge-deny {
+            background: rgba(244, 63, 94, 0.2);
+            border: 1.5px solid #f43f5e;
+            color: #fda4af;
+            font-size: 13px;
+            font-weight: 900;
+            padding: 4px 12px;
+            border-radius: 20px;
+            box-shadow: 0 0 16px rgba(244, 63, 94, 0.5);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            transform: scale(0.65);
+            transition: opacity 0.4s ease 0.38s, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.38s;
+        }
+        .iam-main-canvas.step-active .decision-badge-deny {
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+
+        /* 4) Principle of Least Privilege Banner (Smooth Slide-Up) */
+        .iam-least-banner {
+            opacity: 0;
+            transform: translateY(12px) scale(0.96);
+            transition: opacity 0.5s ease 0.55s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.55s;
+        }
+        .iam-main-canvas.step-active .iam-least-banner {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) !important;
+        }
+
+        /* 5) Core Shield Enhanced Glow */
+        .iam-main-canvas.step-active .iam-core-icon {
+            filter: drop-shadow(0 0 35px #f59e0b) drop-shadow(0 0 15px #4ade80);
+            transform: scale(1.1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+        }
+
     </style>
 </head>
 
@@ -7942,6 +8328,222 @@
                         <h3>EXPANDED ATTACK SURFACE & HYBRID SECURITY</h3>
                         <h2>관리 포인트의 급증 ➔ 공격 표면(Attack Surface)의 기하급수적 확대</h2>
                         <p>과거 온프레미스는 <span class="highlight">외곽 단일 방화벽</span>만 통제하면 안전했으나,<br><span class="highlight">하이브리드 클라우드와 수많은 MSA·API 엔드포인트</span>로 연결되면서,<br><span class="red-text">해커가 침투할 수 있는 접점(공격 표면)이 전방위로 폭증</span>하여 입체적인 제로 트러스트 보안 체계가 필수적입니다.</p>
+                    </div>
+                </div>
+            </section>
+
+<!-- Slide 2.98: AWS IAM (Identity and Access Management & Least Privilege) -->
+            <section class="slide">
+                <div class="slide-content" style="justify-content: center; align-items: center; padding: 15px; width: 100%; height: 100%;">
+                    <div class="iam-fullscreen-stage">
+                        <!-- Top Header -->
+                        <div class="iam-stage-header">
+                            <div class="iam-stage-title">
+                                <span>🛡️ AWS IAM (Identity & Access Management) 핵심 원리</span>
+                            </div>
+                            <div class="iam-stage-badges">
+                                <div class="iam-badge iam-badge-auth">🔑 Who (식별/인증)</div>
+                                <div class="iam-badge iam-badge-policy">📜 Policy (인가/권한 정책)</div>
+                                <div class="iam-badge iam-badge-least">⚖️ Least Privilege (최소 권한의 원칙)</div>
+                            </div>
+                        </div>
+
+                        <!-- Main Canvas (Single 1-Click Sequence Trigger) -->
+                        <div class="iam-main-canvas step-item">
+                            
+                            <!-- Column 1 Header -->
+                            <div class="iam-col-label" style="left: 70px; top: 10px; background: rgba(56, 189, 248, 0.15); border: 1px solid #38bdf8; color: #7dd3fc;">
+                                ① 요청 주체 (Who: Principals)
+                            </div>
+
+                            <!-- Column 3 Header -->
+                            <div class="iam-col-label" style="left: 1220px; top: 10px; background: rgba(168, 85, 247, 0.15); border: 1px solid #a855f7; color: #d8b4fe;">
+                                ③ 클라우드 자원 (What: Resources)
+                            </div>
+
+                            <!-- SVG Wiring Connectors -->
+                            <svg class="iam-wires-svg" viewBox="0 0 1580 600">
+                                <defs>
+                                    <marker id="iam-arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                        <polygon points="0 0, 8 4, 0 8" fill="#38bdf8" />
+                                    </marker>
+                                    <marker id="iam-arrow-green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                        <polygon points="0 0, 8 4, 0 8" fill="#4ade80" />
+                                    </marker>
+                                    <marker id="iam-arrow-red" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                        <polygon points="0 0, 8 4, 0 8" fill="#f43f5e" />
+                                    </marker>
+                                </defs>
+
+                                <!-- Inflow Wires: Principals -> Central IAM Core (580, 270) -->
+                                <!-- Wire: User -> IAM Core -->
+                                <path d="M 330 95 C 450 95, 480 270, 580 270" class="iam-wire-glow" stroke="#38bdf8" />
+                                <path d="M 330 95 C 450 95, 480 270, 580 270" class="iam-wire-base" stroke="#38bdf8" marker-end="url(#iam-arrow-blue)" />
+
+                                <!-- Wire: App Pod -> IAM Core -->
+                                <path d="M 330 270 L 580 270" class="iam-wire-glow" stroke="#06b6d4" />
+                                <path d="M 330 270 L 580 270" class="iam-wire-base" stroke="#06b6d4" marker-end="url(#iam-arrow-blue)" />
+
+                                <!-- Wire: CI/CD -> IAM Core -->
+                                <path d="M 330 445 C 450 445, 480 270, 580 270" class="iam-wire-glow" stroke="#f59e0b" />
+                                <path d="M 330 445 C 450 445, 480 270, 580 270" class="iam-wire-base" stroke="#f59e0b" marker-end="url(#iam-arrow-blue)" />
+
+                                <!-- Outflow Neutral Wires: IAM Core (1000, 270) -> Resources -->
+                                <!-- Core -> S3 -->
+                                <path d="M 1000 270 C 1100 270, 1120 95, 1220 95" class="iam-wire-glow" stroke="#a855f7" />
+                                <path d="M 1000 270 C 1100 270, 1120 95, 1220 95" class="iam-wire-base" stroke="#a855f7" />
+
+                                <!-- Core -> RDS -->
+                                <path d="M 1000 270 C 1100 270, 1120 225, 1220 225" class="iam-wire-glow" stroke="#a855f7" />
+                                <path d="M 1000 270 C 1100 270, 1120 225, 1220 225" class="iam-wire-base" stroke="#a855f7" />
+
+                                <!-- Core -> EKS -->
+                                <path d="M 1000 270 C 1100 270, 1120 355, 1220 355" class="iam-wire-glow" stroke="#a855f7" />
+                                <path d="M 1000 270 C 1100 270, 1120 355, 1220 355" class="iam-wire-base" stroke="#a855f7" />
+
+                                <!-- Core -> Secrets KMS -->
+                                <path d="M 1000 270 C 1100 270, 1120 485, 1220 485" class="iam-wire-glow" stroke="#a855f7" />
+                                <path d="M 1000 270 C 1100 270, 1120 485, 1220 485" class="iam-wire-base" stroke="#a855f7" />
+
+                                <!-- Dynamic ALLOW Laser Beam (Pod -> S3) -->
+                                <g class="iam-wire-allow">
+                                    <path d="M 1000 270 C 1100 270, 1120 95, 1220 95" stroke="#4ade80" stroke-width="4.5" fill="none" 
+                                          stroke-dasharray="14 8" style="animation: iamWireFlow 0.75s linear infinite; filter: drop-shadow(0 0 16px #4ade80);" marker-end="url(#iam-arrow-green)" />
+                                </g>
+                                
+                                <!-- Dynamic DENY Laser Beam (Pod -> RDS Blocked) -->
+                                <g class="iam-wire-deny">
+                                    <path d="M 1000 270 C 1070 270, 1090 225, 1150 225" stroke="#f43f5e" stroke-width="4.5" fill="none" 
+                                          stroke-dasharray="10 6" style="animation: iamWireFlow 0.75s linear infinite; filter: drop-shadow(0 0 16px #f43f5e);" />
+                                    <!-- Red X Block Barrier with Pulse Ring -->
+                                    <circle cx="1150" cy="225" r="14" fill="#f43f5e" filter="drop-shadow(0 0 14px #f43f5e)" />
+                                    <text x="1150" y="230" fill="#ffffff" font-size="14" font-weight="900" text-anchor="middle">✕</text>
+                                </g>
+                            </svg>
+
+                            <!-- Inflow Wire Labels -->
+                            <div class="iam-wire-tag" style="left: 450px; top: 160px; color: #7dd3fc; border: 1px solid #38bdf8;">
+                                관리자 자격 증명 (MFA)
+                            </div>
+                            <div class="iam-wire-tag" style="left: 450px; top: 250px; color: #67e8f9; border: 1px solid #06b6d4;">
+                                서비스 계정 (IAM Role)
+                            </div>
+                            <div class="iam-wire-tag" style="left: 450px; top: 370px; color: #fcd34d; border: 1px solid #f59e0b;">
+                                자동화 토큰 (OIDC)
+                            </div>
+
+                            <!-- Column 1: Principals (Who) -->
+                            <!-- Node 1: User -->
+                            <div class="iam-node" style="left: 70px; top: 60px;">
+                                <div class="iam-node-icon" style="color: #38bdf8;">👤</div>
+                                <div class="iam-node-content">
+                                    <div class="iam-node-title">IAM User / Admin</div>
+                                    <div class="iam-node-sub">콘솔 로그인 & CLI 명령 실행</div>
+                                </div>
+                            </div>
+
+                            <!-- Node 2: Microservice Pod -->
+                            <div class="iam-node" style="left: 70px; top: 235px;">
+                                <div class="iam-node-icon" style="color: #06b6d4;">🐳</div>
+                                <div class="iam-node-content">
+                                    <div class="iam-node-title">
+                                        <span>Microservice Pod</span>
+                                        <span style="font-size: 11px; background: rgba(6,182,212,0.2); color: #67e8f9; padding: 2px 6px; border-radius: 6px; border: 1px solid #06b6d4;">IRSA</span>
+                                    </div>
+                                    <div class="iam-node-sub">컨테이너 서비스 (IAM Role 임시 권한)</div>
+                                </div>
+                            </div>
+
+                            <!-- Node 3: CI/CD Pipeline -->
+                            <div class="iam-node" style="left: 70px; top: 410px;">
+                                <div class="iam-node-icon" style="color: #f59e0b;">🤖</div>
+                                <div class="iam-node-content">
+                                    <div class="iam-node-title">CI/CD Pipeline</div>
+                                    <div class="iam-node-sub">GitHub Actions / 빌드 & 자동 배포</div>
+                                </div>
+                            </div>
+
+                            <!-- Column 2: Central IAM Control Tower (Core Shield) -->
+                            <div class="iam-core-center">
+                                <div class="iam-core-shield-wrap">
+                                    <div class="iam-shield-ring-outer"></div>
+                                    <div class="iam-shield-ring"></div>
+                                    <div class="iam-core-icon">🛡️</div>
+                                </div>
+                                <div class="iam-core-title">AWS IAM Core</div>
+                                <div class="iam-core-desc">
+                                    모든 요청의 신원을 확인하고<br>
+                                    JSON 정책에 따라 권한을 실시간 검증
+                                </div>
+
+                                <!-- Policy Evaluation Card -->
+                                <div class="iam-policy-card">
+                                    <div class="iam-policy-row" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 6px;">
+                                        <span style="color: #fcd34d;">📜 Policy Evaluation (정책 검증)</span>
+                                        <span style="font-size: 11px; color: #94a3b8;">JSON Rule</span>
+                                    </div>
+                                    <div class="iam-policy-row policy-allow-row" style="margin-top: 4px;">
+                                        <span style="color: #cbd5e1;">S3 버킷 읽기 (s3:GetObject)</span>
+                                        <span style="color: #4ade80; font-weight: 800;">Allow ✅</span>
+                                    </div>
+                                    <div class="iam-policy-row policy-deny-row">
+                                        <span style="color: #cbd5e1;">DB 원장 접근 (rds:Connect)</span>
+                                        <span style="color: #f43f5e; font-weight: 800;">Deny 🛑 (기본 차단)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Principle of Least Privilege Banner (Reveals on Click) -->
+                                <div class="iam-least-banner" style="margin-top: 14px;">
+                                    <div style="background: rgba(74, 222, 128, 0.15); border: 1.5px solid #4ade80; border-radius: 20px; padding: 6px 18px; color: #86efac; font-size: 13.5px; font-weight: 800; box-shadow: 0 0 20px rgba(74,222,128,0.35);">
+                                        ⚖️ 최소 권한 원칙 (Least Privilege) 적용 완료!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Column 3: Cloud Target Resources (What) -->
+                            <!-- Resource 1: S3 (ALLOWED) -->
+                            <div class="iam-node" style="left: 1220px; top: 60px;">
+                                <div class="iam-node-icon" style="color: #38bdf8;">🪣</div>
+                                <div class="iam-node-content">
+                                    <div class="iam-node-title">
+                                        <span>Amazon S3</span>
+                                        <span class="decision-badge-allow">ALLOW 🟢</span>
+                                    </div>
+                                    <div class="iam-node-sub">객체 스토리지 (정적 파일/로그)</div>
+                                </div>
+                            </div>
+
+                            <!-- Resource 2: RDS (DENIED) -->
+                            <div class="iam-node" style="left: 1220px; top: 190px;">
+                                <div class="iam-node-icon" style="color: #60a5fa;">🗄️</div>
+                                <div class="iam-node-content">
+                                    <div class="iam-node-title">
+                                        <span>Amazon RDS</span>
+                                        <span class="decision-badge-deny">DENY 🛑 (403)</span>
+                                    </div>
+                                    <div class="iam-node-sub">핵심 고객 금융 데이터베이스</div>
+                                </div>
+                            </div>
+
+                            <!-- Resource 3: EKS Cluster -->
+                            <div class="iam-node" style="left: 1220px; top: 320px;">
+                                <div class="iam-node-icon" style="color: #c084fc;">📦</div>
+                                <div class="iam-node-content">
+                                    <div class="iam-node-title">Amazon EKS</div>
+                                    <div class="iam-node-sub">쿠버네티스 컨테이너 클러스터</div>
+                                </div>
+                            </div>
+
+                            <!-- Resource 4: AWS KMS / Secrets -->
+                            <div class="iam-node" style="left: 1220px; top: 450px;">
+                                <div class="iam-node-icon" style="color: #fb923c;">🔐</div>
+                                <div class="iam-node-content">
+                                    <div class="iam-node-title">AWS KMS & Secrets</div>
+                                    <div class="iam-node-sub">암호화 키 & 인증 비밀정보 보관소</div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </section>
