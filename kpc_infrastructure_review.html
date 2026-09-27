@@ -3547,15 +3547,148 @@
             visibility: visible !important;
         }
 
-        /* 새 질문(r3-step-query) 시작 시 상단 안내 문구 숨김 (글씨 겹침 방지) */
-        .slide:has(.r3-step-query.step-active) .r3-intro-msg {
+        /* ── Slide 22: Round 3 Layer (최종 모델 f*(W*) ➔ GPU VRAM 할당 모핑) ── */
+        .r3-initial-core-wrap {
+            opacity: 1;
+            transform: translate(510px, 270px) scale(1);
+            transform-origin: 0px 0px;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slide:has(.r3-step-vram-morph.step-active) .r3-initial-core-wrap {
+            opacity: 0 !important;
+            transform: translate(670px, 270px) scale(2.2) !important;
+            pointer-events: none !important;
+        }
+
+        .slide:has(.r3-step-vram-morph.step-active) .r3-intro-msg {
+            display: none !important;
+            opacity: 0 !important;
+        }
+
+        .vram-deploy-box {
+            opacity: 0;
+            transform: scale(0.62);
+            transform-origin: 670px 270px;
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slide:has(.r3-step-vram-morph.step-active) .vram-deploy-box {
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+
+        /* ── Slide 23: VRAM Weight Allocation & Massively Parallel Inference ── */
+        .vram-parallel-svg g.step-item {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(8px);
+        }
+
+        .vram-parallel-svg g.step-item.step-active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        /* 2차 결합 질문 재입력(vram-step-refeed) 시작 시:
+           1차 결과(빨간색이고), 자기회귀 루프(아크선/문구), 1차 배너, 초기 입력을 모두 숨겨 깨끗한 환경 조성 */
+        #slideVramParallel:has(.vram-step-refeed.step-active) .vram-query-initial,
+        #slideVramParallel:has(.vram-step-refeed.step-active) .vram-step-input,
+        #slideVramParallel:has(.vram-step-refeed.step-active) .vram-step-token1,
+        #slideVramParallel:has(.vram-step-refeed.step-active) .vram-step-loop,
+        #slideVramParallel:has(.vram-step-refeed.step-active) .vram-step-parallel {
             display: none !important;
             opacity: 0 !important;
             visibility: hidden !important;
         }
 
-        /* 결합 질문 재입력(r3-step-refeed) 시작 시 최초 질문 텍스트 숨김 */
-        .slide:has(.r3-step-refeed.step-active) .r3-query-initial {
+        .vram-tile-rect {
+            transition: all 0.35s ease;
+        }
+
+        .vram-tile-core {
+            transform-box: fill-box;
+            transform-origin: center;
+            transition: all 0.35s ease;
+        }
+
+        /* 1차 병렬 연산(vram-step-parallel) 활성화 시: 모든 16개 타일 일제히 에메랄드 발광 & 고속 회전 */
+        #slideVramParallel:has(.vram-step-parallel.step-active) .vram-tile-rect {
+            fill: rgba(52, 211, 153, 0.16) !important;
+            stroke: #34d399 !important;
+            stroke-width: 1.8px !important;
+            filter: drop-shadow(0 0 12px rgba(52, 211, 153, 0.45));
+        }
+
+        #slideVramParallel:has(.vram-step-parallel.step-active) .vram-tile-text-val {
+            fill: #a7f3d0 !important;
+            font-weight: 900 !important;
+        }
+
+        #slideVramParallel:has(.vram-step-parallel.step-active) .vram-tile-core {
+            animation: coreSpinClockwise 1.2s linear infinite !important;
+            stroke: #6ee7b7 !important;
+        }
+
+        /* 2차 벡터 주입 단계 (vram-step-refeed 활성화 시):
+           연산 대기 상태이므로 회전 멈춤 및 정적 대기 상태로 복귀 */
+        #slideVramParallel:has(.vram-step-refeed.step-active) .vram-tile-core {
+            animation: none !important;
+            stroke: #64748b !important;
+        }
+
+        #slideVramParallel:has(.vram-step-refeed.step-active) .vram-tile-rect {
+            fill: rgba(255, 255, 255, 0.03) !important;
+            stroke: rgba(255, 255, 255, 0.12) !important;
+            filter: none !important;
+        }
+
+        #slideVramParallel:has(.vram-step-refeed.step-active) .vram-tile-text-val {
+            fill: #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        /* 2차 연산 발동 (vram-step-token2 활성화 시):
+           다음 연산이 시작되며 다시 일제히 시안 네온 발광 & 고속 회전! */
+        #slideVramParallel:has(.vram-step-token2.step-active) .vram-tile-rect {
+            fill: rgba(56, 189, 248, 0.18) !important;
+            stroke: #38bdf8 !important;
+            stroke-width: 1.8px !important;
+            filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.45));
+        }
+
+        #slideVramParallel:has(.vram-step-token2.step-active) .vram-tile-text-val {
+            fill: #bae6fd !important;
+            font-weight: 900 !important;
+        }
+
+        #slideVramParallel:has(.vram-step-token2.step-active) .vram-tile-core {
+            animation: coreSpinClockwise 1.0s linear infinite !important;
+            stroke: #7dd3fc !important;
+        }
+
+        /* 3차: 최종 응답 도출 및 완성 단계 (vram-step-final 활성화 시):
+           모든 답변 완결 ➔ VRAM 회전 정지 및 유휴(Idle / 휴식) 상태 복귀, 연산 안내문구 완전 제거 */
+        #slideVramParallel:has(.vram-step-final.step-active) .vram-tile-core {
+            animation: none !important;
+            stroke: #64748b !important;
+            transform: rotate(0deg) !important;
+        }
+
+        #slideVramParallel:has(.vram-step-final.step-active) .vram-tile-rect {
+            fill: rgba(255, 255, 255, 0.03) !important;
+            stroke: rgba(255, 255, 255, 0.1) !important;
+            filter: none !important;
+        }
+
+        #slideVramParallel:has(.vram-step-final.step-active) .vram-tile-text-val {
+            fill: #94a3b8 !important;
+            font-weight: 700 !important;
+        }
+
+        #slideVramParallel:has(.vram-step-final.step-active) .vram-banner-calc2 {
             display: none !important;
             opacity: 0 !important;
             visibility: hidden !important;
@@ -3749,6 +3882,19 @@
 
         .slide.visible .anim-laser-red {
             animation: laserBeamRed 2.2s linear infinite;
+        }
+
+        @keyframes laserBeamGreen {
+            0% {
+                stroke-dashoffset: 70;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .slide.visible .anim-laser-green {
+            animation: laserBeamGreen 1.6s linear infinite;
         }
 
         .slide.visible .anim-backprop-beam {
@@ -7036,76 +7182,39 @@
             <!-- Slide 1: Title -->
             <section class="slide active visible">
                 <div class="slide-content">
-                    <h3 class="reveal">IT Sizing & Architecture Review</h3>
-                    <h1 class="reveal delay-1">인프라 패러다임의 전환</h1>
+                    <h1 class="reveal" style="font-size: 88px; margin-bottom: 0;">인프라 패러다임의 전환</h1>
                     <div style="width: 80px; height: 4px; background: var(--primary); border-radius: 2px; margin: 36px 0; box-shadow: 0 0 15px var(--primary-glow);"
-                        class="reveal delay-2"></div>
-                    <p class="reveal delay-3" style="font-size: 28px; max-width: 900px;">안정성과 민첩성을 동시에 확보하는 차세대 하이브리드 아키텍처</p>
-                    <div class="reveal delay-3" style="margin-top: 48px; display: inline-flex; align-items: center; gap: 14px; padding: 10px 28px; border-radius: 40px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); font-size: 17px; color: #94a3b8; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                        <span style="color: #ff3b5c; font-weight: 700; letter-spacing: 0.05em;">KPC IT 인프라 기초 교육 리뷰</span>
-                        <span style="color: rgba(255,255,255,0.2);">|</span>
-                        <span style="color: #ffffff; font-weight: 500;">오릭스캐피탈 MIS 기획팀</span>
-                    </div>
+                        class="reveal delay-1"></div>
+                    <p class="reveal delay-2" style="font-size: 30px; max-width: 1000px; line-height: 1.6; color: #94a3b8;">안정성과 민첩성을 동시에 확보하는 차세대 하이브리드 아키텍처</p>
                 </div>
             </section>
 
             <!-- Slide 2: Definition of IT Infrastructure -->
             <section class="slide">
                 <div class="slide-content" style="padding: 0 80px;">
-                    <h3 class="reveal" style="letter-spacing: 0.15em;">KPC IT INFRASTRUCTURE BASICS</h3>
-                    <h1 class="reveal delay-1" style="font-size: 76px; font-weight: 700; margin-bottom: 24px;">IT 인프라란?
-                    </h1>
-                    <div style="width: 80px; height: 4px; background: var(--primary); border-radius: 2px; margin: 0 auto 40px auto; box-shadow: 0 0 15px var(--primary-glow);"
-                        class="reveal delay-2"></div>
+                    <h1 class="reveal" style="font-size: 80px; font-weight: 700; margin: 0 0 20px 0;">IT 인프라란?</h1>
+                    <div style="width: 80px; height: 4px; background: var(--primary); border-radius: 2px; margin: 0 auto 32px auto; box-shadow: 0 0 15px var(--primary-glow);"
+                        class="reveal delay-1"></div>
+                    <p class="reveal delay-1" style="font-size: 28px; color: #94a3b8; font-weight: 300; white-space: nowrap; margin: 0 auto 70px auto; line-height: 1.6;">
+                        비즈니스 애플리케이션을 안정적으로 지탱하는 <span style="color: #ffffff; font-weight: 600;">하드웨어, 네트워크, 소프트웨어</span>의 기반 구조
+                    </p>
 
-                    <!-- Main Definition Box -->
+                    <!-- Core 3 Pillars (Minimal No-Box) -->
                     <div class="reveal delay-2"
-                        style="max-width: 1200px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 20px; padding: 42px 60px; backdrop-filter: blur(10px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); margin-bottom: 45px; text-align: center;">
-                        <p
-                            style="font-size: 27px; line-height: 1.75; color: #ffffff; font-weight: 400; word-break: keep-all; margin: 0; word-spacing: 0.02em;">
-                            IT 인프라는 기업의 비즈니스 서비스와 응용 프로그램을 안정적이고 효율적으로 운영하기 위해 필요한<br>
-                            <span style="color: var(--primary); font-weight: 700;">하드웨어, 소프트웨어, 네트워크, 데이터센터 및 관리 파이프라인의
-                                종합적인 기반 구조</span>를 의미합니다.
-                        </p>
-                    </div>
-
-                    <!-- Core Components Cards -->
-                    <div class="reveal delay-3"
-                        style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; width: 100%; max-width: 1240px;">
-                        <div
-                            style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 32px 28px; text-align: center; transition: all 0.3s ease;">
-                            <div style="font-size: 38px; margin-bottom: 14px;">🖥️</div>
-                            <h4
-                                style="font-family: var(--font-display); font-size: 22px; color: #fff; margin: 0 0 12px 0; font-weight: 600;">
-                                Hardware & Server</h4>
-                            <p
-                                style="font-size: 16px; color: var(--text-muted); line-height: 1.6; margin: 0; word-break: keep-all;">
-                                컴퓨팅 파워, 물리 서버, 스토리지,<br>고성능 데이터센터 디바이스
-                            </p>
+                        style="display: flex; justify-content: center; align-items: center; gap: 140px; width: 100%; margin-top: 10px;">
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 22px;">
+                            <div style="font-size: 64px; line-height: 1;">🖥️</div>
+                            <div style="font-family: var(--font-display); font-size: 38px; color: #ffffff; font-weight: 700; letter-spacing: -0.01em;">Hardware</div>
                         </div>
 
-                        <div
-                            style="background: rgba(218, 31, 61, 0.05); border: 1px solid rgba(218, 31, 61, 0.3); border-radius: 16px; padding: 32px 28px; text-align: center; box-shadow: 0 0 25px rgba(218, 31, 61, 0.15);">
-                            <div style="font-size: 38px; margin-bottom: 14px;">🌐</div>
-                            <h4
-                                style="font-family: var(--font-display); font-size: 22px; color: var(--primary); margin: 0 0 12px 0; font-weight: 600;">
-                                Network & Cloud</h4>
-                            <p
-                                style="font-size: 16px; color: var(--text-muted); line-height: 1.6; margin: 0; word-break: keep-all;">
-                                데이터 전송 통로, 라우팅/스위칭,<br>CDN, VPC 및 클라우드 네트워크
-                            </p>
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 22px;">
+                            <div style="font-size: 64px; line-height: 1;">🌐</div>
+                            <div style="font-family: var(--font-display); font-size: 38px; color: #ff3b5c; font-weight: 700; letter-spacing: -0.01em; text-shadow: 0 0 25px rgba(255, 59, 92, 0.35);">Network</div>
                         </div>
 
-                        <div
-                            style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 32px 28px; text-align: center; transition: all 0.3s ease;">
-                            <div style="font-size: 38px; margin-bottom: 14px;">⚙️</div>
-                            <h4
-                                style="font-family: var(--font-display); font-size: 22px; color: #fff; margin: 0 0 12px 0; font-weight: 600;">
-                                Software & OS</h4>
-                            <p
-                                style="font-size: 16px; color: var(--text-muted); line-height: 1.6; margin: 0; word-break: keep-all;">
-                                운영체제(OS), DBMS, 미들웨어,<br>가상화/컨테이너 (Docker / K8s)
-                            </p>
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 22px;">
+                            <div style="font-size: 64px; line-height: 1;">⚙️</div>
+                            <div style="font-family: var(--font-display); font-size: 38px; color: #ffffff; font-weight: 700; letter-spacing: -0.01em;">Software</div>
                         </div>
                     </div>
                 </div>
@@ -9615,7 +9724,7 @@
                                             <td class="col-clean col-clean-age">0.42</td>
                                             <td class="col-clean col-clean-job">1 (개인사업자)</td>
                                             <td class="col-clean col-clean-car">2 (대형/제네시스)</td>
-                                            <td class="col-clean col-clean-income">4분위</td>
+                                            <td class="col-clean col-clean-income">4</td>
                                             <td class="col-clean col-clean-overdue">0</td>
                                             <td class="col-clean col-clean-label">0 (정상 유지)</td>
                                         </tr>
@@ -9623,7 +9732,7 @@
                                             <td class="col-clean col-clean-age">0.35</td>
                                             <td class="col-clean col-clean-job">0 (급여소득자)</td>
                                             <td class="col-clean col-clean-car">1 (준대형/그랜저)</td>
-                                            <td class="col-clean col-clean-income">2분위</td>
+                                            <td class="col-clean col-clean-income">2</td>
                                             <td class="col-clean col-clean-overdue">1</td>
                                             <td class="col-clean col-clean-label">1 (위험 주의군 ⚠️)</td>
                                         </tr>
@@ -9631,7 +9740,7 @@
                                             <td class="col-clean col-clean-age">0.51</td>
                                             <td class="col-clean col-clean-job">2 (전문직)</td>
                                             <td class="col-clean col-clean-car">3 (수입/벤츠)</td>
-                                            <td class="col-clean col-clean-income">5분위</td>
+                                            <td class="col-clean col-clean-income">5</td>
                                             <td class="col-clean col-clean-overdue">0</td>
                                             <td class="col-clean col-clean-label">0 (우량 유지)</td>
                                         </tr>
@@ -10193,6 +10302,11 @@
                                         <stop offset="60%" stop-color="#38bdf8" stop-opacity="0.7" />
                                         <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
                                     </linearGradient>
+                                    <linearGradient id="vramHbmGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#0284c7" stop-opacity="0.25" />
+                                        <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.1" />
+                                        <stop offset="100%" stop-color="#0284c7" stop-opacity="0.25" />
+                                    </linearGradient>
 
                                     <!-- Core Radial Gradients for 3D Glowing Aesthetics -->
                                     <radialGradient id="coreGradRed" cx="50%" cy="50%" r="50%">
@@ -10497,147 +10611,181 @@
                                 </g>
 
                                 <!-- ================================================================= -->
-                                <!-- 🔵 ROUND 3 LAYER: 최종 모델 f*(W*) 단독 유지 및 실제 추론 릴레이 -->
+                                <!-- 🔵 ROUND 3 LAYER: 최종 모델 f*(W*) 완성 및 GPU VRAM 메모리 할당 모핑 -->
                                 <!-- ================================================================= -->
                                 <g class="round-3-layer">
 
-                                    <!-- 3-0. Step 12: 이전 Round 1 & 2 모두 사라지고, 최종 완성 모델 f*(W*) 단독 유지 -->
+                                    <!-- 3-0. Step 12: 이전 Round 1 & 2 모두 사라지고, 최종 완성 모델 f*(W*) 코어 단독 표시 -->
                                     <g class="step-item r3-switch r3-step-clear">
-                                        <!-- 중앙: 학습이 완료된 최종 공식 f*(W*) 코어 (x=510, y=280 완벽 고정) -->
-                                        <g transform="translate(510, 280)">
+                                        <!-- 상단 완료 안내 메시지 -->
+                                        <text class="r3-intro-msg" x="710" y="58" fill="#34d399" font-size="20"
+                                            font-weight="900" letter-spacing="0.5px" text-anchor="middle"
+                                            filter="url(#glowTextCyan)">
+                                            🎓 [학습 완료] 수천억 개 파라미터 최적화 완료 ➔ 최종 완성 공식 f*(W*) 도출!
+                                        </text>
+
+                                        <!-- 중앙: 학습이 완료된 최종 공식 f*(W*) 코어 -->
+                                        <g class="r3-initial-core-wrap">
                                             <!-- 에메랄드 오라 링 -->
-                                            <circle r="50" fill="none" stroke="rgba(52, 211, 153, 0.45)"
-                                                stroke-width="1.5">
-                                                <animate attributeName="r" values="48; 54; 48" dur="3s"
+                                            <circle r="52" fill="none" stroke="rgba(52, 211, 153, 0.45)" stroke-width="1.8">
+                                                <animate attributeName="r" values="50; 56; 50" dur="3s"
                                                     repeatCount="indefinite" calcMode="spline"
                                                     keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
-                                                <animate attributeName="opacity" values="0.35; 0.8; 0.35" dur="3s"
+                                                <animate attributeName="opacity" values="0.35; 0.85; 0.35" dur="3s"
                                                     repeatCount="indefinite" calcMode="spline"
                                                     keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
                                             </circle>
                                             <!-- 중심 코어 구체 (Cyan-Emerald Theme) -->
-                                            <circle r="44" fill="url(#coreGradCyan)" stroke="#34d399" stroke-width="2.8"
+                                            <circle r="46" fill="url(#coreGradCyan)" stroke="#34d399" stroke-width="2.8"
                                                 filter="url(#glowModelCore)">
-                                                <animate attributeName="r" values="43.5; 45.5; 43.5" dur="3s"
+                                                <animate attributeName="r" values="45.5; 47.5; 45.5" dur="3s"
                                                     repeatCount="indefinite" calcMode="spline"
                                                     keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
                                             </circle>
-                                            <text y="-12" fill="#34d399" font-size="12" font-weight="800"
+                                            <text y="-13" fill="#34d399" font-size="12" font-weight="800"
                                                 text-anchor="middle">최종 완성 모델</text>
-                                            <text y="8" fill="#ffffff" font-size="18" font-weight="900"
+                                            <text y="8" fill="#ffffff" font-size="19" font-weight="900"
                                                 text-anchor="middle">f*( W* )</text>
-                                            <text y="26" fill="#a7f3d0" font-size="10.5" font-weight="700"
-                                                text-anchor="middle">학습 완료 🎯</text>
+                                            <text y="27" fill="#a7f3d0" font-size="11" font-weight="700"
+                                                text-anchor="middle">가중치 고정 🎯</text>
                                         </g>
-
-                                        <!-- 상단 완료 안내 메시지 (새 질문 시작 시 글씨 겹침 방지를 위해 CSS로 자동 숨김) -->
-                                        <text class="r3-intro-msg" x="710" y="58" fill="#34d399" font-size="20"
-                                            font-weight="900" letter-spacing="0.5px" text-anchor="middle"
-                                            filter="url(#glowTextCyan)">
-                                            🎓 [학습 완료] 최적화된 최종 모델 f*(W*)에 실제 질문을 입력하여 추론을 시작합니다.
-                                        </text>
                                     </g>
 
-                                    <!-- 3-1. Step 13: 실제 질의 "사과는 어떤 과일이야?" 토큰화 주입 -->
-                                    <g class="step-item r3-step-query">
-                                        <g class="r3-query-initial">
-                                            <g transform="translate(130, 280)">
-                                                <text y="-26" fill="#818cf8" font-size="13" font-weight="700"
-                                                    text-anchor="middle">💬 새 질문 입력</text>
-                                                <text y="6" fill="#ffffff" font-size="23" font-weight="900"
-                                                    text-anchor="middle">"사과는 어떤 과일이야?"</text>
-                                                <text y="36" fill="#818cf8" font-size="13" font-family="monospace"
-                                                    font-weight="700" text-anchor="middle">[0.31] [0.77] [0.55]
-                                                    [0.42]</text>
+                                    <!-- 3-1. Step 13: 최종 모델이 서서히 커지며 23페이지의 GPU VRAM 공간으로 모핑 및 배치 완료 -->
+                                    <g class="step-item r3-step-vram-morph">
+                                        <!-- 상단 배포 로드 안내 메시지 -->
+                                        <g transform="translate(670, 58)">
+                                            <text fill="#38bdf8" font-size="20" font-weight="900" letter-spacing="0.5px"
+                                                text-anchor="middle" filter="url(#glowTextCyan)">
+                                                🚀 [서빙 배포] 최적화된 700억 개 가중치(Weights) ➔ GPU VRAM 메모리 전수 할당 완료!
+                                            </text>
+                                        </g>
+
+                                        <!-- VRAM 할당 하드웨어 박스 (Slide 23과 100% 동일한 좌표 및 크기: x=420, y=98, 500x344) -->
+                                        <g class="vram-deploy-box">
+                                            <rect x="420" y="98" width="500" height="344" rx="16" fill="rgba(8, 12, 20, 0.92)"
+                                                stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.8" filter="url(#glowModelCore)" />
+
+                                            <rect x="436" y="112" width="468" height="30" rx="6" fill="url(#vramHbmGrad)"
+                                                stroke="rgba(56, 189, 248, 0.3)" stroke-width="1" />
+                                            <text x="450" y="132" fill="#38bdf8" font-size="12" font-weight="800">
+                                                ⚡ GPU VRAM (80GB HBM3e) · 70B Weights Space
+                                            </text>
+                                            <text x="890" y="132" fill="#34d399" font-size="11.5" font-weight="700" text-anchor="end">
+                                                대역폭: 3.35 TB/s
+                                            </text>
+
+                                            <!-- 가중치 타일 그리드 (16개 텐서 블록) -->
+                                            <g>
+                                                <!-- Row 0 -->
+                                                <g transform="translate(436, 154)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₁₁</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.82</text>
+                                                </g>
+                                                <g transform="translate(556, 154)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₁₂</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">-0.41</text>
+                                                </g>
+                                                <g transform="translate(676, 154)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₁₃</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.95</text>
+                                                </g>
+                                                <g transform="translate(796, 154)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₁₄</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.12</text>
+                                                </g>
+
+                                                <!-- Row 1 -->
+                                                <g transform="translate(436, 218)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₂₁</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">-0.33</text>
+                                                </g>
+                                                <g transform="translate(556, 218)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₂₂</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+1.24</text>
+                                                </g>
+                                                <g transform="translate(676, 218)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₂₃</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.08</text>
+                                                </g>
+                                                <g transform="translate(796, 218)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₂₄</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">-0.75</text>
+                                                </g>
+
+                                                <!-- Row 2 -->
+                                                <g transform="translate(436, 282)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₃₁</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.65</text>
+                                                </g>
+                                                <g transform="translate(556, 282)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₃₂</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">-0.19</text>
+                                                </g>
+                                                <g transform="translate(676, 282)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₃₃</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+1.42</text>
+                                                </g>
+                                                <g transform="translate(796, 282)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₃₄</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.88</text>
+                                                </g>
+
+                                                <!-- Row 3 -->
+                                                <g transform="translate(436, 346)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₄₁</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">-0.54</text>
+                                                </g>
+                                                <g transform="translate(556, 346)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₄₂</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.93</text>
+                                                </g>
+                                                <g transform="translate(676, 346)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₄₃</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">-0.67</text>
+                                                </g>
+                                                <g transform="translate(796, 346)">
+                                                    <rect width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                                    <g transform="translate(22, 26)"><circle cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                                    <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₄₄</text>
+                                                    <text x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+1.15</text>
+                                                </g>
                                             </g>
-                                            <line x1="260" y1="280" x2="435" y2="280" stroke="#818cf8"
-                                                stroke-width="2.8" class="anim-laser-purple" stroke-dasharray="14 7"
-                                                marker-end="url(#arrowPurpleTr)" />
-                                        </g>
-                                    </g>
 
-                                    <!-- 3-2. Step 14: 모델 ➔ 1차 다음 단어 확률 연산 -->
-                                    <g class="step-item r3-step-engine">
-                                        <line x1="585" y1="260" x2="700" y2="150" stroke="#38bdf8" stroke-width="2.5"
-                                            class="anim-laser-cyan" stroke-dasharray="14 7"
-                                            marker-end="url(#arrowCyanTr)" />
-                                        <text x="800" y="155" fill="#67e8f9" font-size="14" font-weight="800"
-                                            text-anchor="middle" filter="url(#glowTextCyan)">🧠 1차 다음 단어 확률 연산</text>
-                                    </g>
-
-                                    <!-- 3-3. Step 15: 1번째 단어 [ 빨간색이고 ] 도출 (이전 학습 슬라이드 Target 1과 일치) -->
-                                    <g class="step-item r3-step-word1">
-                                        <line x1="900" y1="150" x2="980" y2="150" stroke="#ff3b5c" stroke-width="2.5"
-                                            class="anim-laser-red" stroke-dasharray="12 6"
-                                            marker-end="url(#arrowRedTr)" />
-                                        <g transform="translate(1090, 150)">
-                                            <text y="-20" fill="#ff8599" font-size="14" font-weight="800"
-                                                text-anchor="middle">1️⃣ 최고 확률 91% 🎯</text>
-                                            <text y="10" fill="#ffffff" font-size="28" font-weight="900"
-                                                text-anchor="middle">"빨간색이고"</text>
-                                            <text y="32" fill="#64748b" font-size="12" font-weight="600"
-                                                text-anchor="middle">(초록색이고 7% · 둥글고 2%)</text>
-                                        </g>
-                                    </g>
-
-                                    <!-- 3-4. Step 16: 🔥 자기회귀 Feedback 루프 (빨간색이고 ➔ 질문 맨 뒤로 회귀 재입력) -->
-                                    <g class="step-item r3-step-loop">
-                                        <path d="M 1090,115 C 1090,15 130,15 130,225" fill="none"
-                                            stroke="url(#gradBackpropGold)" stroke-width="3.5" stroke-dasharray="20 10"
-                                            class="anim-autoregressive-beam" />
-                                        <polygon points="130,238 123,222 137,222" fill="#34d399" />
-                                        <text x="610" y="42" fill="#ff8599" font-size="14" font-weight="800"
-                                            text-anchor="middle" filter="url(#glowTextCyan)">💫 [자기회귀 Feedback] 방금 도출된
-                                            단어 "빨간색이고"를 질문 맨 뒤에 실시간 재입력!</text>
-                                    </g>
-
-                                    <!-- 3-5. Step 17: 기존 질문 사라지고 "사과는 어떤 과일이야? 빨간색이고" 결합 재질문 등장 및 모델 재주입 -->
-                                    <g class="step-item r3-step-refeed">
-                                        <g transform="translate(130, 280)">
-                                            <text y="-26" fill="#38bdf8" font-size="13" font-weight="700"
-                                                text-anchor="middle">🔄 질문 + 단어 결합 재입력</text>
-                                            <text y="6" fill="#ffffff" font-size="20" font-weight="900"
-                                                text-anchor="middle">"사과는 어떤 과일이야? <tspan fill="#ff4d6d"
-                                                    font-weight="900">빨간색이고</tspan>"</text>
-                                            <text y="36" fill="#38bdf8" font-size="12.5" font-family="monospace"
-                                                font-weight="700" text-anchor="middle">[0.31] [0.77] [0.55] [0.42] +
-                                                [0.73, 0.12]</text>
-                                        </g>
-                                        <line x1="285" y1="280" x2="435" y2="280" stroke="#38bdf8" stroke-width="2.8"
-                                            class="anim-laser-cyan" stroke-dasharray="14 7"
-                                            marker-end="url(#arrowCyanTr)" />
-                                    </g>
-
-                                    <!-- 3-6. Step 18: 2번째 단어 [ 맛있다. ] 도출 (이전 학습 슬라이드 Target 2와 일치) -->
-                                    <g class="step-item r3-step-word2">
-                                        <line x1="585" y1="300" x2="710" y2="400" stroke="#38bdf8" stroke-width="2.5"
-                                            class="anim-laser-cyan" stroke-dasharray="14 7"
-                                            marker-end="url(#arrowCyanTr)" />
-                                        <g transform="translate(830, 400)">
-                                            <text y="-20" fill="#38bdf8" font-size="14" font-weight="800"
-                                                text-anchor="middle">2️⃣ 최고 확률 95% 🎯</text>
-                                            <text y="10" fill="#ffffff" font-size="28" font-weight="900"
-                                                text-anchor="middle">"맛있다."</text>
-                                            <text y="32" fill="#64748b" font-size="12" font-weight="600"
-                                                text-anchor="middle">(달콤하다 3% · 시다 2%)</text>
-                                        </g>
-                                    </g>
-
-                                    <!-- 3-7. Step 19: <EOS> 문장 종결 및 최종 완성 답변 "빨간색이고 맛있다." 도출 -->
-                                    <g class="step-item r3-step-final">
-                                        <line x1="920" y1="400" x2="980" y2="400" stroke="#10b981" stroke-width="2"
-                                            stroke-dasharray="4 2" />
-                                        <text x="1030" y="405" fill="#34d399" font-size="13" font-weight="800"
-                                            text-anchor="middle">&lt;EOS&gt; 종결</text>
-                                        <path d="M 1070,400 C 1095,370 1125,305 1172,286" fill="none" stroke="#10b981"
-                                            stroke-width="3" stroke-dasharray="6 3" marker-end="url(#arrowGreenTr)" />
-                                        <g transform="translate(1315, 280)">
-                                            <text y="-32" fill="#ff8599" font-size="13" font-weight="800"
-                                                text-anchor="middle">🏁 실시간 ChatGPT 타이핑 완성</text>
-                                            <text y="8" fill="#ffffff" font-size="30" font-weight="900"
-                                                text-anchor="middle" filter="url(#glowTextRed)">"빨간색이고 맛있다."</text>
-                                            <text y="38" fill="#cbd5e1" font-size="12" font-weight="600"
-                                                text-anchor="middle">단어 릴레이 결합으로 완성된 최종 응답</text>
+                                            <!-- 하단 힌트 -->
+                                            <text x="670" y="426" fill="#38bdf8" font-size="12.5" font-weight="700" text-anchor="middle">
+                                                ⚡ 700억 개 가중치 전수 VRAM 상주 완료 ➔ 다음 슬라이드에서 초병렬 추론 연산 가동
+                                            </text>
                                         </g>
                                     </g>
 
@@ -10648,80 +10796,360 @@
 
                     <!-- 하단 캡션: 1문장 1줄 정렬 -->
                     <div class="caption srv-caption reveal delay-1" style="margin-top: 15px;">
-                        <h3>LLM Inference & Optimization</h3>
-                        <h2 class="srv-title-single" style="font-size: 34px; margin-bottom: 8px;">Next-Token Prediction Relay & Loss Backpropagation</h2>
-                        <p class="srv-desc-line" style="font-size: 19px; line-height: 1.6;">문맥 정보를 입력받아 가장 확률이 높은 단어를 한 글자씩 릴레이로 생성하는 것이 생성형 AI의 실체입니다.</p>
-                        <p class="srv-desc-line" style="font-size: 19px; line-height: 1.6;">실제 정답과의 오차(Loss)를 역전파하여 가중치를 지속 갱신하는 것이 딥러닝 학습(Training)의 본질입니다.</p>
+                        <h3>LLM Training & VRAM Deployment</h3>
+                        <h2 class="srv-title-single" style="font-size: 34px; margin-bottom: 8px;">Model Weight Optimization & GPU VRAM Allocation</h2>
+                        <p class="srv-desc-line" style="font-size: 19px; line-height: 1.6;">수많은 데이터의 오차(Loss)를 역전파하며 최적화된 거대한 수학 공식(가중치 행렬 W*)을 완성합니다.</p>
+                        <p class="srv-desc-line" style="font-size: 19px; line-height: 1.6;">완성된 모델 파라미터는 실시간 추론 연산을 위해 초고속 GPU VRAM 메모리 공간에 전수 로드됩니다.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Slide 20: Summary & Q&A -->
-            <section class="slide">
-                <div class="slide-content" style="padding: 0 100px; max-width: 1500px; margin: 0 auto;">
-                    <div class="caption reveal" style="margin-bottom: 40px;">
-                        <h3>Summary & Key Takeaways</h3>
-                        <h2 style="font-size: 50px; font-weight: 700; margin-bottom: 10px;">IT 인프라 패러다임 전환 요약</h2>
-                        <p style="font-size: 22px; color: var(--text-muted);">정적 온프레미스에서 소프트웨어 정의(Software-Defined) 클라우드·데이터·AI 아키텍처로의 도약</p>
+            <!-- Slide 8.6: VRAM Weight Allocation & Massively Parallel Next-Token Generation -->
+            <section class="slide" id="slideVramParallel">
+                <div class="slide-content">
+                    <div class="central-diagram" style="height: 540px; margin-bottom: 0;">
+                        <div class="training-canvas-wrap">
+                            <svg class="training-graphic-svg vram-parallel-svg" viewBox="0 0 1420 540">
+                                <defs>
+                                    <linearGradient id="vramTileGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="rgba(255,255,255,0.06)" />
+                                        <stop offset="100%" stop-color="rgba(255,255,255,0.01)" />
+                                    </linearGradient>
+                                    <linearGradient id="vramHbmGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#0284c7" stop-opacity="0.25" />
+                                        <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.1" />
+                                        <stop offset="100%" stop-color="#0284c7" stop-opacity="0.25" />
+                                    </linearGradient>
+                                </defs>
+
+                                <!-- 중앙 가이드선 -->
+                                <line x1="60" y1="270" x2="1360" y2="270" stroke="rgba(255,255,255,0.03)"
+                                    stroke-width="1.2" stroke-dasharray="6 6" />
+
+                                <!-- 1. 좌측 입력부: 프롬프트 벡터 주입 -->
+                                <g class="vram-query-initial">
+                                    <g transform="translate(130, 270)">
+                                        <text y="-28" fill="#818cf8" font-size="13" font-weight="700" text-anchor="middle">💬 프롬프트 토큰 입력</text>
+                                        <text y="4" fill="#ffffff" font-size="22" font-weight="900" text-anchor="middle">"사과는 어떤 과일이야?"</text>
+                                        <text y="34" fill="#818cf8" font-size="13" font-family="monospace" font-weight="700" text-anchor="middle">[0.31] [0.77] [0.55] [0.42]</text>
+                                    </g>
+                                </g>
+
+                                <!-- Step 1: 입력 벡터 ➔ VRAM 매트릭스로 빔 주입 -->
+                                <g class="step-item vram-step-input">
+                                    <line x1="260" y1="270" x2="410" y2="270" stroke="#818cf8" stroke-width="2.8"
+                                        class="anim-laser-purple" stroke-dasharray="14 7" marker-end="url(#arrowPurpleTr)" />
+                                    <text x="335" y="255" fill="#a5b4fc" font-size="12" font-weight="700" text-anchor="middle">토큰 벡터 주입 ➔</text>
+                                </g>
+
+                                <!-- 2. 중앙: GPU VRAM 메모리 & 4x4 가중치 텐서 행렬 그리드 -->
+                                <rect x="420" y="98" width="500" height="344" rx="16" fill="rgba(8, 12, 20, 0.92)"
+                                    stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.8" filter="url(#glowModelCore)" />
+
+                                <rect x="436" y="112" width="468" height="30" rx="6" fill="url(#vramHbmGrad)"
+                                    stroke="rgba(56, 189, 248, 0.3)" stroke-width="1" />
+                                <text x="450" y="132" fill="#38bdf8" font-size="12" font-weight="800">
+                                    ⚡ GPU VRAM (80GB HBM3e) · 70B Weights Space
+                                </text>
+                                <text x="890" y="132" fill="#34d399" font-size="11.5" font-weight="700" text-anchor="end">
+                                    대역폭: 3.35 TB/s
+                                </text>
+
+                                <!-- 가중치 타일 그리드 (16개 텐서 블록) -->
+                                <g id="vramTilesContainer">
+                                    <!-- Row 0 -->
+                                    <g transform="translate(436, 154)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₁₁</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.82</text>
+                                    </g>
+                                    <g transform="translate(556, 154)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₁₂</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">-0.41</text>
+                                    </g>
+                                    <g transform="translate(676, 154)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₁₃</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.95</text>
+                                    </g>
+                                    <g transform="translate(796, 154)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₁₄</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.12</text>
+                                    </g>
+
+                                    <!-- Row 1 -->
+                                    <g transform="translate(436, 218)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₂₁</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">-0.33</text>
+                                    </g>
+                                    <g transform="translate(556, 218)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₂₂</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+1.24</text>
+                                    </g>
+                                    <g transform="translate(676, 218)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₂₃</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.08</text>
+                                    </g>
+                                    <g transform="translate(796, 218)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₂₄</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">-0.75</text>
+                                    </g>
+
+                                    <!-- Row 2 -->
+                                    <g transform="translate(436, 282)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₃₁</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.65</text>
+                                    </g>
+                                    <g transform="translate(556, 282)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₃₂</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">-0.19</text>
+                                    </g>
+                                    <g transform="translate(676, 282)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₃₃</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+1.42</text>
+                                    </g>
+                                    <g transform="translate(796, 282)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₃₄</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.88</text>
+                                    </g>
+
+                                    <!-- Row 3 -->
+                                    <g transform="translate(436, 346)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₄₁</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">-0.54</text>
+                                    </g>
+                                    <g transform="translate(556, 346)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₄₂</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+0.93</text>
+                                    </g>
+                                    <g transform="translate(676, 346)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₄₃</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">-0.67</text>
+                                    </g>
+                                    <g transform="translate(796, 346)">
+                                        <rect class="vram-tile-rect" width="108" height="52" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" />
+                                        <g transform="translate(22, 26)"><circle class="vram-tile-core" cx="0" cy="0" r="9" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6 3" /></g>
+                                        <text x="42" y="22" fill="#94a3b8" font-size="11" font-weight="700">W₄₄</text>
+                                        <text class="vram-tile-text-val" x="42" y="38" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700">+1.15</text>
+                                    </g>
+                                </g>
+
+                                <text x="670" y="426" fill="#64748b" font-size="12" font-weight="600" text-anchor="middle">
+                                    💡 700억 개(70B) 가중치 매트릭스 전체가 VRAM HBM3 메모리에 상주
+                                </text>
+
+                                <!-- Step 2: 🔥 VRAM 전체 가중치 동시 병렬 연산 배너 -->
+                                <g class="step-item vram-step-parallel">
+                                    <g transform="translate(670, 270)">
+                                        <rect x="-195" y="-30" width="390" height="60" rx="30" fill="rgba(6, 78, 59, 0.95)"
+                                            stroke="#34d399" stroke-width="2.5" filter="url(#glowLossRed)" />
+                                        <text y="-5" fill="#ffffff" font-size="15" font-weight="900" text-anchor="middle"
+                                            filter="url(#glowTextCyan)">
+                                            ⚡ 700억 개 가중치 100% 동시 병렬 연산!
+                                        </text>
+                                        <text y="17" fill="#6ee7b7" font-size="12" font-weight="700" text-anchor="middle">
+                                            (모든 텐서 코어가 일제히 가동되어 대규모 행렬곱 수행)
+                                        </text>
+                                    </g>
+                                </g>
+
+                                <!-- Step 3: 병렬 연산 결과 ➔ 다음 1개 토큰 도출 [ "빨간색이고" ] -->
+                                <g class="step-item vram-step-token1">
+                                    <line x1="920" y1="270" x2="1040" y2="180" stroke="#ff3b5c" stroke-width="3"
+                                        class="anim-laser-red" stroke-dasharray="14 7" marker-end="url(#arrowRedTr)" />
+                                    <g transform="translate(1180, 180)">
+                                        <text y="-24" fill="#ff8599" font-size="13" font-weight="800" text-anchor="middle">
+                                            1️⃣ 병렬 연산 결과 ➔ 다음 1개 토큰 계산 완료!
+                                        </text>
+                                        <text y="12" fill="#ffffff" font-size="32" font-weight="900" text-anchor="middle">
+                                            "빨간색이고"
+                                        </text>
+                                        <text y="36" fill="#34d399" font-size="13" font-weight="700" text-anchor="middle">
+                                            최고 확률 91% 채택 🎯
+                                        </text>
+                                    </g>
+                                </g>
+
+                                <!-- Step 4: 🔥 자기회귀 Feedback 루프 (질문 끝에 단어 결합 및 궤도 이동) -->
+                                <g class="step-item vram-step-loop">
+                                    <path d="M 1180,140 C 1180,12 130,12 130,225" fill="none"
+                                        stroke="url(#gradBackpropGold)" stroke-width="3.5" stroke-dasharray="20 10"
+                                        class="anim-autoregressive-beam" />
+                                    <polygon points="130,238 123,222 137,222" fill="#34d399" />
+                                    <text x="650" y="34" fill="#ff8599" font-size="14" font-weight="800" text-anchor="middle"
+                                        filter="url(#glowTextCyan)">
+                                        💫 [자기회귀] "빨간색이고" 토큰 결합 ➔ 질문 맨 뒤로 재입력!
+                                    </text>
+                                </g>
+
+                                <!-- Step 5: ✨ 깨끗한 환경에서 2차 결합 질문 벡터 주입 (1차 결과 및 루프 문구 자동 완전 제거) -->
+                                <g class="step-item vram-step-refeed">
+                                    <g transform="translate(130, 270)">
+                                        <text y="-28" fill="#38bdf8" font-size="13" font-weight="700" text-anchor="middle">🔄 결합 질의 주입</text>
+                                        <text y="4" fill="#ffffff" font-size="19" font-weight="900" text-anchor="middle">
+                                            "사과는 어떤 과일이야? <tspan fill="#ff4d6d">빨간색이고</tspan>"
+                                        </text>
+                                        <text y="34" fill="#38bdf8" font-size="12" font-family="monospace" font-weight="700" text-anchor="middle">
+                                            [0.31, 0.77, ...] + [0.73, 0.12]
+                                        </text>
+                                    </g>
+                                    <line x1="285" y1="270" x2="410" y2="270" stroke="#38bdf8" stroke-width="2.8"
+                                        class="anim-laser-cyan" stroke-dasharray="14 7" marker-end="url(#arrowCyanTr)" />
+                                    <text x="345" y="255" fill="#38bdf8" font-size="12" font-weight="700" text-anchor="middle">2차 벡터 주입 ➔</text>
+                                </g>
+
+                                <!-- Step 6: 2회차 VRAM 전체 병렬 연산 ➔ 2번째 토큰 [ "맛있다." ] 도출 -->
+                                <g class="step-item vram-step-token2">
+                                    <!-- 2회차: 중앙 700억 개 가중치 동시 병렬 연산 배너 -->
+                                    <g class="vram-banner-calc2" transform="translate(670, 270)">
+                                        <rect x="-195" y="-30" width="390" height="60" rx="30" fill="rgba(8, 47, 73, 0.95)"
+                                            stroke="#38bdf8" stroke-width="2.5" filter="url(#glowLossRed)" />
+                                        <text y="-5" fill="#ffffff" font-size="15" font-weight="900" text-anchor="middle"
+                                            filter="url(#glowTextCyan)">
+                                            ⚡ 700억 개 가중치 100% 동시 병렬 연산!
+                                        </text>
+                                        <text y="17" fill="#7dd3fc" font-size="12" font-weight="700" text-anchor="middle">
+                                            (모든 텐서 코어가 일제히 가동되어 대규모 행렬곱 수행)
+                                        </text>
+                                    </g>
+
+                                    <!-- 2번째 토큰 도출 레이저 및 박스 -->
+                                    <line x1="920" y1="310" x2="995" y2="380" stroke="#38bdf8" stroke-width="3"
+                                        class="anim-laser-cyan" stroke-dasharray="14 7" marker-end="url(#arrowCyanTr)" />
+                                    <g transform="translate(1080, 380)">
+                                        <text y="-22" fill="#38bdf8" font-size="13" font-weight="800" text-anchor="middle">
+                                            2️⃣ 2회차 VRAM 전수 병렬 연산 ➔ 2번째 토큰 도출!
+                                        </text>
+                                        <text y="10" fill="#ffffff" font-size="28" font-weight="900" text-anchor="middle">
+                                            "맛있다."
+                                        </text>
+                                        <text y="32" fill="#67e8f9" font-size="12" font-weight="700" text-anchor="middle">
+                                            최고 확률 95% 채택 🎯
+                                        </text>
+                                    </g>
+                                </g>
+
+                                <!-- Step 7: 최종 문장 완성 & VRAM 연산 종료(유휴/휴식) -->
+                                <g class="step-item vram-step-final">
+                                    <!-- 부드러운 유선형 레이저 애니메이션 연결선 (에메랄드 그린 실시간 스트리밍) -->
+                                    <path d="M 1150,380 C 1195,380 1205,270 1238,270" fill="none" stroke="#10b981"
+                                        stroke-width="3" class="anim-laser-green" stroke-dasharray="12 6"
+                                        marker-end="url(#arrowGreenTr)" />
+
+                                    <!-- 최종 문장 완성 블록 -->
+                                    <g transform="translate(1330, 270)">
+                                        <text y="-32" fill="#ff8599" font-size="13" font-weight="800" text-anchor="middle">
+                                            🏁 실시간 ChatGPT 타이핑 완성
+                                        </text>
+                                        <text y="8" fill="#ffffff" font-size="25" font-weight="900" text-anchor="middle"
+                                            filter="url(#glowTextRed)">
+                                            "빨간색이고 맛있다."
+                                        </text>
+                                        <text y="36" fill="#34d399" font-size="12" font-weight="700" text-anchor="middle">
+                                            글자당 VRAM 전체 가중치 병렬 로드!
+                                        </text>
+                                    </g>
+                                </g>
+
+                            </svg>
+                        </div>
                     </div>
 
-                    <!-- 3 Pillars Takeaway Grid -->
-                    <div class="reveal delay-1" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; width: 100%; margin-bottom: 44px;">
-                        <!-- Card 1: Cloud -->
-                        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 46, 84, 0.28); border-radius: 18px; padding: 28px 24px; text-align: left; position: relative; overflow: hidden; backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
-                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ff2e54, transparent);"></div>
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-                                <span style="font-size: 13px; font-weight: 700; color: #ff3b5c; letter-spacing: 0.12em;">PART 01</span>
-                                <span style="font-size: 26px;">☁️</span>
+                    <!-- 하단 캡션 -->
+                    <div class="caption srv-caption reveal delay-1" style="margin-top: 15px;">
+                        <h3>AI Infrastructure &amp; VRAM Bandwidth</h3>
+                        <h2 class="srv-title-single" style="font-size: 34px; margin-bottom: 8px;">VRAM Weight Allocation &amp; Massively Parallel Token Generation</h2>
+                        <p class="srv-desc-line" style="font-size: 19px; line-height: 1.6;">단 하나의 토큰을 생성할 때마다 GPU VRAM(HBM)에 상주하는 수백억 개 가중치 전체가 수만 개 코어에서 <strong>동시에 병렬 로드 및 연산</strong>됩니다.</p>
+                        <p class="srv-desc-line" style="font-size: 19px; line-height: 1.6;">글자를 순차 도출할 때마다 전체 가중치 전수 연산이 매번 반복되므로, AI 인프라에서는 <strong>VRAM 용량과 메모리 대역폭(HBM3e)</strong>이 가장 결정적인 성능 지표가 됩니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 24: Summary & Key Takeaways (Minimal & Clean) -->
+            <section class="slide">
+                <div class="slide-content" style="padding: 0 100px; max-width: 1500px; margin: 0 auto; text-align: center;">
+                    <!-- Header -->
+                    <div class="reveal" style="margin-bottom: 70px;">
+                        <h2 style="font-size: 64px; font-weight: 700; margin-bottom: 0; letter-spacing: -0.02em;">IT 인프라 패러다임의 전환</h2>
+                        <div style="width: 70px; height: 3.5px; background: var(--primary); border-radius: 2px; margin: 26px auto; box-shadow: 0 0 15px var(--primary-glow);"></div>
+                        <p style="font-size: 25px; color: #94a3b8; font-weight: 300; line-height: 1.5;">
+                            정적 온프레미스에서 소프트웨어 정의(Software-Defined) 클라우드·데이터·AI 아키텍처로의 도약
+                        </p>
+                    </div>
+
+                    <!-- 3 Pillars Minimal Grid (No-Box Clean Architecture) -->
+                    <div class="reveal delay-1" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; width: 100%; text-align: left;">
+                        <!-- Pillar 1: Cloud -->
+                        <div style="padding: 10px 24px; border-left: 2px solid rgba(255, 59, 92, 0.45);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                <span style="font-size: 28px;">☁️</span>
+                                <span style="font-family: var(--font-display); font-size: 14px; font-weight: 800; color: #ff3b5c; letter-spacing: 0.14em;">PART 01</span>
                             </div>
-                            <h4 style="font-family: var(--font-display); font-size: 21px; color: #ffffff; margin: 0 0 10px 0; font-weight: 700;">동적 확장과 유연성</h4>
-                            <p style="font-size: 15px; color: #cbd5e1; line-height: 1.7; margin: 0; word-break: keep-all;">
-                                • 모놀리식 ➔ MSA & K8s 오토스케일링<br>
+                            <h3 style="background: none; border: none; padding: 0; box-shadow: none; font-size: 26px; color: #ffffff; font-weight: 700; margin: 0 0 8px 0; justify-content: flex-start; text-transform: none; letter-spacing: -0.01em;">Cloud Native</h3>
+                            <div style="font-size: 15px; color: #ff8599; font-weight: 600; margin-bottom: 18px;">동적 확장과 유연성</div>
+                            <p style="font-size: 16px; color: #cbd5e1; line-height: 1.85; margin: 0; word-break: keep-all; font-weight: 400;">
+                                • 모놀리식 ➔ MSA &amp; K8s 오토스케일링<br>
                                 • L2/L3 물리 한계 ➔ SDN 가상 오버레이 제어<br>
-                                • 피크 트래픽 ➔ 서버리스(Lambda) 비용 $0 최적화
+                                • 피크 트래픽 ➔ 서버리스(Lambda) 비용 최적화
                             </p>
                         </div>
 
-                        <!-- Card 2: Data -->
-                        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 18px; padding: 28px 24px; text-align: left; position: relative; overflow: hidden; backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
-                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #38bdf8, transparent);"></div>
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-                                <span style="font-size: 13px; font-weight: 700; color: #38bdf8; letter-spacing: 0.12em;">PART 02</span>
-                                <span style="font-size: 26px;">📊</span>
+                        <!-- Pillar 2: Data -->
+                        <div style="padding: 10px 24px; border-left: 2px solid rgba(56, 189, 248, 0.45);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                <span style="font-size: 28px;">📊</span>
+                                <span style="font-family: var(--font-display); font-size: 14px; font-weight: 800; color: #38bdf8; letter-spacing: 0.14em;">PART 02</span>
                             </div>
-                            <h4 style="font-family: var(--font-display); font-size: 21px; color: #ffffff; margin: 0 0 10px 0; font-weight: 700;">운영·분석계 완전 분리</h4>
-                            <p style="font-size: 15px; color: #cbd5e1; line-height: 1.7; margin: 0; word-break: keep-all;">
+                            <h3 style="background: none; border: none; padding: 0; box-shadow: none; font-size: 26px; color: #ffffff; font-weight: 700; margin: 0 0 8px 0; justify-content: flex-start; text-transform: none; letter-spacing: -0.01em;">Data Pipeline</h3>
+                            <div style="font-size: 15px; color: #7dd3fc; font-weight: 600; margin-bottom: 18px;">운영·분석계 완전 분리</div>
+                            <p style="font-size: 16px; color: #cbd5e1; line-height: 1.85; margin: 0; word-break: keep-all; font-weight: 400;">
                                 • OLTP(초고속 트랜잭션)와 OLAP(분석 DW) 격리<br>
                                 • CDC/ETL 비동기 전송으로 운영계 부하 0%<br>
-                                • 금융 비정형 데이터를 AI 연산용 벡터 행렬로 규격화
+                                • 금융 비정형 데이터를 AI 연산용 벡터로 규격화
                             </p>
                         </div>
 
-                        <!-- Card 3: AI -->
-                        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(192, 132, 252, 0.28); border-radius: 18px; padding: 28px 24px; text-align: left; position: relative; overflow: hidden; backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
-                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #c084fc, transparent);"></div>
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-                                <span style="font-size: 13px; font-weight: 700; color: #c084fc; letter-spacing: 0.12em;">PART 03</span>
-                                <span style="font-size: 26px;">🧠</span>
+                        <!-- Pillar 3: AI -->
+                        <div style="padding: 10px 24px; border-left: 2px solid rgba(52, 211, 153, 0.45);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                <span style="font-size: 28px;">🧠</span>
+                                <span style="font-family: var(--font-display); font-size: 14px; font-weight: 800; color: #34d399; letter-spacing: 0.14em;">PART 03</span>
                             </div>
-                            <h4 style="font-family: var(--font-display); font-size: 21px; color: #ffffff; margin: 0 0 10px 0; font-weight: 700;">AI 워크로드 인프라 요건</h4>
-                            <p style="font-size: 15px; color: #cbd5e1; line-height: 1.7; margin: 0; word-break: keep-all;">
-                                • 딥러닝/LLM의 본질은 방대한 가중치 행렬 연산 모델<br>
-                                • AI 도입 시 GPU 클러스터 및 고속 I/O 스토리지 필수<br>
-                                • 실시간 모델 서빙을 위한 초저지연 전송망 준비
+                            <h3 style="background: none; border: none; padding: 0; box-shadow: none; font-size: 26px; color: #ffffff; font-weight: 700; margin: 0 0 8px 0; justify-content: flex-start; text-transform: none; letter-spacing: -0.01em;">AI Infrastructure</h3>
+                            <div style="font-size: 15px; color: #6ee7b7; font-weight: 600; margin-bottom: 18px;">초고속 대역폭 &amp; 병렬 연산</div>
+                            <p style="font-size: 16px; color: #cbd5e1; line-height: 1.85; margin: 0; word-break: keep-all; font-weight: 400;">
+                                • 딥러닝/LLM: 수천억 개 가중치 행렬 연산 모델<br>
+                                • 초고속 GPU VRAM(HBM3e) 메모리 전수 상주<br>
+                                • 토큰 생성당 수만 개 코어의 동시 초병렬 연산
                             </p>
-                        </div>
-                    </div>
-
-                    <!-- Q&A Box -->
-                    <div class="reveal delay-2" style="display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 50px; padding: 16px 40px; width: 100%; max-width: 920px; margin: 0 auto; box-shadow: 0 6px 30px rgba(0,0,0,0.6);">
-                        <div style="display: flex; align-items: center; gap: 16px;">
-                            <span style="font-family: var(--font-display); font-size: 26px; font-weight: 800; color: #ffffff; letter-spacing: 0.05em;">Q & A</span>
-                            <span style="color: #475569;">|</span>
-                            <span style="font-size: 17px; color: #94a3b8;">경청해 주셔서 감사합니다. 자유로운 질문을 환영합니다.</span>
-                        </div>
-                        <div style="display: inline-flex; align-items: center; gap: 10px; background: rgba(218, 31, 61, 0.15); border: 1px solid var(--primary); padding: 7px 22px; border-radius: 30px; color: #ff4d6d; font-weight: 600; font-size: 15px; box-shadow: 0 0 15px rgba(218,31,61,0.3);">
-                            오릭스캐피탈 MIS 기획팀
                         </div>
                     </div>
                 </div>
@@ -10730,7 +11158,6 @@
         </main>
 
         <!-- Persistent Chrome -->
-        <div class="nav-hint"><kbd>Space</kbd> / <kbd>➔</kbd> 다음 슬라이드 &nbsp;•&nbsp; <kbd>←</kbd> 이전</div>
         <div class="slide-counter" id="slideCounter">1 / 20</div>
         <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
         <canvas id="laserCanvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 9999;"></canvas>
