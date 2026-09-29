@@ -7452,43 +7452,6 @@
             </section>
 
 <section class="slide">
-                <div class="slide-content">
-                    <div class="central-diagram">
-                        <div class="vm-docker-compare">
-                            <!-- Traditional Hypervisor VM -->
-                            <div class="stack-col">
-                                <div class="stack-title">Hypervisor VM</div>
-                                <div class="packet-vm anim-packet-vm"></div>
-                                <div class="stack-layer layer-app">App A</div>
-                                <div class="stack-layer">Bins / Libs</div>
-                                <div class="stack-layer layer-guest">Guest OS (Heavy Overhead)</div>
-                                <div class="stack-layer">Hypervisor (VMware)</div>
-                                <div class="stack-layer">Host OS</div>
-                                <div class="stack-layer layer-hw">Infrastructure (Host Kernel)</div>
-                            </div>
-
-                            <!-- Docker Container -->
-                            <div class="stack-col">
-                                <div class="stack-title">Docker Container</div>
-                                <div class="packet-docker anim-packet-docker"></div>
-                                <div class="stack-layer layer-app">App A (Container)</div>
-                                <div class="stack-layer">Bins / Libs (Light)</div>
-                                <div class="stack-layer layer-docker">Docker Engine</div>
-                                <div class="stack-layer">Host OS (Kernel Share)</div>
-                                <div class="stack-layer layer-hw">Infrastructure (Host Kernel)</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption reveal">
- <h3>VIRTUALIZATION</h3>
- <h2>Container vs Hypervisor VM</h2>
- <p>게스트 OS(Guest OS)를 생략하고 호스트 커널을 공유하여, <span class="highlight">오버헤드를 대폭 줄이고 초경량 실행</span>을 가능하게
- 합니다.</p>
- </div>
-                </div>
-            </section>
-
-<section class="slide">
                 <div class="slide-content" style="justify-content: center; align-items: center; padding: 15px; width: 100%; height: 100%;">
                     <div class="arch-fullscreen-stage">
                         
@@ -7994,7 +7957,7 @@
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <span
                                             style="font-family: var(--font-display); font-size: 18px; font-weight: bold; color: var(--primary);">🔒
-                                            AWS VPC (Virtual Private Cloud - 10.0.0.0/16)</span>
+                                            AWS VPC (Virtual Private Cloud - 10.181.0.0/16)</span>
                                         <span
                                             style="font-size: 12px; color: #fff; background: rgba(218,31,61,0.2); padding: 4px 10px; border-radius: 10px; border: 1px solid var(--primary);">독립
                                             격리 네트워크 영역</span>
@@ -8893,7 +8856,7 @@
         </div>
 
 <!-- Persistent Chrome -->
-        <div class="slide-counter" id="slideCounter">1 / 13</div>
+        <div class="slide-counter" id="slideCounter">1 / 12</div>
         <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
         <canvas id="laserCanvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 9999;"></canvas>
     </div>
@@ -8932,62 +8895,55 @@
   },
   {
     "slideNum": 5,
-    "time": "1분 30초",
-    "title": "Container vs Hypervisor VM",
-    "keypoint": "🎯 초경량 가상화: 무거운 게스트 OS를 제거하고 호스트 커널을 공유하여 초 단위 기동 달성",
-    "script": "이러한 MSA를 현실화한 기반 기술이 바로 컨테이너 가상화입니다. 과거 전통적인 하이퍼바이저 가상화(VMware 등)는 VM마다 수 기가바이트에 달하는 독립적인 게스트 OS를 전부 설치해야 했습니다. 부팅에만 수 분이 걸리고 메모리 낭비가 컸습니다. 반면 도커 컨테이너는 호스트 OS의 커널을 공유하고 애플리케이션 실행 파일과 라이브러리만 격리 패키징합니다. 덕분에 수 초 만에 즉시 기동되고 리소스 오버헤드가 거의 없어, 클라우드 환경에서 수백, 수천 개의 서비스를 빠르고 탄력적으로 띄울 수 있는 표준 기술이 되었습니다."
-  },
-  {
-    "slideNum": 6,
     "time": "45초",
     "title": "MSA 서비스 구조",
     "keypoint": "🎯 실제 MSA 구조: API Gateway 동적 라우팅, 폴리글랏 컨테이너, 독립 DB 격리",
     "script": "앞서 말씀드린 컨테이너 기반 MSA가 실제 서비스에서 어떻게 유기적으로 연결되는지 보여주는 전체 구조도입니다. 사용자가 접속하면 웹 서버와 API Gateway를 거쳐, 요청 URL 경로에 따라 주문(Rust), 인증(Go), AI 추천(Python), 결제(Java) 서비스로 알아서 분기됩니다. 각 서비스는 가장 적합한 언어와 독립된 DB를 사용하며, 중앙의 EKS 쿠버네티스 안에서 독립 컨테이너로 격리되어 실행됩니다. 따라서 특정 서비스에 부하나 장애가 생겨도 다른 서비스는 100% 정상 작동하는 완벽한 장애 격리가 이루어집니다."
   },
   {
-    "slideNum": 7,
+    "slideNum": 6,
     "time": "1분 30초",
     "title": "오토스케일링 4대 메커니즘",
     "keypoint": "🎯 탄력적 용량 관리: 트래픽 급증 시 수평(Scale-Out)·수직(Scale-Up) 자동 대응",
     "script": "컨테이너가 초경량으로 기동될 수 있기에 가능한 것이 바로 오토스케일링입니다. 서버 부하가 치솟을 때 대응 방식은 크게 두 가지입니다. 단일 인스턴스의 CPU/메모리 스펙을 올리는 수직 확장(Scale-Up)과, 컨테이너 인스턴스를 옆으로 복제하여 트래픽을 분산하는 수평 확장(Scale-Out)입니다. 쿠버네티스는 메트릭을 실시간 감시하다가 트래픽이 몰리면 수평 파드 자동확장(HPA)을 통해 컨테이너를 수초 만에 증설하고, 트래픽이 빠지면 자동으로 회수하여 리소스 낭비를 막고 서비스 무중단을 달성합니다."
   },
   {
-    "slideNum": 8,
+    "slideNum": 7,
     "time": "1분 15초",
     "title": "AWS Region & Availability Zone (AZ)",
-    "keypoint": "🎯 물리적 고가용성: 4개 독립 가용영역(AZ) 클러스터링 및 VPC 네트워크 격리",
-    "script": "방금 말씀드린 오토스케일링과 컨테이너들이 실제로 안정적으로 살아 숨 쉬는 물리적 토대가 바로 AWS의 리전과 가용영역(AZ)입니다. 클라우드라고 해서 공중에 떠 있는 것이 아니라 물리적 데이터센터가 존재하는데, AWS 서울 리전은 서초, 송파, 일산, 판교 등에 분산된 수많은 데이터센터를 4개의 독립 가용영역(AZ-a, b, c, d)으로 묶어두었습니다. 각 AZ는 전력망과 냉각 시설이 완전히 독립되어 있어, 한 지역에 대형 화재나 정전이 발생해도 다른 AZ로 즉시 트래픽이 넘어가 무중단 서비스가 유지됩니다. 우리 시스템은 이 가용영역 위에 VPC 가상 사설망을 구축하여 외부 접근용 퍼블릭 서브넷과 안전한 내부 프라이빗 서브넷으로 철저히 격리 운영합니다."
+    "keypoint": "🎯 물리적 고가용성: 4개 독립 가용영역(AZ) 및 사내망(10.181.0.0/16) 기반 VPC 격리",
+    "script": "방금 말씀드린 오토스케일링과 컨테이너들이 실제로 안정적으로 살아 숨 쉬는 물리적 토대가 바로 AWS의 리전과 가용영역(AZ)입니다. 클라우드라고 해서 공중에 떠 있는 것이 아니라 물리적 데이터센터가 존재하는데, AWS 서울 리전은 서초, 송파, 일산, 판교 등에 분산된 수많은 데이터센터를 4개의 독립 가용영역(AZ-a, b, c, d)으로 묶어두었습니다. 각 AZ는 전력망과 냉각 시설이 완전히 독립되어 있어, 한 지역에 대형 화재나 정전이 발생해도 다른 AZ로 즉시 트래픽이 넘어가 무중단 서비스가 유지됩니다. 우리 시스템은 이 가용영역 위에 실제 사내망 대역인 10.181.0.0/16 기반의 VPC 가상 사설망을 구축하여 외부 접근용 퍼블릭 서브넷과 안전한 내부 프라이빗 서브넷으로 철저히 격리 운영합니다."
   },
   {
-    "slideNum": 9,
+    "slideNum": 8,
     "time": "30초",
     "title": "인프라 비용의 딜레마",
     "keypoint": "🎯 화두 제기: 월말 피크 트래픽을 위해 95% 유휴 시간에도 최고 스펙 서버를 켜둘 것인가?",
     "script": "여기서 기업 인프라 운영에 가장 뼈아픈 딜레마가 발생합니다. '월말 결산이나 대출 신청 피크 시간대는 한 달 중 단 며칠, 몇 시간에 불과한데, 그 순간을 위해 24시간 내내 최고 스펙의 비싼 서버를 켜두어야 할까?' 실제로 온프레미스에서는 95%의 유휴 시간에도 최대치의 장비와 전기료를 지출해야 했습니다. 이 낭비를 원천 해결하기 위해 등장한 개념이 바로 다음 장의 서버리스입니다."
   },
   {
-    "slideNum": 10,
+    "slideNum": 9,
     "time": "1분 30초",
     "title": "Serverless (AWS Lambda) & Cold/Warm Start",
     "keypoint": "🎯 이벤트 기반 비용 최적화: 유휴 비용 $0, 요청 발생 시에만 100ms 단위로 실행 및 과금",
     "script": "서버리스(AWS Lambda)의 철학은 단순합니다. '서버를 상시 켜두지 마라'는 것입니다. 사용자가 대출 심사를 요청하는 순간 이벤트가 트리거되어 람다 컨테이너가 0.1초 만에 생성(Cold Start)되고, 로직을 처리한 뒤 응답을 돌려주고 사라집니다. 연속 요청 시에는 웜 스타트로 밀리초 단위로 응답합니다. 즉, 요청이 0건이면 비용도 정확히 $0이며, 수천 건이 몰리면 그 수만큼 병렬 생성되어 처리합니다. 유휴 비용을 완전히 제거하고 비즈니스 로직에만 집중할 수 있는 차세대 운영 방식입니다."
   },
   {
-    "slideNum": 11,
+    "slideNum": 10,
     "time": "1분 30초",
     "title": "데이터 아키텍처: OLTP & OLAP Separation",
     "keypoint": "🎯 운영계-분석계 분리: CDC 비동기 복제로 대고객 서비스 무중단 및 대용량 DW 분석 보장",
     "script": "두 번째 축인 데이터 파이프라인입니다. 금융이나 엔터프라이즈 환경에서는 데이터베이스 분리가 필수적입니다. 고객의 조회·결제 같은 실시간 단건 처리를 담당하는 운영계 DB(OLTP)에서, 데이터 분석가가 대규모 집계 쿼리를 직접 날리면 DB 락이 걸려 대고객 서비스가 멈춰버립니다. 따라서 CDC(Change Data Capture) 기술을 통해 운영 DB의 변경 사항을 비동기로 추출·정제하여 대용량 분석 DW인 OLAP로 무부하 전송합니다. 이를 통해 고객 서비스는 0.001초 응답을 보장받고, 분석계는 대용량 머신러닝 및 통계 작업을 자유롭게 수행합니다."
   },
   {
-    "slideNum": 12,
+    "slideNum": 11,
     "time": "1분 30초",
     "title": "차세대 AI 인프라: VRAM 대역폭 & 초병렬 연산",
     "keypoint": "🎯 AI 인프라 병목: 단순 연산(FLOPs)이 아닌 초고속 GPU VRAM(HBM3e) 메모리 대역폭의 중요성",
     "script": "마지막 세 번째 축인 AI 인프라의 핵심입니다. 최근 ChatGPT 같은 LLM 모델을 서빙할 때 가장 중요한 인프라 병목은 단순 CPU 연산이 아니라 'GPU VRAM 대역폭'입니다. LLM은 글자를 하나씩 순차적으로 생성하는 자기회귀 구조를 가집니다. 놀랍게도 단 하나의 토큰(글자)을 뱉을 때마다 모델의 수백억 개 가중치 전체를 VRAM에서 수만 개 GPU 코어로 매번 읽어와야 합니다. 따라서 초당 3테라바이트 이상을 전송할 수 있는 고대역폭 메모리(HBM3e)와 고용량 VRAM이 인프라 성능과 서빙 비용을 결정짓는 절대적인 핵심 스펙이 됩니다."
   },
   {
-    "slideNum": 13,
+    "slideNum": 12,
     "time": "1분 30초",
     "title": "총괄 요약: IT 인프라 패러다임의 전환",
     "keypoint": "🎯 결론 및 랩업: Cloud, Data, AI 3대 축 요약 및 Q&A 백업 안내",
